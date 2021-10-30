@@ -1,0 +1,60 @@
+# open terminal
+# cmd - return : open -na /Applications/Utilities/Terminal.app
+
+# focus window
+cmd - left  : yabai -m window --focus west
+cmd - down  : yabai -m window --focus south
+cmd - up    : yabai -m window --focus north
+cmd - right : yabai -m window --focus east
+
+# move window
+shift + cmd + alt - left  : yabai -m window --warp west
+shift + cmd + alt - down  : yabai -m window --warp south
+shift + cmd + alt - up    : yabai -m window --warp north
+shift + cmd + alt - right : yabai -m window --warp east
+
+# rotate tree
+alt - r : yabai -m space --rotate 90
+
+# toggle window parent zoom
+alt - d : yabai -m window --toggle zoom-parent
+
+# toggle window fullscreen zoom
+alt - f : yabai -m window --toggle zoom-fullscreen
+
+# toggle window native fullscreen
+shift + alt - f : yabai -m window --toggle native-fullscreen
+
+# float / unfloat window and center on screen
+alt - t : yabai -m window --toggle float;\
+          yabai -m window --grid 4:4:1:1:2:2
+
+# toggle sticky
+alt - s : yabai -m window --toggle sticky
+
+# equalize size of windows
+shift + alt - 0 : yabai -m space --balance
+
+# increase window size
+# shift + alt - a : yabai -m window --resize left:-20:0
+# shift + alt - w : yabai -m window --resize right:0:-20
+
+# decrease window size
+# shift + cmd - s : yabai -m window --resize bottom:0:-20
+# shift + cmd - w : yabai -m window --resize top:0:20
+
+# increase size of the left-child (decrease size of right-child) of the containing node
+shift + alt - d : yabai -m window --ratio rel:0.1
+
+# increase size of the right-child (decrease size of left-child) of the containing node
+shift + alt - a : yabai -m window --ratio rel:-0.1
+
+# set the value of the split directly:
+shift + alt - w : yabai -m window --ratio abs:0.75
+
+ctrl + alt + cmd - r : launchctl kickstart -k "gui/${UID}/homebrew.mxcl.yabai"
+
+.blacklist [
+    "terminal"
+    "kitty"
+]

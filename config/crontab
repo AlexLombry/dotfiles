@@ -1,0 +1,8 @@
+# composer auto-update every month
+@monthly /usr/local/bin/composer self-update >> /dev/null 2>&1
+
+# pip upgrade version every month
+@monthly /usr/local/bin/pip install --upgrade pip >> /dev/null 2>&1
+
+# npm update version every month
+@monthly /usr/local/bin/npm install --global npm@latest >> /dev/null 2>&1

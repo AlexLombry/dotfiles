@@ -1,0 +1,148 @@
+# https://taskfile.dev
+version: '2'
+
+tasks:
+  default:
+    silent: true
+    cmds:
+      - task --list
+
+  os:
+    silent: true
+    desc: "Configure macOS default system"
+    cmds:
+      - bash macos/macos.sh
+      - echo "Setup OS done!"
+
+  zsh:
+    silent: true
+    desc: "Install oh my zsh and source zsh extension file"
+    cmds:
+      - rm -rf $HOME/.oh-my-zsh
+      - rm -rf $HOME/.config/base16-shell
+      - chsh -s $(which zsh);
+      - curl -L http://install.ohmyz.sh | sh
+      - rm -rf $HOME/.zshrc
+      - ln -s $PWD/config/zshrc $HOME/.zshrc
+      - mkdir -p $HOME/.config
+      - git clone https://github.com/chriskempson/base16-shell.git $HOME/.config/base16-shell
+      - curl -L -o ~/.oh-my-zsh/custom/themes/materialshell.zsh-theme https://raw.githubusercontent.com/carloscuesta/materialshell/master/materialshell.zsh
+      - echo "Reload your terminal and run base16_tomorrow-night command"
+
+  vim:
+    silent: true
+    desc: "Install Vim packages with Vundle and plugins"
+    cmds:
+      - bash vim/vim.sh
+      - echo "Setup Vim done!"
+
+  neovim:
+    silent: true
+    desc: "Install NeoVim"
+    cmds:
+      - bash nvim/install.sh
+      - echo "Setup Vim done!"
+
+  links:
+    silent: true
+    desc: "Create all dotfiles symlinks"
+    cmds:
+      - bash macos/links.sh
+      - echo "Setup Links done!"
+
+  sublime:
+    silent: true
+    desc: "Setup Sublime Text 3 Dropbox preferences"
+    cmds:
+      - echo "Setup Sublime Text 3"
+      - rm -rf cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+      - ln -s /Users/alex/Dropbox/Sublime/User /Users/alex/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+
+  php:
+    silent: true
+    desc: "Forcing reinstallation of PHP"
+    cmds:
+      - echo "Setup PHP "
+      - bash macos/php.sh
+      - echo "Setup PHP done!"
+
+  yabai-install:
+    silent: true
+    desc: "Installing Yabai for Window Management"
+    cmds:
+      - brew install koekeishiya/formulae/yabai
+      - sudo yabai --install-sa
+      - brew services start yabai
+      - killall Dock
+      - brew install koekeishiya/formulae/skhd
+      - brew services start skhd
+      - chmod +x ~/.yabairc
+      - chmod +x ~/.skhdrc
+      - echo "you have to run on Recovery OS csrutil enable --without debug --without fs"
+
+  yabai-remove:
+    silent: true
+    desc: "Uninstalling Yabai for Window Management"
+    cmds:
+      - brew services stop yabai skhd
+      - sudo yabai --uninstall-sa
+      - brew uninstall yabai skhd
+      - rm -rf /usr/local/var/log/yabai
+      - rm ~/.yabairc
+      - rm ~/.skhdrc
+      - rm /tmp/yabai_$USER.lock
+      - rm /tmp/yabai_$USER.socket
+      - rm /tmp/yabai-sa_$USER.socket
+      - killall Dock
+
+  yabai-update:
+    silent: true
+    desc: "Update Yabai for Window Management"
+    cmds:
+      - brew services stop yabai
+      - brew upgrade yabai
+      - brew services start yabai
+      - sudo yabai --uninstall-sa
+      - sudo yabai --install-sa
+      - killall Dock
+
+  spaceship:
+    silent: true
+    desc: "Install Spaceship ZSH Plugins"
+    cmds:
+      - git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+      - git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
+      - ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+
+  ctf:
+    silent: true
+    desc: "CTF Hacking Tools"
+    cmds:
+      - brew update
+      - export HOMEBREW_NO_AUTO_UPDATE=1
+      - brew install aircrack-ng bfg binutils binwalk cifer dex2jar dns2tcp fcrackzip foremost hashpump hydra john
+      - brew install knock netpbm nmap pngcheck socat sqlmap tcpflow tcpreplay tcptrace ucspi-tcp xpdf xz
+      - brew cleanup
+
+  kymsu:
+    silent: true
+    desc: "Installation of Kymsu updater"
+    cmds:
+      - bash macos/kymsu.sh
+
+  alacritty:
+    silent: true
+    desc: "Configuration for Alacritty"
+    cmds:
+      - brew update
+      - brew cask install alacritty
+      - mkdir -p $HOME/.config/alacritty
+      - ln -s $PWD/config/alacritty.yml $HOME/.config/alacritty/alacritty.yml
+
+  todolist:
+    silent: true
+    desc: "Download binaries of Todolist Cli App"
+    cmds:
+      - git clone git@github.com:AlexLombry/GoList.git ~/go/src/github.com/AlexLombry/GoList
+      - echo "Make go list and build"
+      - echo "Run mv /tmp/golist/todo /usr/local/bin/todo"

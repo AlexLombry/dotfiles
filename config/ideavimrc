@@ -1,0 +1,15 @@
+set surround
+" https://youtrack.jetbrains.com/issue/VIM-959
+set ideamarks
+
+" https://github.com/JetBrains/ideavim/wiki/%60ideajoin%60-examples
+set ideajoin
+
+" https://youtrack.jetbrains.com/issue/VIM-1521
+set commentary
+"  Mouseless Driven Development by Hadi Hariri https://www.youtube.com/watch?v=UH6YVv9js3s
+" https://github.com/JetBrains/ideavim
+" https://github.com/Valloric/dotfiles/blob/master/intellij/ideavimrc
+" https://resources.jetbrains.com/storage/products/intellij-idea/docs/IntelliJIDEA_ReferenceCard.pdf
+set surround
+let mapleader = ","

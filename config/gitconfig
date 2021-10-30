@@ -1,0 +1,98 @@
+# gitconfig
+[push]
+	default = current
+[credential]
+	helper = osxkeychain
+[alias]
+    plr = pull --rebase --autostash
+	lg = log --graph --date=relative --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ad)%Creset'
+	oops = commit --amend --no-edit
+	rc = rebase --continue
+	rs = rebase --skip
+	rbi = "!f() { git rebase -i HEAD~$1; }; f"
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    count = shortlog -sn
+    df = diff --color
+    wdf = diff --word-diff --color
+    fdf = diff --name-only --color
+    br = branch -a
+    sh = show --pretty=format: --name-only
+    last = log -1 HEAD
+    lgg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+    # show what I did today
+    s = status --short
+    sb = status -sb
+    ci = commit
+    co = checkout
+    rebase-on-top = ! \
+        CURRENT_BRANCH_TO_REBASE=$(git rev-parse --abbrev-ref HEAD) && \
+        BASE_BRANCH=$1 && shift && \
+        echo "==\\> Rebasing $CURRENT_BRANCH_TO_REBASE on top of $BASE_BRANCH" && \
+        git rebase --onto ${BASE_BRANCH} ${CURRENT_BRANCH_TO_REBASE}^ ${CURRENT_BRANCH_TO_REBASE} && \
+        echo "==\\> done 🚀"
+	who = blame
+	ac = commit -am
+[core]
+	excludesfile = /Users/alex/.gitignore_global
+    quotepath = false
+	editor = 'nvim'
+
+[color]
+    ui = auto
+    branch = auto
+    diff = auto
+    status = auto
+
+[color "branch"]
+    current = yellow reverse
+    local = yellow
+    remote = green
+[color "diff"]
+    meta = yellow
+    frag = magenta
+    old = red
+    new = green
+[color "status"]
+    added = green
+    changed = yellow
+    untracked = red
+[filter "hawser"]
+	clean = git hawser clean %f
+	smudge = git hawser smudge %f
+	required = true
+[filter "lfs"]
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+[user]
+	name = Alex Lombry
+	email = alex.lombry@manomano.com
+	signingkey = 9154A7D2B8C0E343
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path =
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	gpgsign = true
+[rerere]
+	enable = true
+[pull]
+	rebase = true
+[merge]
+	conflictStyle = diff3
+[github]
+    user = AlexLombry
+[gpg]
+	program = gpg
+[rebase]
+	autostash = true
+	autosquash = true
+[fetch]
+    pruneTags = true
+[help]
+	autocorrect = 1
+[init]
+	defaultBranch = main

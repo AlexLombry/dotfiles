@@ -1,0 +1,41 @@
+.DS_Store
+Thumbs.db
+*~
+*.swp
+.AppleDouble
+.LSOverride
+Icon
+.idea
+tags
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# project-specific vim configurations
+.vimrc.local
+
+# typescript command garbage
+tscommand*.txt
+
+.DS_Store
+.DS_Store?
+
+
+Thumbs.db
+ehthumbs.db
+*.swp
+*.swo
+*.orig
+*~
+\#*\#
+
+.ropeproject/
+.idea/
+*.iml
+
+coverage/
+yarn-error.log
