@@ -185,15 +185,6 @@ gitnr() {
     git commit -mFirst-commit;
 }
 
-# Do a Matrix movie effect of falling characters
-matrix1() {
-    echo -e "\e[1;40m" ; clear ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) ;sleep 0.05; done|gawk '{ letters="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()"; c=$4; letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'
-}
-
-matrix2() {
-    echo -e "\e[1;40m" ; clear ; characters=$( jot -c 94 33 | tr -d '\n' ) ; while :; do echo $LINES $COLUMNS $(( $RANDOM % $COLUMNS)) $(( $RANDOM % 72 )) $characters ;sleep 0.05; done|gawk '{ letters=$5; c=$4; letter=substr(letters,c,1);a[$3]=0;for (x in a) {o=a[x];a[x]=a[x]+1; printf "\033[%s;%sH\033[2;32m%s",o,x,letter; printf "\033[%s;%sH\033[1;37m%s\033[0;0H",a[x],x,letter;if (a[x] >= $1) { a[x]=0; } }}'
-}
-
 # Use Preview to open a man page
 manp() {
     man -t $1 | open -f -a /Applications/Preview.app
@@ -206,19 +197,6 @@ skill() {
 
 fixperms(){
     find . \( -name "*.sh" -or -type d \) -exec chmod 755 {} \; && find . -type f ! -name "*.sh" -exec chmod 644 {} \;
-}
-
-phpserve() {
-    if [ $# -eq 1 ]; then
-        php -S 0.0.0.0:$1
-    else
-        php -S 0.0.0.0:8000
-    fi
-}
-
-killTouchbar(){
-    sudo pkill "Touch Bar agent";
-    sudo killall "ControlStrip";
 }
 
 # Xcode via @orta
@@ -310,51 +288,6 @@ o() {
 
 video-duration() {
     find . -type f -exec mediainfo --Inform="General;%Duration%" "{}" \; 2>/dev/null | awk '{s+=$1/1000} END {h=s/3600; s=s%3600; printf "%.2d:%.2d\n", int(h), int(s/60)}'
-}
-
-rename-sf-db() {
-    sed -i -- "s/db_user:db_password@127.0.0.1:3306\/db_name/root:root@mysql:3306\/$1/g" .env
-}
-
-sonar() {
-    sonar-scanner \
-  -Dsonar.projectKey=$1 \
-  -Dsonar.sources=. \
-  -Dsonar.host.url=http://localhost:9000 \
-  -Dsonar.login=$2
-}
-
-minimal-php-setup-for-composer() {
-    composer require --dev roave/security-advisories:dev-master sebastian/phpcpd phploc/phploc phpstan/phpstan phpmd/phpmd
-}
-
-starter-api-platform()
-{
-    if [ -z "$1" ]; then
-        echo "You must give a folder name (create DB of same name)";
-    else
-        composer create-project symfony/skeleton $1
-        cd $1
-        git init
-        git add .
-        git commit -am "Create Project"
-        composer req api annotations migrations
-        composer req --dev fzaninotto/faker maker debug orm-fixtures
-        composer dump-autoload -o
-        sed -i '' "s/db_user:db_password@127.0.0.1:3306\/db_name/root:root@mysql:3306\/$1/g" .env
-        #php bin/console doctrine:database:create -e dev --if-not-exists
-        rm -rf .env--
-
-        ## MySQL 8 and delete backup file
-        # sed -i '' "s/'5.7'/'8.0'/g" config/packages/doctrine.yaml
-        # rm -rf config/packages/doctrine.yaml--
-
-        git add .
-        git commit -am "Add first dependencies"
-
-        echo "Launch Symfony Server and create PHPStorm Project"
-        symfony serve --no-tls -d
-    fi
 }
 
 sysupdate() {
@@ -469,12 +402,6 @@ got() {
 gocover() {
     local t=$(mktemp -t cover)
     go test $COVERFLAGS -coverprofile=$t $@ && go tool cover -func=$t && unlink $t
-}
-
-morning() {
-    while read line; do
-        open "$line"
-    done < ~/dotfiles/config/browser-list.txt
 }
 
 pw () {
