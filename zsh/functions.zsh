@@ -476,3 +476,8 @@ morning() {
         open "$line"
     done < ~/dotfiles/config/browser-list.txt
 }
+
+pw () {
+    pwgen -sync "${1:-48}" -1 | if command -v pbcopy > /dev/null 2>&1; then pbcopy; else xclip; fi
+}
+

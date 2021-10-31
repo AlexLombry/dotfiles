@@ -29,13 +29,6 @@ tasks:
       - curl -L -o ~/.oh-my-zsh/custom/themes/materialshell.zsh-theme https://raw.githubusercontent.com/carloscuesta/materialshell/master/materialshell.zsh
       - echo "Reload your terminal and run base16_tomorrow-night command"
 
-  vim:
-    silent: true
-    desc: "Install Vim packages with Vundle and plugins"
-    cmds:
-      - bash vim/vim.sh
-      - echo "Setup Vim done!"
-
   neovim:
     silent: true
     desc: "Install NeoVim"
