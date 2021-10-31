@@ -165,7 +165,7 @@ alias messydesk="defaults write com.apple.finder CreateDesktop"
 alias bench="ab -n 500 -c 100 $1"
 
 alias s="sublime"
-alias gentags="ctags -R --exclude=.git --exclude=node_modules"
+alias gentags="ctags -R --exclude=.git --exclude=node_modules --exclude=build --exclude=out"
 
 # ImageMagick
 alias heictojpg="magick convert $1 $1.jpg"
