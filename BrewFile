@@ -29,14 +29,12 @@ cask "ngrok"
 cask "protonvpn"
 cask "sequel-ace"
 cask "setapp"
-cask "skype"
 cask "slack"
 cask "sublime-text"
 cask "suspicious-package"
 cask "jetbrains-toolbox"
 cask "transmission"
 cask "oracle-jdk"
-cask "steelseries-engine"
 cask "notion"
 cask "logitech-options"
 cask "microsoft-office"
@@ -91,10 +89,6 @@ brew "mycli"
 brew "speedtest"
 brew "gh"
 brew "glab"
-brew "qlcolorcode"
-brew "qlstephen"
-brew "qlmarkdown" 
-brew "quicklook-json" 
 brew "suspicious-package" 
 brew "apparency"
 brew "luarocks"
@@ -103,7 +97,6 @@ brew "ripgrep"
 brew "kotlin-language-server"
 
 # Languages
-# brew "php", restart_service: true, link: true
 brew "node"
 brew "yarn"
 brew "go"
@@ -119,11 +112,9 @@ cask "font-cascadia"
 cask "rectangle"
 
 # GUI Software from App Store
-mas "Brightness Slider", id: 456624497
-mas "DaisyDisk", id: 411643860
 mas "Encrypto", id: 935235287
 mas "iMazing HEIC Converter", id: 1292198261
 mas "iNet Network Scanner", id: 403304796
 mas "Parcel", id: 639968404
 mas "The Unarchiver", id: 425424353
-# mas "Xcode", id: 497799835
+mas "Xcode", id: 497799835
