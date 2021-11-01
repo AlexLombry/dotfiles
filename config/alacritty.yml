@@ -2,8 +2,8 @@ live_config_reload: true
 # Window Customization
 window:
   dimensions:
-    columns: 210
-    lines: 80
+    columns: 190
+    lines: 70
   padding:
     x: 25
     y: 25
