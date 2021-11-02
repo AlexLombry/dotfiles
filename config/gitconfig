@@ -4,7 +4,7 @@
 [credential]
 	helper = osxkeychain
 [alias]
-    plr = pull --rebase --autostash
+  plr = pull --rebase --autostash
 	lg = log --graph --date=relative --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ad)%Creset'
 	oops = commit --amend --no-edit
 	rc = rebase --continue

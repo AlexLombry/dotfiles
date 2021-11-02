@@ -6,7 +6,7 @@ alias v="nvim"
 alias oldvim="\vim"
 
 # reload zsh config
-alias rld='echo "Reloading Zshrc file" && source ~/.zshrc'
+alias rld='echo "Reloading Zshrc file" && source ~/.zshrc && echo "Reload complete"'
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -161,7 +161,6 @@ alias messydesk="defaults write com.apple.finder CreateDesktop"
 
 alias bench="ab -n 500 -c 100 $1"
 
-alias s="sublime"
 alias gentags="ctags -R --exclude=.git --exclude=node_modules --exclude=build --exclude=out"
 
 # ImageMagick
