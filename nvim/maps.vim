@@ -67,3 +67,16 @@ nmap <C-w><down> <C-w>-
 nmap <leader>w :w<cr>
 nmap <leader>q :q<cr>
 nmap <leader>wq :wq!<cr>
+
+
+"-- code action
+nnoremap <silent><leader>ca <cmd>lua require('lspsaga.codeaction').code_action()<CR>
+vnoremap <silent><leader>ca :<C-U>lua require('lspsaga.codeaction').range_code_action()<CR>
+
+"-- show hover doc
+nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
+
+"-- rename
+nnoremap <silent>gr <cmd>lua require('lspsaga.rename').rename()<CR>
+
+nnoremap <silent> gd <cmd>lua require'lspsaga.provider'.preview_definition()<CR>
