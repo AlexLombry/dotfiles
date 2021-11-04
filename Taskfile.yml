@@ -128,7 +128,7 @@ tasks:
     desc: "Configuration for Alacritty"
     cmds:
       - brew update
-      - brew cask install alacritty
+      - brew install alacritty
       - mkdir -p $HOME/.config/alacritty
       - ln -s $PWD/config/alacritty.yml $HOME/.config/alacritty/alacritty.yml
 
