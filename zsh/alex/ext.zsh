@@ -22,8 +22,6 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # zsh builtin to re-run last line. dangerous. do not want. use `!!`.
 disable r
 
-for script in $DOTFILES/zsh/*.zsh; do source $script; done
-
 PATH+=:$HOME/.composer/vendor/bin
 PATH+=:$HOME/.symfony/bin
 PATH+=:/usr/local/sbin

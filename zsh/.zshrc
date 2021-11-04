@@ -32,7 +32,7 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-source ~/.zsh_ext
+for script in $ZSH_CUSTOM/alex/*.zsh; do source $script; done
 source ~/.mano.zsh
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet

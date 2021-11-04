@@ -38,6 +38,9 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 running "Show the ~/Library folder in Finder"
 chflags nohidden ~/Library
 
+running "Stop that DSStore file nightmare"
+defaults write com.apple.desktopservices DSDontWriteNetworkStores TRUE
+
 running "Use current directory as default search scope in Finder"
 defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
 
