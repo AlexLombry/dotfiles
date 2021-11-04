@@ -24,10 +24,10 @@ font:
     style: Bold
   italic:
     family: SauceCodePro Nerd Font Mono
-  size: 17
+  size: 20
   offset:
     x: 0
-    y: 0
+    y: 17
   glyph_offset:
     x: 0
     y: 0
