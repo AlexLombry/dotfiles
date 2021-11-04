@@ -9,6 +9,7 @@ done
 
 files=$( ls -1 -A files )
 for file in $files ; do
+    p="$(pwd)/files/"
     unlink ~/$file
-    ln -s $pwd$file ~/$file
+    ln -s $p$file ~/$file
 done
