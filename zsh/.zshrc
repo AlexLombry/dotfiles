@@ -14,7 +14,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM="$ZSH/custom"
 
-plugins=(git zsh-autosuggestions zsh-completions extract ssh-agent gpg-agent docker docker-compose fancy-ctrl-z)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions zsh-completions extract ssh-agent gpg-agent docker docker-compose fancy-ctrl-z)
 
 # Needed to reload plugins
 autoload -U compinit && compinit
