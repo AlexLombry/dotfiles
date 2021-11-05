@@ -160,9 +160,6 @@ defaults write com.apple.mail DraftsViewerAttributes -dict-add "DisplayInThreade
 defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortedDescending" -string "yes"
 defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortOrder" -string "received-date"
 
-running "Disable inline attachments (just show the icons)"
-defaults write com.apple.mail DisableInlineAttachmentViewing -bool true
-
 running "Disable automatic spell checking"
 defaults write com.apple.mail SpellCheckingBehavior -string "NoSpellCheckingEnabled"
 
@@ -178,52 +175,3 @@ defaults write "com.apple.sound.beep.feedback" -int 1
 running "7 days for Calendar"
 defaults write com.apple.iCal n\ days\ of\ week 7
 
-# running "Fix issue with Audio Bluetooth"
-
-# defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Max (editable)" 80
-# defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" 80
-# defaults write com.apple.BluetoothAudioAgent "Apple Initial Bitpool (editable)" 80
-# defaults write com.apple.BluetoothAudioAgent "Apple Initial Bitpool Min (editable)" 80
-# defaults write com.apple.BluetoothAudioAgent "Negotiated Bitpool" 80
-# defaults write com.apple.BluetoothAudioAgent "Negotiated Bitpool Max" 80
-# defaults write com.apple.BluetoothAudioAgent "Negotiated Bitpool Min" 80
-
-# ==============================================
-# Kill affected applications
-# ==============================================
-
-function killallApps() {
-    killall "Finder" > /dev/null 2>&1
-    killall "SystemUIServer" > /dev/null 2>&1
-    killall "Dock" > /dev/null 2>&1
-
-    appsToKill=(
-    "Activity Monitor"
-    "BBEdit"
-    "Calendar"
-    "Contacts"
-    "Dashboard"
-    "Disk Utility"
-    "Safari"
-    "System Preferences"
-    "TextWrangler"
-    "Xcode"
-    )
-
-    for app in "${appsToKill[@]}"
-    do
-        killall "${app}" > /dev/null 2>&1
-        if [[ $? -eq 0 ]]; then
-            # We just killed an app so restart it
-            open -a "${app}"
-        fi
-    done
-
-    bot "Note that some of these changes require a logout/restart to take effect."
-}
-
-printf "Restart the affected applications? (y/n): "
-read killallReply
-if [[ $killallReply =~ ^[Yy]$ ]]; then
-    killallApps
-fi
