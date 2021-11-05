@@ -57,14 +57,6 @@ tasks:
       - rm -rf cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
       - ln -s /Users/alex/Dropbox/Sublime/User /Users/alex/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
 
-  php:
-    silent: true
-    desc: "Forcing reinstallation of PHP"
-    cmds:
-      - echo "Setup PHP "
-      - bash macos/php.sh
-      - echo "Setup PHP done!"
-
   yabai-install:
     silent: true
     desc: "Installing Yabai for Window Management"
@@ -123,12 +115,6 @@ tasks:
       - brew install knock netpbm nmap pngcheck socat sqlmap tcpflow tcpreplay tcptrace ucspi-tcp xpdf xz
       - brew cleanup
 
-  kymsu:
-    silent: true
-    desc: "Installation of Kymsu updater"
-    cmds:
-      - bash macos/kymsu.sh
-
   alacritty:
     silent: true
     desc: "Configuration for Alacritty"
@@ -137,11 +123,3 @@ tasks:
       - brew install alacritty
       - mkdir -p $HOME/.config/alacritty
       - ln -s $PWD/config/alacritty.yml $HOME/.config/alacritty/alacritty.yml
-
-  todolist:
-    silent: true
-    desc: "Download binaries of Todolist Cli App"
-    cmds:
-      - git clone git@github.com:AlexLombry/GoList.git ~/go/src/github.com/AlexLombry/GoList
-      - echo "Make go list and build"
-      - echo "Run mv /tmp/golist/todo /usr/local/bin/todo"

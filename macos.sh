@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source ~/dotfiles/zsh/functions.zsh
+source ~/dotfiles/zsh/alex/functions.zsh
 
 running "Close any open System Preferences panes, to prevent them from overriding"
 
