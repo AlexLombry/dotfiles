@@ -49,14 +49,6 @@ tasks:
       - bash links.sh
       - echo "Setup Links done!"
 
-  sublime:
-    silent: true
-    desc: "Setup Sublime Text 3 Dropbox preferences"
-    cmds:
-      - echo "Setup Sublime Text 3"
-      - rm -rf cd ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
-      - ln -s /Users/alex/Dropbox/Sublime/User /Users/alex/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
-
   yabai-install:
     silent: true
     desc: "Installing Yabai for Window Management"
