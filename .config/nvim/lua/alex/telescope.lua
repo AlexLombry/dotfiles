@@ -7,6 +7,11 @@ local actions = require('telescope.actions')
 
 telescope.setup{
   defaults = {
+    pickers = {
+      find_files = {
+        hidden = true
+      },
+    },
     mappings = {
       n = {
         ["q"] = actions.close
