@@ -11,6 +11,15 @@ inoremap <leader>. <Esc>
 " Increment/decrement
 nnoremap + <C-a>
 nnoremap - <C-x>
+nnoremap Y y$
+
+" Keep centered
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap J mzJ`z
+
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
 
 " Delete a word backwards
 nnoremap dw vb"_d
