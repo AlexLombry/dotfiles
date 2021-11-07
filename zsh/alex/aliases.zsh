@@ -48,6 +48,8 @@ alias trimcopy="tr -d '\n' | pbcopy"
 
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
+# Remove broken symlinks
+alias clsym="find -L . -name . -o -type d -prune -o -type l -exec rm {} +"
 
 # URL-encode strings
 alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'

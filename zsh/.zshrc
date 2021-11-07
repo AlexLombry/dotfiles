@@ -30,6 +30,9 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 export CODEFOLDER="$HOME/code"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
+export EDITOR='nvim'
+export GIT_EDITOR='nvim'
+
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 for script in $ZSH_CUSTOM/alex/*.zsh; do source $script; done
