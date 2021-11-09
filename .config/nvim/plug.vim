@@ -28,6 +28,7 @@ if has("nvim")
   Plug 'nvim-telescope/telescope.nvim'
   Plug 'windwp/nvim-autopairs'
   Plug 'kabouzeid/nvim-lspinstall'
+  Plug 'arcticicestudio/nord-vim'
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }
@@ -35,3 +36,4 @@ Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 
 call plug#end()
 
+colorscheme nord
