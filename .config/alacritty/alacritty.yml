@@ -414,4 +414,4 @@ schemes:
 # *solarized-dark
 # *tomorrow-night
 
-colors: *gruvbox-dark
+colors: *nord
