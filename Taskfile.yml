@@ -30,6 +30,8 @@ tasks:
       - curl -L -o ~/.oh-my-zsh/custom/themes/materialshell.zsh-theme https://raw.githubusercontent.com/carloscuesta/materialshell/master/materialshell.zsh
       - git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
       - git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
+      - git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+      - git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
       - echo "Reload your terminal and run base16_tomorrow-night command"
 
   neovim:
@@ -88,23 +90,6 @@ tasks:
       - sudo yabai --uninstall-sa
       - sudo yabai --install-sa
       - killall Dock
-
-  spaceship:
-    silent: true
-    desc: "Install Spaceship ZSH Plugins"
-    cmds:
-      - git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-      - git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
-  ctf:
-    silent: true
-    desc: "CTF Hacking Tools"
-    cmds:
-      - brew update
-      - export HOMEBREW_NO_AUTO_UPDATE=1
-      - brew install aircrack-ng bfg binutils binwalk cifer dex2jar dns2tcp fcrackzip foremost hashpump hydra john
-      - brew install knock netpbm nmap pngcheck socat sqlmap tcpflow tcpreplay tcptrace ucspi-tcp xpdf xz
-      - brew cleanup
 
   alacritty:
     silent: true
