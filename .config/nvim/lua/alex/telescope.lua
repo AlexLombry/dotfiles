@@ -7,11 +7,7 @@ local actions = require('telescope.actions')
 
 telescope.setup{
   defaults = {
-    pickers = {
-      find_files = {
-        hidden = true
-      },
-    },
+    file_ignore_patterns = {"node_modules", ".git", "out", "build"},
     mappings = {
       n = {
         ["q"] = actions.close
