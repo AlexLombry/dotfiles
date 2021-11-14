@@ -9,7 +9,6 @@ Plug 'tpope/vim-rhubarb'
 
 if has("nvim")
   Plug 'glepnir/dashboard-nvim'
-  Plug 'hoob3rt/lualine.nvim'
   Plug 'kristijanhusak/defx-git'
   Plug 'kristijanhusak/defx-icons'
   Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -31,6 +30,7 @@ if has("nvim")
   Plug 'arcticicestudio/nord-vim'
   Plug 'akinsho/bufferline.nvim'
   Plug 'kyazdani42/nvim-tree.lua'
+  Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }
