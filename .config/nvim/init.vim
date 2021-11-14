@@ -7,7 +7,7 @@ autocmd!
 scriptencoding utf-8
 " stop loading config if it's on tiny or small
 if !1 | finish | endif
-
+set termguicolors
 set nocompatible
 set number
 set relativenumber
@@ -38,7 +38,8 @@ endif
 
 " Suppress appending <PasteStart> and <PasteEnd> when pasting
 set t_BE=
-
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set nosc noru nosm
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
@@ -138,6 +139,8 @@ require('alex.lualine')
 require('alex.telescope')
 require('alex.treesitter')
 require('alex.web-devicons')
+require('alex.bufferline')
+require('alex.nvimtree')
 EOF
 
 "}}}
@@ -230,4 +233,30 @@ let s:footer = []
 let g:dashboard_custom_header = s:header
 let g:dashboard_custom_footer = s:footer
 " }}}
+
+
+" 'nvim tree' {{{
+nnoremap <C-n> :NvimTreeToggle<CR>
+nnoremap <leader>r :NvimTreeRefresh<CR>
+nnoremap <leader>n :NvimTreeFindFile<CR>
+" NvimTreeOpen, NvimTreeClose, NvimTreeFocus, NvimTreeFindFileToggle, and NvimTreeResize are also available if you need them
+
+" a list of groups can be found at `:help nvim_tree_highlight`
+highlight NvimTreeFolderIcon guibg=blue
+" }}}
+
+
+" 'BufferLine config' {{{
+
+nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
+nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
+nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
+nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
+nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
+nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
+nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
+nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
+nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
+" }}}
+
 " vim: set foldmethod=marker foldlevel=0:

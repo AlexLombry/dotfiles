@@ -29,6 +29,8 @@ if has("nvim")
   Plug 'windwp/nvim-autopairs'
   Plug 'kabouzeid/nvim-lspinstall'
   Plug 'arcticicestudio/nord-vim'
+  Plug 'akinsho/bufferline.nvim'
+  Plug 'kyazdani42/nvim-tree.lua'
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }
