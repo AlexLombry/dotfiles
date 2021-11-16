@@ -187,12 +187,12 @@ endif
 cnoreabbrev g Git
 cnoreabbrev gopen GBrowse
 
-" LSPSaga
+" 'LSPSaga' }}}
 nnoremap <silent> <C-j> :Lspsaga diagnostic_jump_next<CR>
 "nnoremap <silent> K <cmd>lua require('lspsaga.hover').render_hover_doc()<CR>
 nnoremap <silent> gh :Lspsaga lsp_finder<CR>
 nnoremap <silent> gp :Lspsaga preview_definition<CR>
-
+" }}}
 
 " 'Telescope' {{{
 nnoremap  <silent> ;f <cmd>lua require('telescope.builtin').find_files({ hidden = true })<cr>

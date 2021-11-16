@@ -44,6 +44,7 @@ source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 export HOMEBREW_FORCE_BREWED_CURL=1
 
+source $HOME/.private.zsh
 # autocd in these paths
 cdpath=($(echo $cdpath) $HOME/ManoMano/ $HOME/ManoMano/dev-workspace/www)
 
