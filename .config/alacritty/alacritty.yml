@@ -31,9 +31,9 @@ font:
   glyph_offset:
     x: 0
     y: 0
-  use_thin_strokes: false
+  use_thin_strokes: true
   debug:
-    persistent_logging: false
+    persistent_logging: true
 draw_bold_text_with_bright_colors: true
 
 colors:
