@@ -24,7 +24,7 @@ font:
     style: Bold
   italic:
     family: SauceCodePro Nerd Font Mono
-  size: 21
+  size: 14
   offset:
     x: 0
     y: 0
