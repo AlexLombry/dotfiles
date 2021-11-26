@@ -31,6 +31,7 @@ if has("nvim")
   Plug 'akinsho/bufferline.nvim'
   Plug 'kyazdani42/nvim-tree.lua'
   Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }

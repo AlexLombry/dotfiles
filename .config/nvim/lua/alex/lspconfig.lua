@@ -162,6 +162,21 @@ nvim_lsp.diagnosticls.setup {
   }
 }
 
+nvim_lsp.gopls.setup {
+  on_attach = on_attach,
+  filetypes = { "go" },
+  capabilities = capabilities,
+  cmd = { "gopls", "serve" },
+  settings = {
+        gopls = {
+        analyses = {
+          unusedparams = true,
+        },
+        staticcheck = true,
+      },
+    },
+}
+
 -- icon
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
