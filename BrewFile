@@ -95,6 +95,7 @@ brew "luarocks"
 brew "luv"
 brew "ripgrep"
 brew "kotlin-language-server"
+brew "gopls"
 
 # Languages
 brew "node"
