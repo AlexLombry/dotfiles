@@ -23,6 +23,7 @@
     s = status --short
     sb = status -sb
     ci = commit
+    cm = commit -m
     co = checkout
     rebase-on-top = ! \
         CURRENT_BRANCH_TO_REBASE=$(git rev-parse --abbrev-ref HEAD) && \

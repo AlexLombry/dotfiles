@@ -11,19 +11,19 @@ window:
 scrolling:
   history: 10000
   multiplier: 3
-background_opacity: .7
+background_opacity: .8
 window.dynamic_title: true
 
 # Font Customization
 font:
   normal:
-    family: SauceCodePro Nerd Font Mono
+    family: SF Mono
     style: Regular
   bold:
-    family: SauceCodePro Nerd Font Mono
+    family: SF Mono
     style: Bold
   italic:
-    family: SauceCodePro Nerd Font Mono
+    family: SF Mono
   size: 14
   offset:
     x: 0
