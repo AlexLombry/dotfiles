@@ -11,19 +11,19 @@ window:
 scrolling:
   history: 10000
   multiplier: 3
-background_opacity: .8
+window.opacity: .8
 window.dynamic_title: true
 
 # Font Customization
 font:
   normal:
-    family: SF Mono
+    family: Jetbrains Mono
     style: Regular
   bold:
-    family: SF Mono
+    family: Jetbrains Mono
     style: Bold
   italic:
-    family: SF Mono
+    family: Jetbrains Mono
   size: 14
   offset:
     x: 0
