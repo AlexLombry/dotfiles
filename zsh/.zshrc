@@ -8,7 +8,7 @@ ZSH_THEME="awesomepanda"
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM="$ZSH/custom"
 
-plugins=(git zsh-syntax-highlighting zsh-autosuggestions zsh-completions extract ssh-agent gpg-agent docker docker-compose fancy-ctrl-z)
+plugins=(git tmux sublime 1password zsh-syntax-highlighting zsh-autosuggestions zsh-completions extract ssh-agent gpg-agent docker docker-compose fancy-ctrl-z)
 
 # Needed to reload plugins
 autoload -U compinit && compinit
@@ -41,4 +41,6 @@ export SDKMAN_DIR="/Users/alex/.sdkman"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+ZSH_TMUX_AUTOSTART=true
+ZSH_TMUX_AUTOCONNECT=true
 

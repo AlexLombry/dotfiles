@@ -2,8 +2,8 @@ live_config_reload: true
 # Window Customization
 window:
   dimensions:
-    columns: 190
-    lines: 70
+    columns: 140
+    lines: 50
   padding:
     x: 25
     y: 25
@@ -11,7 +11,7 @@ window:
 scrolling:
   history: 10000
   multiplier: 3
-window.opacity: .8
+window.opacity: .2
 window.dynamic_title: true
 
 # Font Customization
