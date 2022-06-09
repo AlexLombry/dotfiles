@@ -64,9 +64,9 @@ function main() {
     python "$HOME/Downloads/get-pip.py" --user
     ok
 
-    running "Installing Docker"
-    docker_install
-    ok
+    # running "Installing Docker"
+    # docker_install
+    # ok
 
     running "Fixing fonts"
     sudo chmod 775 ~/Library/Fonts/**/
