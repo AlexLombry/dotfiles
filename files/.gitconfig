@@ -77,7 +77,7 @@
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [commit]
-	gpgsign = true
+	gpgsign = false
 [rerere]
 	enable = true
 [pull]

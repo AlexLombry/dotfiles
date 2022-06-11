@@ -31,7 +31,8 @@ eval "$(saml2aws --completion-script-zsh)"
 # User configuration
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
-export PATH="/Users/alex/Library/Python/3.9/bin:$PATH"
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+#export PATH="/Users/alex/Library/Python/3.9/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
 # Kafka Course
@@ -60,3 +61,5 @@ export SDKMAN_DIR="/Users/alex/.sdkman"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 # zprof
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
