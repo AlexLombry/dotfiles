@@ -68,8 +68,10 @@
 	clean = git-lfs clean -- %f
 [user]
 	name = Alex Lombry
-	email = alex.lombry@manomano.com
-	signingkey = 9154A7D2B8C0E343
+  email = 1451210+AlexLombry@users.noreply.github.com
+	signingkey = 32630E753AF22BFF
+[includeIf "gitdir:~/ManoMano/"]
+    path = ~/ManoMano/.gitconfig
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =
