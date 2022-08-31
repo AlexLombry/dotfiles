@@ -1,5 +1,5 @@
 # Fig pre block. Keep at the top of this file.
-. "$HOME/.fig/shell/zshrc.pre.zsh"
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
 # zmodload zsh/zprof
 # Default and Original ZSHRC file
 export ZSH="$HOME/.oh-my-zsh"
@@ -22,6 +22,7 @@ plugins=(
     docker
     docker-compose
     fancy-ctrl-z
+    kubectl
 )
 
 # Needed to reload plugins
@@ -30,6 +31,10 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 eval "$(saml2aws --completion-script-zsh)"
+
+# Source Kube PS1 Terms Output
+source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+
 # User configuration
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
 export PATH="/usr/local/opt/ruby/bin:$PATH"
@@ -67,4 +72,4 @@ export SDKMAN_DIR="/Users/alex/.sdkman"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # Fig post block. Keep at the bottom of this file.
-. "$HOME/.fig/shell/zshrc.post.zsh"
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
