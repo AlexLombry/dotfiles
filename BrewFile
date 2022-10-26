@@ -13,6 +13,7 @@ tap "sambadevi/powerlevel9k"
 tap "go-task/tap"
 tap "teamookla/speedtest"
 tap "mykolaharmash/git-jump"
+tap "1password/tap/1password-cli"
 
 # GUI Software
 cask "tor-browser"
@@ -39,6 +40,7 @@ cask "postman"
 cask "pritunl"
 cask "1password"
 cask "monitorcontrol"
+cask "1password/tap/1password-cli"
 
 # CLI software
 brew "ack"

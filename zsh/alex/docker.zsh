@@ -52,3 +52,7 @@ function cleanup-docker() {
     docker rm $(docker ps -q -f status=exited)
     docker volume rm $(docker volume ls -q)
 }
+
+function start-colima() {
+    colima start --memory 6 --mount $HOME:w --mount-type 9p
+}

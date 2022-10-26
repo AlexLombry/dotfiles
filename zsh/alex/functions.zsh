@@ -436,3 +436,10 @@ function set-keychain-environment-variable () {
 #export SAML2AWS_USERNAME=$(keychain-environment-variable SAML2AWS_USERNAME);
 #export SAML2AWS_PASSWORD=$(keychain-environment-variable SAML2AWS_PASSWORD);
 
+function pass-init() {
+    set-keychain-environment-variable $1
+}
+
+function pass-get() {
+    keychain-environment-variable $1;
+}
