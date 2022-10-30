@@ -31,14 +31,12 @@ PATH+=:/usr/local/opt/openjdk/bin
 PATH+=:$(yarn global bin)
 
 #### JAVA FOR KOTLIN
-export JAVA_13_HOME=$(/usr/libexec/java_home -v13)
-export JAVA_11_HOME=$(/usr/libexec/java_home -v11)
+export JAVA_17_HOME=$(/usr/libexec/java_home -v17)
 
-alias java11='export JAVA_HOME=$JAVA_11_HOME'
-alias java13='export JAVA_HOME=$JAVA_13_HOME'
+alias java17='export JAVA_HOME=$JAVA_17_HOME'
 
-# default to Java 11
-java11
+# default to Java 17
+java17
 
 source "$HOME/.sdkman/bin/sdkman-init.sh"
 

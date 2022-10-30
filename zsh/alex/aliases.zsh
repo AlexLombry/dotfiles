@@ -1,8 +1,6 @@
 alias vimdiff='nvim -d'
 export EDITOR=nvim
 alias vim="nvim"
-alias vi="nvim"
-alias v="nvim"
 alias oldvim="\vim"
 
 # reload zsh config
@@ -20,34 +18,29 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
-alias sl="ls"
 
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 alias ls="exa --icons"
-alias l="exa -abghl --git --color=automatic --icons"
-alias la="exa -abghl --git --color=automatic --icons"
 alias ll="exa -abghl --git --color=automatic --icons"
 alias lld="ls -l | grep ^d"
-alias gs="gst"
+
 # Helpers
 alias grep='grep --color=auto'
 
 # Applications
 alias ios="open /Applications/Xcode.app/Contents/Developer/Applications/Simulator.app"
-alias chrome="/usr/bin/open -a /Applications/Google\ Chrome.app"
 alias dot="cd ~/dotfiles"
 
 # Network
-alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias ips="ifconfig -a | perl -nle'/(\d+\.\d+\.\d+\.\d+)/ && print $1'"
 alias httpdump="sudo tcpdump -i en1 -n -s 0 -w - | grep -a -o -E \"Host\: .*|GET \/.*\""
-alias ifactive="ifconfig | pcregrep -M -o '^[^\t:]+:([^\n]|\n\t)*status: active'"
 
 # Trim new lines and copy to clipboard
 alias trimcopy="tr -d '\n' | pbcopy"
 
 # Recursively delete `.DS_Store` files
 alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
+
 # Remove broken symlinks
 alias clsym="find -L . -name . -o -type d -prune -o -type l -exec rm {} +"
 
@@ -61,9 +54,6 @@ alias map="xargs -n1"
 
 # File size
 alias fss="stat -f \"%z bytes\""
-
-# Empty the Trash on all mounted volumes and the main HDD
-alias emptytrash="sudo rm -rfv /Volumes/*/.Trashes; rm -rfv ~/.Trash"
 
 # Show/hide all desktop icons (useful when presenting)
 alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
@@ -170,13 +160,9 @@ alias heictojpg="magick convert $1 $1.jpg"
 alias heictojpgdir="magick mogrify -monitor -format jpg *.HEIC"
 
 alias meh="echo '¯\\\_(ツ)_/¯' | pbcopy"
-alias phptags="ctags -R --fields=+aimlS"
-alias todo="todo -action"
 alias runmysql="cd ~/dotfiles/tools; docker-compose up -d"
 alias speed="speedtest --server-id=24215"
 alias vim=nvim
-alias weather='clear && curl wttr.in'
 
 alias t='tmux new-session -s StarK'
 alias tt='tmux attach -t StarK'
-alias r=ranger

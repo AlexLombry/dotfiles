@@ -51,11 +51,6 @@ error() {
     echo -e "$RED [error] $RESET "$1
 }
 
-# Open url with google chrome on mac
-url() {
-    open -a google\ chrome "$@"
-}
-
 # print available colors and their numbers
 colours() {
     for i in {0..255}; do
@@ -172,19 +167,6 @@ tre() {
 }
 
 #########################################
-# From PascalVink
-# Utility Functions
-
-# Create a new git repo with one README commit and CD into it
-gitnr() {
-    mkdir $1;
-    cd $1;
-    git init;
-    touch README;
-    git add README;
-    git commit -mFirst-commit;
-}
-
 # Use Preview to open a man page
 manp() {
     man -t $1 | open -f -a /Applications/Preview.app
