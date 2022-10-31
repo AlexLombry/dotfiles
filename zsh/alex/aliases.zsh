@@ -23,6 +23,7 @@ alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 alias ls="exa --icons"
 alias ll="exa -abghl --git --color=automatic --icons"
 alias lld="ls -l | grep ^d"
+alias gs=gst
 
 # Helpers
 alias grep='grep --color=auto'

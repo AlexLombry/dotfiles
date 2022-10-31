@@ -68,7 +68,7 @@
 	clean = git-lfs clean -- %f
 [user]
 	name = Alex Lombry
-	email = alex@lombry.email
+	email = 1451210+AlexLombry@users.noreply.github.com
 [includeIf "gitdir:~/ManoMano/"]
     path = ~/ManoMano/.gitconfig
 [difftool "sourcetree"]
