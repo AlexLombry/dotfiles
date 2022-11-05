@@ -33,7 +33,8 @@ source $ZSH/oh-my-zsh.sh
 eval "$(saml2aws --completion-script-zsh)"
 
 # Source Kube PS1 Terms Output
-source "/usr/local/opt/kube-ps1/share/kube-ps1.sh"
+# source "/opt/homebrew/opt/kube-ps1/share/kube-ps1.sh"
+# PS1='$(kube_ps1)'$PS1
 
 # User configuration
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"

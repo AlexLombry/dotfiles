@@ -167,3 +167,5 @@ alias vim=nvim
 
 alias t='tmux new-session -s StarK'
 alias tt='tmux attach -t StarK'
+
+alias ldk="DOCKER_HOST=unix:///Users/$USER/.colima/docker.sock lazydocker"
