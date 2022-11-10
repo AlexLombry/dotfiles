@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 source ~/dotfiles/zsh/alex/functions.zsh
 
 ZSH=${ZSH:-~/.oh-my-zsh}
@@ -31,26 +31,23 @@ function brewbundle() {
     esac
 }
 
-function docker_install() {
-    curl -O https://download.docker.com/mac/stable/Docker.dmg $HOME/Downloads/Docker.dmg
-    hdiutil attach -nobrowse $HOME/Downloads/Docker.dmg
-    rsync -a /Volumes/Docker/Docker.app /Applications/
-    hdiutil detach -quiet /Volumes/Docker
-}
-
 function main() {
     setup_color
     xcodetools
 
     # Install HomeBrew
     if ! command_exists brew; then
-        /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
         # Needed for the rest
         HOMEBREW_NO_AUTO_UPDATE=1 brew install go-task/tap/go-task
     fi
 
+    source $HOME/.zshrc
+
     task "os"
     task "zsh"
+    source $HOME/.zshrc
+
     brewbundle
     task "links"
 
@@ -63,10 +60,6 @@ function main() {
     curl https://bootstrap.pypa.io/get-pip.py -o "$HOME/Downloads/get-pip.py"
     python "$HOME/Downloads/get-pip.py" --user
     ok
-
-    # running "Installing Docker"
-    # docker_install
-    # ok
 
     running "Fixing fonts"
     sudo chmod 775 ~/Library/Fonts/**/

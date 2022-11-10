@@ -50,6 +50,9 @@ defaults write com.apple.dock autohide -bool true
 running "Set a blazingly fast keyboard repeat rate"
 defaults write NSGlobalDomain KeyRepeat -int 0
 
+running "Set keyboard no press and hold"
+defaults write -g ApplePressAndHoldEnabled -bool false
+
 running "Set a shorter Delay until key repeat"
 defaults write NSGlobalDomain InitialKeyRepeat -int 0
 
@@ -126,7 +129,7 @@ defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 # Screen                                                                      #
 ###############################################################################
 running "Save screenshots to the desktop"
-defaults write com.apple.screencapture location -string "${HOME}/Desktop"
+defaults write com.apple.screencapture location -string "${HOME}/Dropbox/Screenshots"
 
 running "Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)"
 defaults write com.apple.screencapture type -string "png"
@@ -174,4 +177,3 @@ defaults write "com.apple.sound.beep.feedback" -int 1
 
 running "7 days for Calendar"
 defaults write com.apple.iCal n\ days\ of\ week 7
-

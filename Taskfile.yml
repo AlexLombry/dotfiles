@@ -11,7 +11,7 @@ tasks:
     silent: true
     desc: "Configure macOS default system"
     cmds:
-      - bash macos/macos.sh
+      - bash macos.sh
       - echo "Setup OS done!"
 
   zsh:
