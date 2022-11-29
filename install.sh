@@ -31,6 +31,12 @@ function brewbundle() {
     esac
 }
 
+function aws_cli_install() {
+    curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+    sudo installer -pkg AWSCLIV2.pkg -target /
+    rm -rf AWSCLIV2.pkg
+}
+
 function main() {
     setup_color
     xcodetools
@@ -54,6 +60,10 @@ function main() {
     running "Running Task !\n"
     task --list
     $(brew --prefix)/opt/fzf/install
+    ok
+
+    running "AWS Cli Install"
+    aws_cli_install
     ok
 
     running "Installing Python"

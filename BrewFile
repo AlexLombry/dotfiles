@@ -13,6 +13,7 @@ tap "sambadevi/powerlevel9k"
 tap "go-task/tap"
 tap "teamookla/speedtest"
 tap "hashicorp/tap"
+tap "shivammathur/php"
 
 # GUI Software
 cask "tor-browser"
@@ -41,6 +42,13 @@ cask "tunnelblick"
 cask "fig"
 cask "iterm2"
 
+# Languages
+brew "php"
+brew "node"
+brew "yarn"
+brew "go"
+brew "nvm"
+
 # CLI software
 brew "ack"
 brew "ccat"
@@ -65,6 +73,7 @@ brew "jd"
 brew "mas"
 brew "pv"
 brew "pwgen"
+brew "brew-php-switcher"
 brew "reattach-to-user-namespace"
 brew "rsync"
 brew "sbt"
@@ -92,12 +101,7 @@ brew "qwerty-fr"
 brew "colima"
 brew "docker"
 brew "docker-compose"
-
-# Languages
-brew "node"
-brew "yarn"
-brew "go"
-brew "nvm"
+brew "shivammathur/php/php@7.3"
 
 # Font face
 cask "font-fira-code"
