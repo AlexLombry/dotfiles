@@ -1,5 +1,5 @@
 # https://taskfile.dev
-version: '2'
+version: '3'
 
 tasks:
   default:
@@ -51,46 +51,6 @@ tasks:
     cmds:
       - bash links.sh
       - echo "Setup Links done!"
-
-  yabai-install:
-    silent: true
-    desc: "Installing Yabai for Window Management"
-    cmds:
-      - brew install koekeishiya/formulae/yabai
-      - sudo yabai --install-sa
-      - brew services start yabai
-      - killall Dock
-      - brew install koekeishiya/formulae/skhd
-      - brew services start skhd
-      - chmod +x ~/.yabairc
-      - chmod +x ~/.skhdrc
-      - echo "you have to run on Recovery OS csrutil enable --without debug --without fs"
-
-  yabai-remove:
-    silent: true
-    desc: "Uninstalling Yabai for Window Management"
-    cmds:
-      - brew services stop yabai skhd
-      - sudo yabai --uninstall-sa
-      - brew uninstall yabai skhd
-      - rm -rf /usr/local/var/log/yabai
-      - rm ~/.yabairc
-      - rm ~/.skhdrc
-      - rm /tmp/yabai_$USER.lock
-      - rm /tmp/yabai_$USER.socket
-      - rm /tmp/yabai-sa_$USER.socket
-      - killall Dock
-
-  yabai-update:
-    silent: true
-    desc: "Update Yabai for Window Management"
-    cmds:
-      - brew services stop yabai
-      - brew upgrade yabai
-      - brew services start yabai
-      - sudo yabai --uninstall-sa
-      - sudo yabai --install-sa
-      - killall Dock
 
   alacritty:
     silent: true
