@@ -41,6 +41,7 @@ cask "visual-studio-code"
 cask "tunnelblick"
 cask "fig"
 cask "iterm2"
+cask "amethyst"
 
 # Languages
 brew "php"
