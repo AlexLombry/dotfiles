@@ -48,13 +48,13 @@ running "Enable autohide for the Dock"
 defaults write com.apple.dock autohide -bool true
 
 running "Set a blazingly fast keyboard repeat rate"
-defaults write NSGlobalDomain KeyRepeat -int 0
+defaults write NSGlobalDomain KeyRepeat -int 2
 
 running "Set keyboard no press and hold"
 defaults write -g ApplePressAndHoldEnabled -bool false
 
 running "Set a shorter Delay until key repeat"
-defaults write NSGlobalDomain InitialKeyRepeat -int 0
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
 
 running "Increase sound quality for Bluetooth headphones/headsets"
 defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40

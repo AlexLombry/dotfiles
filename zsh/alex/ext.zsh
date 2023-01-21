@@ -30,22 +30,13 @@ PATH+=:$HOME/Library/Python/2.7/bin
 PATH+=:/usr/local/opt/openjdk/bin
 PATH+=:$(yarn global bin)
 
-#### JAVA FOR KOTLIN
-export JAVA_17_HOME=$(/usr/libexec/java_home -v17)
+# #### JAVA FOR KOTLIN
+# export JAVA_17_HOME=$(/usr/libexec/java_home -v17)
 
-alias java17='export JAVA_HOME=$JAVA_17_HOME'
+# # default to Java 17
+# java17
 
-# default to Java 17
-java17
+# source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-source "$HOME/.sdkman/bin/sdkman-init.sh"
-
-export HOMEBREW_FORCE_BREWED_CURL=1
-
-source $HOME/.private.zsh
 # autocd in these paths
 cdpath=($(echo $cdpath) $HOME/ManoMano/ $HOME/ManoMano/dev-workspace/www)
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git,out,build}"'

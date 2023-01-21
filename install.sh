@@ -68,7 +68,7 @@ function main() {
 
     running "Installing Python"
     curl https://bootstrap.pypa.io/get-pip.py -o "$HOME/Downloads/get-pip.py"
-    python "$HOME/Downloads/get-pip.py" --user
+    python3 "$HOME/Downloads/get-pip.py" --user
     ok
 
     running "Fixing fonts"
