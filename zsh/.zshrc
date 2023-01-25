@@ -28,10 +28,9 @@ eval "$(saml2aws --completion-script-zsh)"
 
 # User configuration
 export PATH="/usr/local/opt/mysql-client/bin:$PATH"
-export PATH="/usr/local/opt/ruby/bin:$PATH"
 export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-
 export PATH="$(yarn global bin):$PATH"
 
 export CODEFOLDER="$HOME/code"

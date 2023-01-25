@@ -14,6 +14,13 @@ tasks:
       - bash macos.sh
       - echo "Setup OS done!"
 
+  kymsu:
+    silent: true
+    desc: "Install KYMSU"
+    cmds:
+      - bash kymsupdate/install.sh
+      - echo "Setup KYMSU done"
+
   zsh:
     silent: true
     desc: "Install oh my zsh and source zsh extension file"
