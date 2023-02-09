@@ -100,6 +100,7 @@ brew "colima"
 brew "docker"
 brew "docker-compose"
 brew "shivammathur/php/php@7.3"
+brew "openapi-generator"
 
 # Font face
 cask "font-fira-code"
