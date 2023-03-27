@@ -425,3 +425,9 @@ function pass-init() {
 function pass-get() {
     keychain-environment-variable $1;
 }
+
+function formatjsonlog() {
+  while read -r data; do
+    printf "%s" "$data" | jq -r '.["@timestamp"][11:22] + " " + .level + " " + .message + "\n" + .error.stack'
+  done
+}
