@@ -58,12 +58,3 @@ tasks:
     cmds:
       - bash links.sh
       - echo "Setup Links done!"
-
-  alacritty:
-    silent: true
-    desc: "Configuration for Alacritty"
-    cmds:
-      - brew update
-      - brew install alacritty
-      - mkdir -p $HOME/.config/alacritty
-      - ln -s $PWD/config/alacritty.yml $HOME/.config/alacritty/alacritty.yml

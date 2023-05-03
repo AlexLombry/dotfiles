@@ -1,4 +1,9 @@
 # gitconfig
+[user]
+	name = Alex Lombry
+	email = 1451210+AlexLombry@users.noreply.github.com
+[includeIf "gitdir:~/ManoMano/"]
+    path = ~/ManoMano/.gitconfig
 [push]
 	default = current
 [credential]
@@ -66,11 +71,6 @@
 	process = git-lfs filter-process
 	required = true
 	clean = git-lfs clean -- %f
-[user]
-	name = Alex Lombry
-	email = 1451210+AlexLombry@users.noreply.github.com
-[includeIf "gitdir:~/ManoMano/"]
-    path = ~/ManoMano/.gitconfig
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path =
