@@ -283,7 +283,6 @@ sysupdate() {
     sudo gem update
     sudo gem cleanup
     composer self-update
-
 }
 
 to-mp3() {
@@ -375,15 +374,6 @@ whoseport() {
 
 killport() {
   lsof -t -i ":$1" | xargs kill -9
-}
-
-got() {
-  go test $* | sed ''/PASS/s//$(printf "\033[32mPASS\033[0m")/'' | sed ''/SKIP/s//$(printf "\033[34mSKIP\033[0m")/'' | sed ''/FAIL/s//$(printf "\033[31mFAIL\033[0m")/'' | sed ''/FAIL/s//$(printf "\033[31mFAIL\033[0m")/'' | GREP_COLOR="01;33" egrep --color=always '\s*[a-zA-Z0-9\-_.]+[:][0-9]+[:]|^'
-}
-
-gocover() {
-    local t=$(mktemp -t cover)
-    go test $COVERFLAGS -coverprofile=$t $@ && go tool cover -func=$t && unlink $t
 }
 
 pw () {
