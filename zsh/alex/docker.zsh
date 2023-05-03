@@ -10,7 +10,11 @@ alias dc="docker-compose"
 alias k="kubectl"
 alias dcd="docker-compose down"
 
-function reset-docker() {
+function stopdock() {
+    docker stop $(docker ps -qa)
+}
+
+function resetdock() {
     docker kill $(docker ps -q)
 
     echo "delete volumes? (y/n): "
@@ -46,13 +50,13 @@ function reset-docker() {
     fi
 }
 
-function cleanup-docker() {
+function cleandock() {
     docker system prune -fa
     docker rmi $(docker images -q -f dangling=true)
     docker rm $(docker ps -q -f status=exited)
     docker volume rm $(docker volume ls -q)
 }
 
-function start-colima() {
+function colstart() {
     colima start --memory 6 --mount $HOME:w --mount-type 9p
 }

@@ -30,13 +30,5 @@ PATH+=:$HOME/Library/Python/2.7/bin
 PATH+=:/usr/local/opt/openjdk/bin
 PATH+=:$(yarn global bin)
 
-# #### JAVA FOR KOTLIN
-# export JAVA_17_HOME=$(/usr/libexec/java_home -v17)
-
-# # default to Java 17
-# java17
-
-# source "$HOME/.sdkman/bin/sdkman-init.sh"
-
 # autocd in these paths
 cdpath=($(echo $cdpath) $HOME/ManoMano/ $HOME/ManoMano/dev-workspace/www)
