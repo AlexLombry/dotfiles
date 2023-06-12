@@ -421,3 +421,7 @@ function formatjsonlog() {
     printf "%s" "$data" | jq -r '.["@timestamp"][11:22] + " " + .level + " " + .message + "\n" + .error.stack'
   done
 }
+
+function resetipv6() {
+    networksetup -setv6off Ethernet || networksetup -setv6off Wi-Fi
+}
