@@ -29,13 +29,12 @@ cask "sequel-ace"
 cask "setapp"
 cask "slack"
 cask "sublime-text"
-cask "oracle-jdk"
 cask "logitech-options"
 cask "microsoft-office"
 cask "postman"
 cask "1password"
 cask "visual-studio-code"
-cask "tunnelblick"
+cask "viscosity"
 cask "iterm2"
 cask "amethyst"
 
@@ -87,7 +86,6 @@ brew "jlhonora/lsusb/lsusb"
 brew "hadolint"
 brew "mycli"
 brew "speedtest"
-brew "apparency"
 brew "luarocks"
 brew "luv"
 brew "ripgrep"
@@ -117,4 +115,4 @@ mas "iMazing HEIC Converter", id: 1292198261
 mas "iNet Network Scanner", id: 403304796
 mas "Parcel", id: 639968404
 mas "The Unarchiver", id: 425424353
-mas "Xcode", id: 497799835
+# mas "Xcode", id: 497799835

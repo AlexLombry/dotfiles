@@ -44,8 +44,8 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 for script in $ZSH_CUSTOM/alex/*.zsh; do source $script; done
 source ~/.mano.zsh
 
-ZSH_TMUX_AUTOSTART=false
-ZSH_TMUX_AUTOCONNECT=false
+# ZSH_TMUX_AUTOSTART=false
+# ZSH_TMUX_AUTOCONNECT=false
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git,out,build}"'
 

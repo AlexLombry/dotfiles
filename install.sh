@@ -3,77 +3,63 @@ source ~/dotfiles/zsh/alex/functions.zsh
 
 ZSH=${ZSH:-~/.oh-my-zsh}
 
-function xcodetools() {
-    running "XCode Command Line Tools"
-    if [ $(xcode-select -p &> /dev/null; printf $?) -ne 0 ]; then
-        xcode-select --install &> /dev/null
-        # Wait until the XCode Command Line Tools are installed
-        while [ $(xcode-select -p &> /dev/null; printf $?) -ne 0 ]; do
-            sleep 5
-        done
-        xcode-select -p &> /dev/null
-        if [ $? -eq 0 ]; then
-            # Prompt user to agree to the terms of the Xcode license
-            # https://github.com/alrra/dotfiles/issues/10
-           sudo xcodebuild -license
-       fi
-    fi
-}
+setup_color
 
-function brewbundle() {
-    # Prompt for user choice on running brew bundle command
-    action "${YELLOW}Do you want to run Brew Bundle ? [Y/n]${RESET} "
-    read opt
-    case $opt in
-        y*|Y*|"") running "Running brew bundle" && HOMEBREW_NO_AUTO_UPDATE=1 brew bundle ;;
-        n*|N*) echo "Brew bundle skipped."; ;;
-        *) echo "Invalid choice. Action skipped."; ;;
-    esac
-}
+# First of all install xcode developer tool, without it nothing works properly
+running "XCode Command Line Tools"
+if [ $(xcode-select -p &> /dev/null; printf $?) -ne 0 ]; then
+    xcode-select --install &> /dev/null
+    # Wait until the XCode Command Line Tools are installed
+    while [ $(xcode-select -p &> /dev/null; printf $?) -ne 0 ]; do
+        sleep 5
+    done
+    xcode-select -p &> /dev/null
+    if [ $? -eq 0 ]; then
+        # Prompt user to agree to the terms of the Xcode license
+        # https://github.com/alrra/dotfiles/issues/10
+       sudo xcodebuild -license
+   fi
+fi
+ok
 
-function aws_cli_install() {
-    curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
-    sudo installer -pkg AWSCLIV2.pkg -target /
-    rm -rf AWSCLIV2.pkg
-}
+running "Now that it's done, source everything and install Homebrew"
+source $HOME/.zshrc
 
-function main() {
-    setup_color
-    xcodetools
+if ! command_exists brew; then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+ok
 
-    # Install HomeBrew
-    if ! command_exists brew; then
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        # Needed for the rest
-        HOMEBREW_NO_AUTO_UPDATE=1 brew install go-task/tap/go-task
-    fi
+source $HOME/.zshrc
 
-    source $HOME/.zshrc
+running "Now we install Go Task to be able to run task builder"
+HOMEBREW_NO_AUTO_UPDATE=1 brew install go-task/tap/go-task
+ok
 
-    task "os"
-    task "zsh"
-    source $HOME/.zshrc
+running "Ok, now we can install our brew bundle entirely"
+HOMEBREW_NO_AUTO_UPDATE=1 brew bundle
+ok
 
-    brewbundle
-    task "links"
+running "Installation of AWS SDK v2 needed for work"
+curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+sudo installer -pkg AWSCLIV2.pkg -target /
+rm -rf AWSCLIV2.pkg
+ok
 
-    running "Running Task !\n"
-    task --list
-    $(brew --prefix)/opt/fzf/install
-    ok
+running "Running GO Task installation tools for macOS, OMZ ..."
+task "os"
+task "zsh"
+task "links"
+ok
 
-    running "AWS Cli Install"
-    aws_cli_install
-    ok
+$(brew --prefix)/opt/fzf/install
+ok
 
-    running "Installing Python"
-    curl https://bootstrap.pypa.io/get-pip.py -o "$HOME/Downloads/get-pip.py"
-    python3 "$HOME/Downloads/get-pip.py" --user
-    ok
+running "Installing Python"
+curl https://bootstrap.pypa.io/get-pip.py -o "$HOME/Downloads/get-pip.py"
+python3 "$HOME/Downloads/get-pip.py" --user
+ok
 
-    running "Fixing fonts"
-    sudo chmod 775 ~/Library/Fonts/**/
-    ok
-}
-
-main "$@"
+running "Fixing fonts"
+sudo chmod 775 ~/Library/Fonts/**/
+ok

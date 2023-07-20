@@ -2,7 +2,6 @@ GPG_TTY=$(tty)
 export GPG_TTY
 
 export APP_ENV="dev"
-export XDEBUG_CONFIG="idekey=PHPSTORM"
 export DOTFILES=$HOME/dotfiles
 export DOCKER_CLIENT_TIMEOUT=120
 export COMPOSE_HTTP_TIMEOUT=120
@@ -27,7 +26,7 @@ PATH+=:$HOME/.symfony/bin
 PATH+=:/usr/local/sbin
 PATH+=:/usr/local/opt/awscli@1/bin
 PATH+=:$HOME/Library/Python/2.7/bin
-PATH+=:/usr/local/opt/openjdk/bin
+PATH+=:/opt/homebrew/opt/openjdk@17/bin
 PATH+=:$(yarn global bin)
 
 # autocd in these paths
