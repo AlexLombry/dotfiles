@@ -52,6 +52,12 @@ tasks:
       - vim -E +PlugInstall +qall || true
       - echo "Setup NeoVim done!"
 
+  chad:
+      silent: true
+      desc: "Install ChadVIM"
+      cmds:
+        - git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
+
   links:
     silent: true
     desc: "Create all dotfiles symlinks"
