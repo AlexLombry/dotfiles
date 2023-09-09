@@ -97,6 +97,7 @@ brew "docker"
 brew "docker-compose"
 brew "shivammathur/php/php@7.3"
 brew "openapi-generator"
+brew "switchaudio-osx"
 
 # Font face
 cask "font-fira-code"
