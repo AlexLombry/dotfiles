@@ -4,7 +4,7 @@ alias vim="nvim"
 alias oldvim="\vim"
 
 # reload zsh config
-alias rld='echo "Reloading Zshrc file" && source ~/.zshrc && echo "Reload complete"'
+alias rld='echo "Reloading Zshrc file" && source ~/.zshrc && tmux source-file $HOME/.tmux.conf && echo "Reload complete"'
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`
@@ -169,3 +169,20 @@ alias t='tmux new-session -s StarK'
 alias tt='tmux attach -t StarK'
 
 alias ldk="DOCKER_HOST=unix:///Users/$USER/.colima/docker.sock lazydocker"
+alias ta="tmux attach"
+
+# I'll be doing another one for Linux, but this one will give you 
+# a pop up notification and sound alert (using the built-in sounds for macOS)
+
+# Requires https://github.com/caarlos0/timer to be installed
+
+# Mac setup for pomo
+alias work="timer 10s && terminal-notifier -message 'Pomodoro'\
+        -title 'Work Timer is up! Take a Break 😊'\
+        -appIcon '~/Pictures/pumpkin.png'\
+        -sound Crystal"
+        
+alias rest="timer 10s && terminal-notifier -message 'Pomodoro'\
+        -title 'Break is over! Get back to work 😬'\
+        -appIcon '~/Pictures/pumpkin.png'\
+        -sound Crystal"
