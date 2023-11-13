@@ -13,6 +13,7 @@ tap "hashicorp/tap"
 tap "shivammathur/php"
 
 # GUI Software
+cask "arc"
 cask "tor-browser"
 cask "transmit"
 cask "vlc"
