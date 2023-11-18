@@ -186,3 +186,5 @@ alias rest="timer 10s && terminal-notifier -message 'Pomodoro'\
         -title 'Break is over! Get back to work 😬'\
         -appIcon '~/Pictures/pumpkin.png'\
         -sound Crystal"
+
+alias sl=l
