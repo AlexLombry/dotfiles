@@ -1,0 +1,33 @@
+# NOTE(selman): without decorations, tabs can not be used :(
+
+keybind = ctrl+z=close_surface
+keybind = ctrl+d=new_split:right
+
+window-decoration = true
+window-padding-x = 10
+window-padding-y = 15
+window-width = 165
+window-height = 42
+mouse-hide-while-typing = true
+cursor-style = block
+
+font-size = 16
+font-thicken = true
+background-opacity = 0.90
+
+# Using MaterialDesignColors, modified background and cursor color
+palette = 0=#435b67
+palette = 1=#fc3841
+palette = 2=#5cf19e
+
+macos-option-as-alt = true
+mouse-hide-while-typing = true
+cursor-style = block
+cursor-style-blink = true
+
+
+background=#181616
+foreground=#c5c9c5
+cursor-color=#C8C093
+selection-foreground=#C8C093
+selection-background=#223249
