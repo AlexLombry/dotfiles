@@ -24,14 +24,24 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-eval "$(saml2aws --completion-script-zsh)"
-
+export GOPATH=$(go env GOPATH)/bin
 # User configuration
-export PATH="/usr/local/opt/mysql-client/bin:$PATH"
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
-export PATH="$(yarn global bin):$PATH"
+path=(
+    $path
+    ~/.local/bin
+    /usr/local/opt/mysql-client/bin
+    /usr/local/opt/python/libexec/bin
+    /opt/homebrew/opt/ruby/bin
+    $GOPATH/bin/
+    ${KREW_ROOT:-$HOME/.krew}/bin
+    $HOME/.composer/vendor/bin
+    $HOME/.symfony/bin
+    /usr/local/sbin
+    /usr/local/opt/awscli@1/bin
+    $HOME/Library/Python/2.7/bin
+    /opt/homebrew/opt/openjdk@17/bin
+    $(yarn global bin)
+)
 
 export CODEFOLDER="$HOME/code"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"

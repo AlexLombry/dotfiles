@@ -98,3 +98,5 @@
 	autocorrect = 1
 [init]
 	defaultBranch = main
+[url "ssh://git@git.manomano.tech/"]
+	insteadOf = https://git.manomano.tech/

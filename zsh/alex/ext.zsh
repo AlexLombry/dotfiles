@@ -21,13 +21,5 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # zsh builtin to re-run last line. dangerous. do not want. use `!!`.
 disable r
 
-PATH+=:$HOME/.composer/vendor/bin
-PATH+=:$HOME/.symfony/bin
-PATH+=:/usr/local/sbin
-PATH+=:/usr/local/opt/awscli@1/bin
-PATH+=:$HOME/Library/Python/2.7/bin
-PATH+=:/opt/homebrew/opt/openjdk@17/bin
-PATH+=:$(yarn global bin)
-
 # autocd in these paths
 cdpath=($(echo $cdpath) $HOME/ManoMano/ $HOME/ManoMano/dev-workspace/www)
