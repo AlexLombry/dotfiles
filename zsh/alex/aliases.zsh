@@ -165,7 +165,7 @@ alias runmysql="cd ~/dotfiles/tools; docker-compose up -d"
 alias speed="speedtest --server-id=24215"
 alias vim=nvim
 
-alias t='tmux new-session -s StarK'
+alias t='tm'
 alias tt='tmux attach -t StarK'
 
 alias ldk="DOCKER_HOST=unix:///Users/$USER/.colima/docker.sock lazydocker"
