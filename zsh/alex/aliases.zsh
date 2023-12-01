@@ -20,8 +20,8 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
-alias ls="exa --icons"
-alias ll="exa -abghl --git --color=automatic --icons"
+alias ls="eza --icons"
+alias ll="eza -abghl --git --color=automatic --icons"
 alias lld="ls -l | grep ^d"
 alias gs=gst
 

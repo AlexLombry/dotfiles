@@ -478,9 +478,7 @@ function tm() {
     tmux send-keys -t $SESSION:4 "cd $HOME && ll" Enter
 
     tmux split-window -h -t $SESSION:4.1
-    tmux send-keys -t $SESSION:4.1 "cd $WORK_DIR && vim notes" Enter
-    tmux send-keys -t $SESSION:4.1 "G" Enter
-    tmux send-keys -t $SESSION:4.2 "cd $WORK_DIR && ll" Enter
+    tmux send-keys -t $SESSION:4.1 "cd $WORK_DIR && ll" Enter
 
     # Attach the session 
     tmux attach-session -t $SESSION
