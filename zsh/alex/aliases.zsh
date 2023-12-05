@@ -189,3 +189,6 @@ alias rest="timer 5m && say -v Samantha 'Get back to work' && terminal-notifier 
 
 alias sl=l
 alias b=bat
+
+alias tun="ssh-tunnel -a create -e all -u alex.lombry"
+alias cltun="ssh-tunnel -a close"
