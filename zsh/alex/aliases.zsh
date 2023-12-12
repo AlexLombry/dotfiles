@@ -192,3 +192,4 @@ alias b=bat
 
 alias tun="ssh-tunnel -a create -e all -u alex.lombry"
 alias cltun="ssh-tunnel -a close"
+alias cleanflared="rm -rf $HOME/.cloudflared/*"
