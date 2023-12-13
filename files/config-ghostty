@@ -20,8 +20,7 @@ palette = 0=#435b67
 palette = 1=#fc3841
 palette = 2=#5cf19e
 
-macos-option-as-alt = true
-mouse-hide-while-typing = true
+mouse-hide-while-typing = false
 cursor-style = block
 cursor-style-blink = true
 

@@ -6,7 +6,7 @@
 # @raycast.mode fullOutput
 
 # Optional parameters:
-# @raycast.icon 🤖
+# @raycast.icon 💾
 # @raycast.packageName Developer Utils
 
 # Documentation:

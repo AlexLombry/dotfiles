@@ -6,7 +6,7 @@
 // @raycast.mode silent
 
 // Optional parameters:
-// @raycast.icon images/airpod.png
+// @raycast.icon 🎧
 // @raycast.packageName audio
 
 // Documentation:
