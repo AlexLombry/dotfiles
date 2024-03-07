@@ -68,6 +68,8 @@ source ~/.mano.zsh
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git,out,build}"'
 
+eval "$(zoxide init --CMD cd zsh)"
+
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/alex/.sdkman"
 [[ -s "/Users/alex/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/alex/.sdkman/bin/sdkman-init.sh"
@@ -80,6 +82,8 @@ export PHP_INI_SCAN_DIR="/Users/alex/Library/Application Support/Herd/config/php
 
 # Herd injected PHP 8.2 configuration.
 export HERD_PHP_82_INI_SCAN_DIR="/Users/alex/Library/Application Support/Herd/config/php/82/"
+
+typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 export NVM_DIR="$HOME/.nvm"
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm

@@ -9,21 +9,22 @@
 [credential]
 	helper = osxkeychain
 [alias]
-  	plr = pull --rebase --autostash
+  plr = pull --rebase --autostash
 	lg = log --graph --date=relative --pretty=tformat:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%an %ad)%Creset'
 	oops = commit --amend --no-edit
 	rc = rebase --continue
 	rs = rebase --skip
+  mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' - 
 	rbi = "!f() { git rebase -i HEAD~$1; }; f"
-    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-    count = shortlog -sn
-    df = diff --color
-    wdf = diff --word-diff --color
-    fdf = diff --name-only --color
-    br = branch -a
-    sh = show --pretty=format: --name-only
-    last = log -1 HEAD
-    lgg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
+  hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+  count = shortlog -sn
+  df = diff --color
+  wdf = diff --word-diff --color
+  fdf = diff --name-only --color
+  br = branch -a
+  sh = show --pretty=format: --name-only
+  last = log -1 HEAD
+  lgg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
     # show what I did today
     s = status --short
     sb = status -sb
@@ -40,19 +41,19 @@
 	ac = commit -am
 [core]
 	excludesfile = /Users/alex/.gitignore_global
-    quotepath = false
+  quotepath = false
 	editor = 'nvim'
 
 [color]
-    ui = auto
-    branch = auto
-    diff = auto
-    status = auto
+  ui = auto
+  branch = auto
+  diff = auto
+  status = auto
 
 [color "branch"]
-    current = yellow reverse
-    local = yellow
-    remote = green
+  current = yellow reverse
+  local = yellow
+  remote = green
 [color "diff"]
     meta = yellow
     frag = magenta
@@ -98,5 +99,3 @@
 	autocorrect = 1
 [init]
 	defaultBranch = main
-[url "ssh://git@git.manomano.tech/"]
-	insteadOf = https://git.manomano.tech/

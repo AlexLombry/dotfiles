@@ -171,7 +171,7 @@ alias tt='tmux attach -t StarK'
 alias ldk="DOCKER_HOST=unix:///Users/$USER/.colima/docker.sock lazydocker"
 alias ta="tmux attach"
 
-# I'll be doing another one for Linux, but this one will give you 
+# I'll be doing another one for Linux, but this one will give you
 # a pop up notification and sound alert (using the built-in sounds for macOS)
 
 # Requires https://github.com/caarlos0/timer to be installed

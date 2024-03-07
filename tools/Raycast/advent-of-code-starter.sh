@@ -21,10 +21,6 @@ if [ $(date +%m) != 12 ]; then
 fi
 
 cd $HOME/Code/AdventOfCode
-if [ -f $FOLDER/src/aoc$YEAR/Day$DAY.kt ]; then
-  echo "$FOLDER/src/aoc$YEAR/Day$DAY.kt already exist"
-  exit 1
-fi
 
 ./day.sh
 
