@@ -11,7 +11,7 @@ window-height = 42
 mouse-hide-while-typing = true
 cursor-style = block
 
-font-size = 16
+font-size = 19
 font-thicken = true
 font-variation-bold = wght=500
 background-opacity = 0.90
