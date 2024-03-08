@@ -68,7 +68,7 @@ source ~/.mano.zsh
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git,out,build}"'
 
-eval "$(zoxide init --CMD cd zsh)"
+eval "$(zoxide init --cmd cd zsh)"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/alex/.sdkman"

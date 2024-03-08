@@ -13,6 +13,7 @@ cursor-style = block
 
 font-size = 16
 font-thicken = true
+font-variation-bold = wght=500
 background-opacity = 0.90
 
 # Using MaterialDesignColors, modified background and cursor color
