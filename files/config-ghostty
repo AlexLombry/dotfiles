@@ -1,7 +1,7 @@
 # NOTE(selman): without decorations, tabs can not be used :(
 
-keybind = ctrl+z=close_surface
-keybind = ctrl+d=new_split:right
+#keybind = ctrl+z=close_surface
+#keybind = ctrl+d=new_split:right
 
 window-decoration = true
 window-padding-x = 10
@@ -12,6 +12,7 @@ mouse-hide-while-typing = true
 cursor-style = block
 
 font-size = 19
+font-family = "SauceCodePro Nerd Font"
 font-thicken = true
 font-variation-bold = wght=500
 background-opacity = 0.90
@@ -21,7 +22,6 @@ palette = 0=#435b67
 palette = 1=#fc3841
 palette = 2=#5cf19e
 
-mouse-hide-while-typing = false
 cursor-style = block
 cursor-style-blink = true
 
