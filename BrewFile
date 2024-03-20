@@ -28,6 +28,7 @@ cask "postman"
 cask "1password"
 cask "viscosity"
 cask "iterm2"
+cask "zed"
 
 # Languages
 brew "php"
