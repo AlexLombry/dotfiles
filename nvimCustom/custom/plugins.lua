@@ -5,6 +5,44 @@ local plugins = {
 
   -- Override plugin definition options
   {
+    "zbirenbaum/copilot.lua",
+    -- Lazy load when event occurs. Events are triggered
+    -- as mentioned in:
+    -- https://vi.stackexchange.com/a/4495/20389
+    event = "InsertEnter",
+    -- You can also have it load at immediately at
+    -- startup by commenting above and uncommenting below:
+    -- lazy = false
+    opts = overrides.copilot,
+  },
+   {
+    "zbirenbaum/copilot.lua",
+    event = "InsertEnter",
+    opts = overrides.copilot,
+  },
+
+  {
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      {
+        "zbirenbaum/copilot-cmp",
+        config = function()
+          require("copilot_cmp").setup()
+        end,
+      },
+    },
+    opts = {
+      sources = {
+        { name = "nvim_lsp", group_index = 2 },
+        { name = "copilot",  group_index = 2 },
+        { name = "luasnip",  group_index = 2 },
+        { name = "buffer",   group_index = 2 },
+        { name = "nvim_lua", group_index = 2 },
+        { name = "path",     group_index = 2 },
+      },
+    },
+  },
+  {
     "christoomey/vim-tmux-navigator",
     lazy = false
   },
@@ -76,11 +114,22 @@ local plugins = {
       require("better_escape").setup()
     end,
   },
+  {
+      "toppair/peek.nvim",
+      event = { "VeryLazy" },
+      build = "deno task --quiet build:fast",
+      config = function()
+          require("peek").setup()
+          -- refer to `configuration to change defaults`
+          vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
+          vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
+      end,
+  },
+  {
+    "ThePrimeagen/vim-be-good",
+    lazy = false,
+  }
 
-    {
-        "ThePrimeagen/vim-be-good",
-        lazy = false
-    },
   -- To make a plugin not be loaded
   -- {
   --   "NvChad/nvim-colorizer.lua",
