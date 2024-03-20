@@ -26,7 +26,6 @@ cask "sublime-text"
 cask "microsoft-office"
 cask "postman"
 cask "1password"
-cask "visual-studio-code"
 cask "viscosity"
 cask "iterm2"
 
