@@ -457,7 +457,7 @@ function openSession () {
     tmux send-keys -t $SESSION:3.2 "cd $WORK_DIR && ll" Enter
     tmux send-keys -t $SESSION:3.3 "cd $WORK_DIR && ll" Enter
 
-    # Attach the session 
+    # Attach the session
     tmux attach-session -t $SESSION
 }
 
@@ -477,11 +477,15 @@ function tm() {
     tmux new-window -t $SESSION:4 -n 'Custom'
     tmux send-keys -t $SESSION:4 "cd $HOME && ll" Enter
 
-    # Attach the session 
+    # Attach the session
     tmux attach-session -t $SESSION
 }
 
-qbrew() {                                                                   
+qbrew() {
     HOMEBREW_NO_INSTALL_CLEANUP=1 HOMEBREW_NO_ANALYTICS=1 HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1 HOMEBREW_NO_INSTALL_UPGRADE=1 brew $@
 }
 
+daily() {
+    cd $HOME/ManoMano/meeting-notes
+    vim daily.md
+}

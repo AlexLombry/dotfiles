@@ -3,6 +3,7 @@
 #keybind = ctrl+z=close_surface
 #keybind = ctrl+d=new_split:right
 
+theme = catppuccin-mocha
 window-decoration = true
 window-padding-x = 10
 window-padding-y = 15
@@ -11,23 +12,22 @@ window-height = 42
 mouse-hide-while-typing = true
 cursor-style = block
 
-font-size = 20
-font-family = "SauceCodePro Nerd Font"
+font-size = 21
+font-family = "JetBrainsMono Nerd Font"
 font-thicken = true
 font-variation-bold = wght=500
 background-opacity = 0.90
 
 # Using MaterialDesignColors, modified background and cursor color
-palette = 0=#435b67
-palette = 1=#fc3841
-palette = 2=#5cf19e
+# palette = 0=#435b67
+# palette = 1=#fc3841
+# palette = 2=#5cf19e
 
 cursor-style = block
 cursor-style-blink = true
 
-
-background=#181616
-foreground=#c5c9c5
-cursor-color=#C8C093
-selection-foreground=#C8C093
-selection-background=#223249
+# background=#181616
+# foreground=#c5c9c5
+# cursor-color=#C8C093
+# selection-foreground=#C8C093
+# selection-background=#223249
