@@ -38,6 +38,8 @@ func toggleAirPods() {
         print("AirPods Connected")
         bluetoothDevice.openConnection()
     }
+
+    print("End of script")
 }
 
 toggleAirPods()

@@ -2,6 +2,7 @@ alias vimdiff='nvim -d'
 export EDITOR=nvim
 alias vim="nvim"
 alias oldvim="\vim"
+alias cc="clear"
 
 # reload zsh config
 alias rld='echo "Reloading Zshrc file" && source ~/.zshrc && tmux source-file $HOME/.tmux.conf && echo "Reload complete"'
@@ -195,3 +196,4 @@ alias cltun="ssh-tunnel -a close"
 alias cleanflared="rm -rf $HOME/.cloudflared/*"
 
 alias zip-encrypt="zip -e -r $1.zip $1"
+alias p=python3
