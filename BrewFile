@@ -92,6 +92,7 @@ brew "docker-compose"
 brew "openapi-generator"
 brew "switchaudio-osx"
 brew "openssl"
+brew "joshmedeski/sesh/sesh"
 
 # Font face
 cask "font-fira-code"
