@@ -48,9 +48,6 @@ tasks:
       - brew install luarocks luv
       - brew install --HEAD luajit
       - brew install --HEAD neovim
-      - curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-      - vim -E +PlugInstall +qall || true
-      - echo "Setup NeoVim done!"
 
   chad:
       silent: true

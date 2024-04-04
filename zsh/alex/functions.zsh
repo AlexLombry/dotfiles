@@ -475,7 +475,7 @@ function tm() {
     tmux send-keys -t $SESSION:3 "cd $HOME/ManoMano/gradle-dev-workspace/web && ll" Enter
 
     tmux new-window -t $SESSION:4 -n 'Custom'
-    tmux send-keys -t $SESSION:4 "cd $HOME && ll" Enter
+    tmux send-keys -t $SESSION:4 "cd $HOME/Desktop && ll" Enter
 
     # Attach the session
     tmux attach-session -t $SESSION
@@ -488,4 +488,24 @@ qbrew() {
 daily() {
     cd $HOME/ManoMano/meeting-notes
     vim daily.md
+}
+
+func vaultcp() {
+	if [ $# -ne 2 ]; then
+		echo "Usage: vaultcp <env> <path>"
+		return 1
+	fi
+	local env=$1
+	local kvPath=$2
+	local role="order"
+
+	# authenticate only if needed
+	if ! VAULT_ADDR=https://vault-eu-west-3.$env.manomano.com vault token lookup -format=json > /dev/null 2>&1; then
+		VAULT_ADDR=https://vault-eu-west-3.$env.manomano.com vault login -path=sso -method=oidc role=$role
+	fi
+	local json=$(VAULT_ADDR=https://vault-eu-west-3.$env.manomano.com vault kv get -format=json "$env/$kvPath" |jq '.data.data')
+	previewCmd=$(printf "echo '%s' | jq --raw-output .{1}" $json)
+	bindCmd=$(printf "echo '%s' | jq --raw-output --join-output .{1}|xclip" $json)
+
+	echo $json|jq -r 'keys[]' | fzf --preview $previewCmd --bind "enter:become($bindCmd)"
 }
