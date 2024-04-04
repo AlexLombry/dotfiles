@@ -7,7 +7,6 @@ alias d="docker"
 alias ldc='lazydocker'
 alias lgi='lazygit'
 alias dc="docker-compose"
-alias k="kubectl"
 alias dcd="docker-compose down"
 
 function stopdock() {

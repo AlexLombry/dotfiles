@@ -197,3 +197,22 @@ alias cleanflared="rm -rf $HOME/.cloudflared/*"
 
 alias zip-encrypt="zip -e -r $1.zip $1"
 alias p=python3
+
+# VIM
+alias v="/opt/homebrew/bin/nvim"
+
+# Nmap
+alias nm="nmap -sC -sV -oN nmap"
+
+alias k="kubectl"
+alias ka="kubectl apply -f"
+alias kg="kubectl get"
+alias kd="kubectl describe"
+alias kl="kubectl logs"
+alias kgpo="kubectl get pod"
+alias kgd="kubectl get deployments"
+alias kc="kubectx"
+alias kns="kubens"
+alias kl="kubectl logs -f"
+alias ke="kubectl exec -it"
+alias kcns='kubectl config set-context --current --namespace'
