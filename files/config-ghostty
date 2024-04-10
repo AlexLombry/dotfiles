@@ -1,8 +1,4 @@
 # NOTE(selman): without decorations, tabs can not be used :(
-
-#keybind = ctrl+z=close_surface
-#keybind = ctrl+d=new_split:right
-
 theme = catppuccin-mocha
 window-decoration = true
 window-padding-x = 10
@@ -16,18 +12,8 @@ font-size = 19
 font-family = "JetBrainsMono Nerd Font"
 font-thicken = true
 font-variation-bold = wght=500
-background-opacity = 0.90
-
-# Using MaterialDesignColors, modified background and cursor color
-# palette = 0=#435b67
-# palette = 1=#fc3841
-# palette = 2=#5cf19e
+background-opacity = 0.98
 
 cursor-style = block
 cursor-style-blink = true
 
-# background=#181616
-# foreground=#c5c9c5
-# cursor-color=#C8C093
-# selection-foreground=#C8C093
-# selection-background=#223249
