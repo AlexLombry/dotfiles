@@ -527,8 +527,19 @@ func vaultcp() {
 	echo $json|jq -r 'keys[]' | fzf --preview $previewCmd --bind "enter:become($bindCmd)"
 }
 
-func impotDan() {
+func calculate_taxes() {
+    echo "🏃 CD Into taxes folder"
+    cd $HOME/go/dev/Fdp 
+
+    # current year
+    year=$(date +"%Y")
+    echo "📂 Generate JPG file from PDF Salary"
+    pdftoppm -jpeg dan-$year.pdf files/salary-
+    
+    echo "📄 Fetch all Amount to Deduct from taxes ..."
     go run main.go > search.txt
-    value=$(cat search.txt | grep 'Mont' | grep -o '[0-9]\+[ ,]*[0-9]*\.[0-9]\+' | sed 's/ //g' | tr '\n' '+' | sed 's/+$//' | bc)
-    echo "The amount of taxes to remove is $value"
+    value=$(cat search.txt | sed 's/ //g' | tr '\n' '+' | sed 's/+$//' | bc)
+    
+    echo "🚀 The amount of taxes to remove is $value"
+    rm -rf $HOME/go/dev/Fdp/files/sala*
 }
