@@ -529,7 +529,7 @@ func vaultcp() {
 
 func calculate_taxes() {
     echo "🏃 CD Into taxes folder"
-    cd $HOME/go/dev/Fdp 
+    cd $HOME/dotfiles/tools/DanTaxes 
 
     # current year
     year=$(date +"%Y")
@@ -537,9 +537,8 @@ func calculate_taxes() {
     pdftoppm -jpeg dan-$year.pdf files/salary-
     
     echo "📄 Fetch all Amount to Deduct from taxes ..."
-    go run main.go > search.txt
-    value=$(cat search.txt | sed 's/ //g' | tr '\n' '+' | sed 's/+$//' | bc)
+    go run main.go #> search.txt
+    #value=$(cat search.txt | sed 's/ //g' | tr '\n' '+' | sed 's/+$//' | bc)
     
-    echo "🚀 The amount of taxes to remove is $value"
-    rm -rf $HOME/go/dev/Fdp/files/sala*
+    rm -rf $HOME/dotfiles/tools/DanTaxes/files/sala*
 }
