@@ -32,7 +32,9 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
-export GOPATH=$(go env GOPATH)/bin
+
+export GOPATH="$HOME/go"
+# export GOPATH=$(go env GOPATH)/bin
 # User configuration
 
 path=(
@@ -65,7 +67,8 @@ source ~/.mano.zsh
 
 # ZSH_TMUX_AUTOSTART=false
 # ZSH_TMUX_AUTOCONNECT=false
-
+export LIBRARY_PATH="/opt/homebrew/lib"
+export CPATH="/opt/homebrew/include"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git,out,build}"'
 
 eval "$(zoxide init --cmd cd zsh)"
