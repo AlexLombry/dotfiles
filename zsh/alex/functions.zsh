@@ -526,3 +526,8 @@ func vaultcp() {
 
 	echo $json|jq -r 'keys[]' | fzf --preview $previewCmd --bind "enter:become($bindCmd)"
 }
+
+func impotDan() {
+    go run main.go > search.txt
+    cat search.txt | grep 'Mont' | grep -o '[0-9]\+[ ,]*[0-9]*\.[0-9]\+' | sed 's/ //g' | tr '\n' '+' | sed 's/+$//' | bc
+}
