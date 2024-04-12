@@ -529,5 +529,6 @@ func vaultcp() {
 
 func impotDan() {
     go run main.go > search.txt
-    cat search.txt | grep 'Mont' | grep -o '[0-9]\+[ ,]*[0-9]*\.[0-9]\+' | sed 's/ //g' | tr '\n' '+' | sed 's/+$//' | bc
+    value=$(cat search.txt | grep 'Mont' | grep -o '[0-9]\+[ ,]*[0-9]*\.[0-9]\+' | sed 's/ //g' | tr '\n' '+' | sed 's/+$//' | bc)
+    echo "The amount of taxes to remove is $value"
 }
