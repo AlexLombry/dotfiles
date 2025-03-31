@@ -169,7 +169,7 @@ alias vim=nvim
 alias t='tm'
 alias tt='tmux attach -t StarK'
 
-alias ldk="DOCKER_HOST=unix:///Users/$USER/.colima/docker.sock lazydocker"
+#alias ldk="DOCKER_HOST=unix:///Users/$USER/.colima/docker.sock lazydocker"
 alias ta="tmux attach"
 
 # I'll be doing another one for Linux, but this one will give you

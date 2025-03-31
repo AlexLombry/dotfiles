@@ -24,7 +24,6 @@ plugins=(
     extract
     ssh-agent
     gpg-agent
-    docker
     docker-compose
     fancy-ctrl-z
     kubectl
@@ -52,6 +51,7 @@ path=(
     $HOME/Library/Python/2.7/bin
     /opt/homebrew/opt/openjdk@17/bin
     $(yarn global bin)
+    $HOME/.composer/vendor/bin
 )
 
 if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
@@ -93,9 +93,9 @@ export HERD_PHP_82_INI_SCAN_DIR="/Users/alex/Library/Application Support/Herd/co
 
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
-export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+#   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+#   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

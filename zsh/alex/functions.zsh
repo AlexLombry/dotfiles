@@ -543,3 +543,7 @@ func calculate_taxes() {
     
     rm -rf $HOME/dotfiles/tools/DanTaxes/files/sala*
 }
+
+func cjq() {
+    echo '' | fzf --print-query --preview "cat $1 | jq {q}"
+}
