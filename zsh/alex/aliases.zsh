@@ -162,7 +162,6 @@ alias heictojpg="magick convert $1 $1.jpg"
 alias heictojpgdir="magick mogrify -monitor -format jpg *.HEIC"
 
 alias meh="echo '¯\\\_(ツ)_/¯' | pbcopy"
-alias runmysql="cd ~/dotfiles/tools; docker-compose up -d"
 alias speed="speedtest --server-id=24215"
 alias vim=nvim
 

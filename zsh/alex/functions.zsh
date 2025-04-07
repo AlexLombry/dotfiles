@@ -78,20 +78,20 @@ f() {
 }
 
 # navigation
-cx() { 
-    cd "$@" && l; 
+cx() {
+    cd "$@" && l;
 }
 
-fcd() { 
-    cd "$(find . -type d -not -path '*/.*' | fzf)" && l; 
+fcd() {
+    cd "$(find . -type d -not -path '*/.*' | fzf)" && l;
 }
 
-f() { 
-    echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy 
+f() {
+    echo "$(find . -type f -not -path '*/.*' | fzf)" | pbcopy
 }
 
-fv() { 
-    nvim "$(find . -type f -not -path '*/.*' | fzf)" 
+fv() {
+    nvim "$(find . -type f -not -path '*/.*' | fzf)"
 }
 
 # get the gps coordinates from a picture
@@ -508,6 +508,34 @@ daily() {
     vim daily.md
 }
 
+pull_all_project() {
+    # Define the directory containing your git projects
+    projects_dir=$PWD
+
+    # Loop through each directory in the projects_dir
+    for dir in "$projects_dir"/*; do
+      if [ -d "$dir/.git" ]; then
+        echo "Updating project in $dir"
+        cd "$dir"
+        git pull --rebase --autostash
+      else
+        echo "Skipping $dir, not a git repository"
+      fi
+    done
+}
+
+runmysql() {
+    docker run --name mysql \
+      --platform linux/x86_64 \
+      -e MYSQL_ROOT_PASSWORD=forge \
+      -e MYSQL_USER=forge \
+      -e MYSQL_PASSWORD=forge \
+      -e MYSQL_DATABASE=forge \
+      -v db_data:/var/lib/mysql \
+      -p 3306:3306 \
+      -d mysql:5.7
+}
+
 func vaultcp() {
 	if [ $# -ne 2 ]; then
 		echo "Usage: vaultcp <env> <path>"
@@ -530,17 +558,17 @@ func vaultcp() {
 
 func calculate_taxes() {
     echo "🏃 CD Into taxes folder"
-    cd $HOME/dotfiles/tools/DanTaxes 
+    cd $HOME/dotfiles/tools/DanTaxes
 
     # current year
     year=$(date +"%Y")
     echo "📂 Generate JPG file from PDF Salary"
     pdftoppm -jpeg dan-$year.pdf files/salary-
-    
+
     echo "📄 Fetch all Amount to Deduct from taxes ..."
     go run main.go #> search.txt
     #value=$(cat search.txt | sed 's/ //g' | tr '\n' '+' | sed 's/+$//' | bc)
-    
+
     rm -rf $HOME/dotfiles/tools/DanTaxes/files/sala*
 }
 

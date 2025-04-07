@@ -9,6 +9,9 @@ fi
 # Default and Original ZSHRC file
 export ZSH="$HOME/.oh-my-zsh"
 
+HISTSIZE=
+SAVEHIST=
+
 # Which theme did you want to use
 ZSH_THEME="powerlevel10k/powerlevel10k"
 # ZSH_THEME="awesomepanda"
@@ -99,3 +102,15 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+# Herd injected PHP binary.
+export PATH="/Users/alex/Library/Application Support/Herd/bin/":$PATH
+
+
+# Herd injected PHP 8.4 configuration.
+export HERD_PHP_84_INI_SCAN_DIR="/Users/alex/Library/Application Support/Herd/config/php/84/"
+
+
+# Herd injected PHP 7.4 configuration.
+export HERD_PHP_74_INI_SCAN_DIR="/Users/alex/Library/Application Support/Herd/config/php/74/"
