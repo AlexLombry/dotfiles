@@ -1,27 +1,9 @@
 #!/usr/bin/env zsh
 source ~/dotfiles/zsh/alex/functions.zsh
 
-if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
-  echo "Installing Oh My Zsh..."
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi
-
 ZSH=${ZSH:-~/.oh-my-zsh}
 
 setup_color
-
-# First of all install Xcode Command Line Tools
-running "XCode Command Line Tools"
-if ! xcode-select -p &> /dev/null; then
-    xcode-select --install &> /dev/null
-    # Wait until the Xcode Command Line Tools are installed
-    while ! xcode-select -p &> /dev/null; do
-        sleep 5
-    done
-    # After successful installation, prompt user to agree to the license.
-    sudo xcodebuild -license
-fi
-ok
 
 running "Now that it's done, source everything and install Homebrew"
 source "$HOME/.zshrc"
