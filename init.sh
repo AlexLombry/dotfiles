@@ -13,7 +13,6 @@ if ! xcode-select -p &> /dev/null; then
     # After successful installation, prompt user to agree to the license.
     sudo xcodebuild -license
 fi
-ok
 
 chsh -s '/bin/zsh'
 
