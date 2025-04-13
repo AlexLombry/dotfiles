@@ -1,9 +1,9 @@
 #!/usr/bin/env zsh
-git clone https://github.com/AlexLombry/dotfiles.git ~/dotfiles
-cd ~/dotfiles
+echo "First we need to install the Command Line Tools"
+echo "After that, we will install ohMyZsh and change our current Bash to zsh"
 
 # First of all install Xcode Command Line Tools
-running "XCode Command Line Tools"
+echo "XCode Command Line Tools"
 if ! xcode-select -p &> /dev/null; then
     xcode-select --install &> /dev/null
     # Wait until the Xcode Command Line Tools are installed
@@ -15,9 +15,9 @@ if ! xcode-select -p &> /dev/null; then
 fi
 ok
 
-if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
-  echo "Installing Oh My Zsh..."
-  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-fi
+chsh -s '/bin/zsh'
+
+git clone https://github.com/AlexLombry/dotfiles.git ~/dotfiles
+cd ~/dotfiles
 
 zsh install.sh

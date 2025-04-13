@@ -1,6 +1,11 @@
 #!/usr/bin/env zsh
 source ~/dotfiles/zsh/alex/functions.zsh
 
+if [[ ! -d "$HOME/.oh-my-zsh" ]]; then
+  echo "Installing Oh My Zsh..."
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+fi
+
 ZSH=${ZSH:-~/.oh-my-zsh}
 
 setup_color
