@@ -32,6 +32,7 @@ if has("nvim")
   Plug 'kyazdani42/nvim-tree.lua'
   Plug 'glepnir/galaxyline.nvim' , {'branch': 'main'}
   Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+  Plug 'kdheepak/lazygit.nvim'
 endif
 
 Plug 'groenewege/vim-less', { 'for': 'less' }
