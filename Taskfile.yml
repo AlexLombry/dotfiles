@@ -1,63 +1,63 @@
 # https://taskfile.dev
-version: '3'
+version: "3"
 
 tasks:
-  default:
-    silent: true
-    cmds:
-      - task --list
+    default:
+        silent: true
+        cmds:
+            - task --list
 
-  os:
-    silent: true
-    desc: "Configure macOS default system"
-    cmds:
-      - bash macos.sh
-      - echo "Setup OS done!"
+    os:
+        silent: true
+        desc: "Configure macOS default system"
+        cmds:
+            - bash macos.sh
+            - echo "Setup OS done!"
 
-  kymsu:
-    silent: true
-    desc: "Install KYMSU"
-    cmds:
-      - bash kymsupdate/install.sh
-      - echo "Setup KYMSU done"
+    kymsu:
+        silent: true
+        desc: "Install KYMSU"
+        cmds:
+            - bash tools/kymsupdate/install.sh
+            - echo "Setup KYMSU done"
 
-  zsh:
-    silent: true
-    desc: "Install oh my zsh and source zsh extension file"
-    cmds:
-      - rm -rf $HOME/.oh-my-zsh
-      - rm -rf $HOME/.config/base16-shell
-      - chsh -s $(which zsh);
-      - curl -L http://install.ohmyz.sh | sh
-      - rm -rf $HOME/.zshrc
-      - ln -s $PWD/zsh/.zshrc $HOME/.zshrc
-      - ln -s $PWD/zsh/alex $HOME/.oh-my-zsh/custom/alex
-      - mkdir -p $HOME/.config
-      - git clone https://github.com/chriskempson/base16-shell.git $HOME/.config/base16-shell
-      - curl -L -o ~/.oh-my-zsh/custom/themes/materialshell.zsh-theme https://raw.githubusercontent.com/carloscuesta/materialshell/master/materialshell.zsh
-      - git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-      - git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
-      - git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-      - git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-      - echo "Reload your terminal and run base16_tomorrow-night command"
+    zsh:
+        silent: true
+        desc: "Install oh my zsh and source zsh extension file"
+        cmds:
+            - rm -rf $HOME/.oh-my-zsh
+            - rm -rf $HOME/.config/base16-shell
+            - chsh -s $(which zsh);
+            - curl -L http://install.ohmyz.sh | sh
+            - rm -rf $HOME/.zshrc
+            - ln -s $PWD/zsh/.zshrc $HOME/.zshrc
+            - ln -s $PWD/zsh/alex $HOME/.oh-my-zsh/custom/alex
+            - mkdir -p $HOME/.config
+            - git clone https://github.com/chriskempson/base16-shell.git $HOME/.config/base16-shell
+            - curl -L -o ~/.oh-my-zsh/custom/themes/materialshell.zsh-theme https://raw.githubusercontent.com/carloscuesta/materialshell/master/materialshell.zsh
+            - git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+            - git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/zsh-completions
+            - git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+            - git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+            - echo "Reload your terminal and run base16_tomorrow-night command"
 
-  neovim:
-    silent: true
-    desc: "Install NeoVim"
-    cmds:
-      - brew install luarocks luv
-      - brew install --HEAD luajit
-      - brew install --HEAD neovim
+    neovim:
+        silent: true
+        desc: "Install NeoVim"
+        cmds:
+            - brew install luarocks luv
+            - brew install --HEAD luajit
+            - brew install --HEAD neovim
 
-  chad:
-      silent: true
-      desc: "Install ChadVIM"
-      cmds:
-        - git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
+    chad:
+        silent: true
+        desc: "Install ChadVIM"
+        cmds:
+            - git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 
-  links:
-    silent: true
-    desc: "Create all dotfiles symlinks"
-    cmds:
-      - bash links.sh
-      - echo "Setup Links done!"
+    links:
+        silent: true
+        desc: "Create all dotfiles symlinks"
+        cmds:
+            - bash links.sh
+            - echo "Setup Links done!"
