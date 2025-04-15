@@ -219,3 +219,4 @@ alias splitpdf="pdftoppm -jpeg $1 $2"
 alias btc="better-commits"
 
 alias lg=lazygit
+alias nte="nvim $HOME/Desktop/myBigNotesRandom.log"
