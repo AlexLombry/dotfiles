@@ -217,3 +217,5 @@ alias ke="kubectl exec -it"
 alias kcns='kubectl config set-context --current --namespace'
 alias splitpdf="pdftoppm -jpeg $1 $2"
 alias btc="better-commits"
+
+alias lg=lazygit
