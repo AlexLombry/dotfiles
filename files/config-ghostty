@@ -12,7 +12,7 @@ font-size = 17
 font-family = "SF Mono for Powerline"
 font-thicken = true
 font-variation-bold = wght=500
-background-opacity = 0.96
+background-opacity = 0.85
 
 cursor-style = block
 cursor-style-blink = true
