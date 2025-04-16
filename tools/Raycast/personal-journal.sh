@@ -11,10 +11,10 @@
 # Documentation:
 # @raycast.author Alex Lombry
 
-echo "Journal opening !"
+# Open the Ghostty application
+# open -a "Ghostty"
+# osascript -e 'tell application "Ghostty" to activate'
+# osascript -e 'tell application "Ghostty" to tell current window to create tab with default profile'
+# osascript -e 'tell application "Ghostty" to tell current session of current window to write text "cd ~/Desktop && vim captains-log.md"'
 
-#!/bin/bash
-open -a iTerm
-osascript -e 'tell application "iTerm" to activate'
-osascript -e 'tell application "iTerm" to tell current window of application "iTerm" to create tab with default profile'
-osascript -e 'tell application "iTerm" to tell current session of current window of application "iTerm" to write text "cd ~/Desktop && vim captains-log.md"'
+open -na Ghostty --args -e /opt/homebrew/bin/nvim "$HOME/Desktop/captains-log.md"
