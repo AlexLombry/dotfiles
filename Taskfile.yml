@@ -62,8 +62,8 @@ tasks:
             - bash links.sh
             - echo "Setup Links done!"
 
-    brewup:
+    bundle:
         silent: false
-        desc: "Update Homebrew completely, create new Brewfile"
+        desc: "Install the current BrewFile bundle"
         cmds:
-            - bash tools/brewup.sh
+            - HOMEBREW_NO_AUTO_UPDATE=1 brew bundle
