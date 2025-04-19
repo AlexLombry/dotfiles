@@ -525,15 +525,7 @@ pull_all_project() {
 }
 
 runmysql() {
-    docker run --name mysql \
-      --platform linux/x86_64 \
-      -e MYSQL_ROOT_PASSWORD=forge \
-      -e MYSQL_USER=forge \
-      -e MYSQL_PASSWORD=forge \
-      -e MYSQL_DATABASE=forge \
-      -v db_data:/var/lib/mysql \
-      -p 3306:3306 \
-      -d mysql:5.7
+    docker run --name mysql --platform linux/x86_64 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -v $HOME/Sites/docker/mysql/data_folder:/var/lib/mysql -p 3306:3306 -d mysql:5.7
 }
 
 func vaultcp() {
