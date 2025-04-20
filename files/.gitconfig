@@ -2,8 +2,8 @@
 [user]
 	name = Alex Lombry
 	email = 1451210+AlexLombry@users.noreply.github.com
-[includeIf "gitdir:/Users/alex/ManoMano/"]
-    path = /Users/alex/ManoMano/.gitconfig
+[includeIf "gitdir:/Volumes/ManoManoCode/"]
+    path = /Volumes/ManoManoCode/.gitconfig
 [push]
 	default = current
 [credential]

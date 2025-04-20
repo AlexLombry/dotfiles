@@ -524,6 +524,10 @@ pull_all_project() {
     done
 }
 
+crackzip() {
+    fcrackzip -b -v -l 1-8 -c a1 -u $1
+}
+
 runmysql() {
     docker run --name mysql --platform linux/x86_64 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -v $HOME/Sites/docker/mysql/data_folder:/var/lib/mysql -p 3306:3306 -d mysql:5.7
 }

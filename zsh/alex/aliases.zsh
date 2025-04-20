@@ -220,3 +220,4 @@ alias btc="better-commits"
 
 alias lg=lazygit
 alias nte="nvim $HOME/Desktop/myBigNotesRandom.log"
+alias mm="cd /Volumes/ManoManoCode/"

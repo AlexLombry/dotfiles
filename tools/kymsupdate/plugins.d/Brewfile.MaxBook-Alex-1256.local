@@ -134,7 +134,6 @@ brew "yarn"
 brew "yazi"
 brew "ykman"
 brew "yq"
-brew "yt-dlp"
 brew "zoxide"
 brew "caarlos0/tap/timer"
 brew "derailed/k9s/k9s"
@@ -151,7 +150,6 @@ brew "ynqa/tap/jnv"
 cask "1password", args: { appdir: "/Applications" }
 cask "1password-cli"
 cask "arc"
-cask "deskpad"
 cask "discord"
 cask "dropbox", args: { appdir: "/Applications" }
 cask "firefox"
@@ -180,7 +178,6 @@ cask "sublime-text", args: { appdir: "/Applications" }
 cask "tor-browser", args: { appdir: "/Applications" }
 cask "transmit", args: { appdir: "/Applications" }
 cask "vlc", args: { appdir: "/Applications" }
-cask "warp"
 cask "wireshark"
 cask "zed"
 mas "1Password for Safari", id: 1569813296
@@ -220,6 +217,7 @@ vscode "ms-python.python"
 vscode "ms-python.vscode-pylance"
 vscode "ms-vscode.makefile-tools"
 vscode "redhat.java"
+vscode "tomrijndorp.find-it-faster"
 vscode "visualstudioexptteam.intellicode-api-usage-examples"
 vscode "visualstudioexptteam.vscodeintellicode"
 vscode "vmware.vscode-boot-dev-pack"
