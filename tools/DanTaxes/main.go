@@ -35,7 +35,7 @@ func main() {
 
 	folderPath := "./files"
 
-	// Pattern to capture numbers like 628R | Mont.Deduct ...
+	// make sure I get a number at the end 
 	numberPattern := regexp.MustCompile(`[0-9]+[ ,]*[0-9]*\.[0-9]+`)
 
 	err := filepath.Walk(folderPath, func(path string, info fs.FileInfo, err error) error {

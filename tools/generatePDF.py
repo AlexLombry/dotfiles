@@ -1,16 +1,21 @@
-from fpdf import FPDF
 import os
+
+from fpdf import FPDF
+
 
 # Création d'un PDF avec le texte retranscrit
 class PDF(FPDF):
     def header(self):
         self.set_font("Arial", "B", 12)
-        self.cell(0, 10, "Lettre de Pétition - Assistantes Maternelles", ln=True, align="C")
+        self.cell(
+            0, 10, "Lettre de Pétition - Assistantes Maternelles", ln=True, align="C"
+        )
 
     def footer(self):
         self.set_y(-15)
         self.set_font("Arial", "I", 8)
         self.cell(0, 10, f"Page {self.page_no()}", align="C")
+
 
 pdf = PDF()
 pdf.add_page()
@@ -23,7 +28,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 """
 
 # Ajouter le texte au PDF
-for line in texte.strip().split('\n'):
+for line in texte.strip().split("\n"):
     pdf.multi_cell(0, 10, line)
 
 # Sauvegarde du fichier
