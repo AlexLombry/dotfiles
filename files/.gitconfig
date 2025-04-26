@@ -2,6 +2,7 @@
 [user]
 	name = Alex Lombry
 	email = 1451210+AlexLombry@users.noreply.github.com
+	signingkey = CF93C41EA81ED3AC
 [includeIf "gitdir:/Volumes/ManoManoCode/"]
     path = /Volumes/ManoManoCode/.gitconfig
 [push]
@@ -103,3 +104,5 @@
 	ui = auto
 [branch]
 	sort = --committerdate
+[tag]
+	gpgSign = false
