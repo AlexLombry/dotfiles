@@ -8,8 +8,8 @@ window-height = 42
 mouse-hide-while-typing = true
 cursor-style = block
 
-font-size = 17
-font-family = "SF Mono for Powerline"
+font-size = 19
+font-family = "Ubuntu Mono derivative Powerline"
 font-thicken = true
 font-variation-bold = wght=500
 background-opacity = 0.95
