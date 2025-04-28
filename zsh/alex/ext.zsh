@@ -22,4 +22,4 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 disable r
 
 # autocd in these paths
-cdpath=($(echo $cdpath) $HOME/ManoMano/ $HOME/ManoMano/dev-workspace/www)
+cdpath=($(echo $cdpath) $HOME/ManoMano/ /Volumes/ManoManoCode/)
