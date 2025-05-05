@@ -34,6 +34,7 @@ plugins=(
 )
 
 source $ZSH/oh-my-zsh.sh
+source $HOME/dotfiles/zsh/alex/ext.zsh
 
 export GOPATH="$HOME/go"
 # export GOPATH=$(go env GOPATH)/bin
