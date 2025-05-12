@@ -8,6 +8,7 @@ fi
 # zmodload zsh/zprof
 # Default and Original ZSHRC file
 export ZSH="$HOME/.oh-my-zsh"
+export GPG_TTY=$(tty)
 
 HISTSIZE=
 SAVEHIST=
@@ -115,3 +116,6 @@ export HERD_PHP_84_INI_SCAN_DIR="/Users/alex/Library/Application Support/Herd/co
 
 # Herd injected PHP 7.4 configuration.
 export HERD_PHP_74_INI_SCAN_DIR="/Users/alex/Library/Application Support/Herd/config/php/74/"
+export GPG_TTY="$(tty)"
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent

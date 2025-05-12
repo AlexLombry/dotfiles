@@ -1,7 +1,7 @@
 # gitconfig
 [user]
 	name = Alex Lombry
-	email = 1451210+AlexLombry@users.noreply.github.com
+	email = alex@lombry.email
 	signingkey = CF93C41EA81ED3AC
 [includeIf "gitdir:/Volumes/ManoManoCode/"]
     path = /Volumes/ManoManoCode/.gitconfig
