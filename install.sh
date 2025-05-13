@@ -1,4 +1,6 @@
 #!/usr/bin/env zsh
+set -euo pipefail
+
 source ~/dotfiles/zsh/alex/functions.zsh
 
 setup_color
@@ -36,9 +38,8 @@ ok
 "$(brew --prefix)/opt/fzf/install"  # fzf installation
 ok
 
-running "Installing Python"
-curl https://bootstrap.pypa.io/get-pip.py -o "$HOME/Downloads/get-pip.py"
-python3 "$HOME/Downloads/get-pip.py" --user
+running "Installing Python via Homebrew"
+HOMEBREW_NO_AUTO_UPDATE=1 brew install python
 ok
 
 running "Fixing fonts"
