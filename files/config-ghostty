@@ -1,5 +1,5 @@
 # NOTE(selman): without decorations, tabs can not be used :(
-theme = catppuccin-mocha
+theme = dark:catppuccin-mocha,light:catppuccin-latte
 window-decoration = true
 window-padding-x = 10
 window-padding-y = 15
