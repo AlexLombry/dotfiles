@@ -1,10 +1,10 @@
 # gitconfig
 [user]
-	name = Alex Lombry
-	email = 1451210+AlexLombry@users.noreply.github.com
-	signingkey = CF93C41EA81ED3AC
-[includeIf "gitdir:/Volumes/ManoManoCode/"]
-    path = /Volumes/ManoManoCode/.gitconfig
+	name = Alex LOMBRY
+	email = alex.lombry@manomano.com
+	signingkey = 0x56DF601047410567
+[includeIf "gitdir:/Users/alex/Code/"]
+    path = /Users/alex/Code/.gitconfig
 [push]
 	default = current
 [credential]
@@ -15,7 +15,7 @@
 	oops = commit --amend --no-edit
 	rc = rebase --continue
 	rs = rebase --skip
-  mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' - 
+  mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
 	rbi = "!f() { git rebase -i HEAD~$1; }; f"
   hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
   count = shortlog -sn
@@ -80,7 +80,7 @@
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [commit]
-	gpgsign = false
+	gpgsign = true
 [rerere]
 	enable = true
 [pull]
@@ -90,7 +90,7 @@
 [github]
     user = AlexLombry
 [gpg]
-	program = gpg
+	program = /usr/local/MacGPG2/bin/gpg2
 [rebase]
 	autostash = true
 	autosquash = true
@@ -106,3 +106,7 @@
 	sort = --committerdate
 [tag]
 	gpgSign = false
+[url "ssh://git@git.manomano.tech/"]
+	insteadOf = https://git.manomano.tech/
+	insteadOf = http://git.manomano.tech/
+	insteadOf = //git.manomano.tech/

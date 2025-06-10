@@ -32,7 +32,7 @@ plugins=(
     fancy-ctrl-z
     kubectl
 #    git-commit
-)
+ mise)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/dotfiles/zsh/alex/ext.zsh
@@ -119,3 +119,5 @@ export HERD_PHP_74_INI_SCAN_DIR="/Users/alex/Library/Application Support/Herd/co
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
+export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+export DOCKER_HOST=unix://${HOME}/.colima/docker.sock
