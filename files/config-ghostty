@@ -17,3 +17,6 @@ background-opacity = 0.95
 
 cursor-style = block
 cursor-style-blink = true
+shell-integration = zsh
+
+keybind = global:cmd+3=toggle_quick_terminal

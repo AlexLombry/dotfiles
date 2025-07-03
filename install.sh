@@ -14,6 +14,13 @@ ok
 
 source "$HOME/.zshrc"
 
+running "Install mise (mise en place) for language/tool management"
+HOMEBREW_NO_AUTO_UPDATE=1 brew install mise
+ok
+
+mise install
+mise use -g
+
 running "Now we install Go Task to be able to run task builder"
 HOMEBREW_NO_AUTO_UPDATE=1 brew install go-task/tap/go-task
 ok
@@ -38,9 +45,7 @@ ok
 "$(brew --prefix)/opt/fzf/install"  # fzf installation
 ok
 
-running "Installing Python via Homebrew"
-HOMEBREW_NO_AUTO_UPDATE=1 brew install python
-ok
+# Removed: Homebrew Python installation (now managed by mise)
 
 running "Fixing fonts"
 sudo chmod 775 ~/Library/Fonts/**/
