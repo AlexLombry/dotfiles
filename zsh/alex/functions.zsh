@@ -571,3 +571,7 @@ func calculate_taxes() {
 func cjq() {
     echo '' | fzf --print-query --preview "cat $1 | jq {q}"
 }
+
+a() {
+    gemini -p "Only answer with the command. Don't put it in backticks or any markdown. Give me a terminal command to $*" 2>/dev/null
+}

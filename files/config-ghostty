@@ -20,3 +20,4 @@ cursor-style-blink = true
 shell-integration = zsh
 
 keybind = global:cmd+3=toggle_quick_terminal
+custom-shader=cursor_smear.glsl
