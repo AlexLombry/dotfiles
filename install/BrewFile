@@ -78,9 +78,7 @@ cask "font-source-code-pro-for-powerline"
 cask "font-cascadia"
 
 # GUI Software from App Store
-mas "Encrypto", id: 935235287
 mas "iMazing HEIC Converter", id: 1292198261
 mas "iNet Network Scanner", id: 403304796
 mas "Parcel", id: 639968404
 mas "The Unarchiver", id: 425424353
-# mas "Xcode", id: 497799835
