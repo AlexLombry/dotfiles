@@ -1,0 +1,22 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:5.7
+    container_name: mysql
+    platform: linux/x86_64
+    environment:
+      # Définit le mot de passe root et crée un utilisateur 'forge' avec le même mot de passe.
+      MYSQL_ROOT_PASSWORD: "forge"
+      MYSQL_USER: "forge"
+      MYSQL_PASSWORD: "forge"
+      # Optionnel : crée une base de données nommée "forge"
+      MYSQL_DATABASE: "forge"
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  db_data:
+    driver: local
