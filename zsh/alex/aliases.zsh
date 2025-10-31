@@ -221,3 +221,5 @@ alias btc="better-commits"
 alias lg=lazygit
 alias nte="nvim $HOME/Desktop/myBigNotesRandom.log"
 alias mm="cd /Volumes/ManoManoCode/"
+
+alias safe-open=$HOME/dotfiles/zsh/alex/safe-open.sh

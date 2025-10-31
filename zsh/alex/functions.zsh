@@ -532,26 +532,6 @@ runmysql() {
     docker run --name mysql --platform linux/x86_64 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -v $HOME/Sites/docker/mysql/data_folder:/var/lib/mysql -p 3306:3306 -d mysql:5.7
 }
 
-func vaultcp() {
-	if [ $# -ne 2 ]; then
-		echo "Usage: vaultcp <env> <path>"
-		return 1
-	fi
-	local env=$1
-	local kvPath=$2
-	local role="order"
-
-	# authenticate only if needed
-	if ! VAULT_ADDR=https://vault-eu-west-3.$env.manomano.com vault token lookup -format=json > /dev/null 2>&1; then
-		VAULT_ADDR=https://vault-eu-west-3.$env.manomano.com vault login -path=sso -method=oidc role=$role
-	fi
-	local json=$(VAULT_ADDR=https://vault-eu-west-3.$env.manomano.com vault kv get -format=json "$env/$kvPath" |jq '.data.data')
-	previewCmd=$(printf "echo '%s' | jq --raw-output .{1}" $json)
-	bindCmd=$(printf "echo '%s' | jq --raw-output --join-output .{1}|xclip" $json)
-
-	echo $json|jq -r 'keys[]' | fzf --preview $previewCmd --bind "enter:become($bindCmd)"
-}
-
 func calculate_taxes() {
     echo "🏃 CD Into taxes folder"
     cd $HOME/dotfiles/tools/DanTaxes
@@ -574,4 +554,29 @@ func cjq() {
 
 a() {
     gemini -p "Only answer with the command. Don't put it in backticks or any markdown. Give me a terminal command to $*" 2>/dev/null
+}
+
+func vaultcp() {
+    if [ $# -ne 2 ]; then
+        echo "Usage: vaultcp <env> <path>"
+        return 1
+    fi
+
+    local env=$1
+    local kvPath=$2
+    local role="order"
+
+    # Authenticate only if needed
+    if ! VAULT_ADDR="https://vault-eu-west-3.${env}.manomano.com" vault token lookup -format=json > /dev/null 2>&1; then
+        VAULT_ADDR="https://vault-eu-west-3.${env}.manomano.com" vault login -path=sso -method=oidc role="$role"
+    fi
+
+    local json=$(VAULT_ADDR="https://vault-eu-west-3.${env}.manomano.com" vault kv get -format=json "${env}/${kvPath}" | jq '.data.data')
+
+    # Use printf to safely handle JSON data and escape necessary characters
+    local previewCmd=$(printf "echo '%s' | jq --raw-output .\\\"{}\\\"" "$json")
+    local bindCmd=$(printf "echo '%s' | jq --raw-output --join-output .\\\"{}\\\" | xclip" "$json")
+
+    # Use echo to pass the JSON keys to fzf, preview and bind must handle complex commands properly
+    echo "$json" | jq -r 'keys[]' | fzf --preview "$previewCmd" --bind "enter:execute($bindCmd)"
 }
