@@ -3,16 +3,19 @@
 ## CURRENTLY IN REWRITE WITH STOW ⚠️
 
 ## macOS Setup
+
 The installation script (install/install.sh) will install all the necessary program you need like Brew, Zsh and configuring macOS with my own preferences.
 
 The installer launch also the installation of [Go Task](https://github.com/go-task/task) which is used to create some bash script in a Yaml format.
 
 To simply install the script run the following command :
+
 ```
-curl https://raw.githubusercontent.com/AlexLombry/dotfiles/master/install/init.sh | bash
+curl https://raw.githubusercontent.com/AlexLombry/dotfiles/refs/heads/main/install/install.sh | bash
 ```
 
 ### What's going on
+
 If you run the init.sh script, this is what's going to happened.
 
 `chsh -s /bin/zsh`
