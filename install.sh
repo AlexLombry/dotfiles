@@ -1,7 +1,9 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-source ~/dotfiles/zsh/alex/functions.zsh
+stow -t ~ ~/dotfiles/config-files
+
+source ~/dotfiles/config-files/.oh-my-zsh/custom/alex/functions.zsh
 
 setup_color
 
@@ -38,8 +40,6 @@ ok
 running "Running GO Task installation tools for macOS, OMZ ..."
 task "os"
 task "neovim"
-task "zsh"
-task "links"
 ok
 
 "$(brew --prefix)/opt/fzf/install"  # fzf installation
