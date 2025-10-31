@@ -21,7 +21,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 ZSH_CUSTOM="$ZSH/custom"
 
 plugins=(
-    git 
+    git
     zsh-syntax-highlighting
     zsh-autosuggestions
     zsh-completions
@@ -35,7 +35,7 @@ plugins=(
  mise)
 
 source $ZSH/oh-my-zsh.sh
-source $HOME/dotfiles/zsh/alex/ext.zsh
+source $HOME/dotfiles/.oh-my-zsh/custom/alex/ext.zsh
 
 export GOPATH="$HOME/go"
 # export GOPATH=$(go env GOPATH)/bin
@@ -89,13 +89,6 @@ export SDKMAN_DIR="/Users/alex/.sdkman"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# Herd injected PHP binary.
-export PHP_INI_SCAN_DIR="/Users/alex/Library/Application Support/Herd/config/php/":$PHP_INI_SCAN_DIR
-
-
-# Herd injected PHP 8.2 configuration.
-export HERD_PHP_82_INI_SCAN_DIR="/Users/alex/Library/Application Support/Herd/config/php/82/"
-
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # export NVM_DIR="$HOME/.nvm"
@@ -105,23 +98,11 @@ typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
-# Herd injected PHP binary.
-export PATH="/Users/alex/Library/Application Support/Herd/bin/":$PATH
-
-
-# Herd injected PHP 8.4 configuration.
-export HERD_PHP_84_INI_SCAN_DIR="/Users/alex/Library/Application Support/Herd/config/php/84/"
-
-
-# Herd injected PHP 7.4 configuration.
-export HERD_PHP_74_INI_SCAN_DIR="/Users/alex/Library/Application Support/Herd/config/php/74/"
 export GPG_TTY="$(tty)"
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 gpgconf --launch gpg-agent
 export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
 export DOCKER_HOST=unix://${HOME}/.colima/docker.sock
-
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -137,4 +118,3 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/alex/.lmstudio/bin"
 # End of LM Studio CLI section
-
