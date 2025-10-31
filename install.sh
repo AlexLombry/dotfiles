@@ -1,7 +1,11 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-stow -t ~ ~/dotfiles/config-files
+cd ~/dotfiles/config-files
+
+stow -t ~ . --adopt
+
+cd ~/dotfiles/
 
 source ~/dotfiles/config-files/.oh-my-zsh/custom/alex/functions.zsh
 
