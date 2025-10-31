@@ -1,13 +1,14 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
-cd ~/dotfiles/config-files
+DOTFILES_DIR="$HOME/dotfiles"
+cd $DOTFILES_DIR
 
-stow -t ~ . --adopt
+cp $DOTFILES_DIR/stow-local-ignore $HOME/stow-local-ignore
 
-cd ~/dotfiles/
+stow .
 
-source ~/dotfiles/config-files/.oh-my-zsh/custom/alex/functions.zsh
+source ~/dotfiles/.oh-my-zsh/custom/alex/functions.zsh
 
 setup_color
 
