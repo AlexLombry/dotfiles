@@ -4,20 +4,23 @@ set -euo pipefail
 DOTFILES_DIR="$HOME/dotfiles"
 cd $DOTFILES_DIR
 
-cp $DOTFILES_DIR/stow-local-ignore $HOME/stow-local-ignore
-
-stow .
+cp $DOTFILES_DIR/stow-local-ignore $HOME/.stow-local-ignore
 
 source ~/dotfiles/.oh-my-zsh/custom/alex/functions.zsh
 
 setup_color
 
-running "Now that it's done, source everything and install Homebrew"
+running "Install Oh My ZSH"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+ok
 
+running "Now that it's done, source everything and install Homebrew"
 if ! command_exists brew; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 ok
+
+stow . --adopt
 
 source "$HOME/.zshrc"
 
