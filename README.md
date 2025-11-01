@@ -11,7 +11,7 @@ The installer launch also the installation of [Go Task](https://github.com/go-ta
 To simply install the script run the following command :
 
 ```
-curl https://raw.githubusercontent.com/AlexLombry/dotfiles/refs/heads/main/install/install.sh | bash
+curl https://raw.githubusercontent.com/AlexLombry/dotfiles/refs/heads/main/install/init.sh | bash
 ```
 
 ### What's going on

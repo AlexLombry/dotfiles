@@ -4,8 +4,10 @@ set -euo pipefail
 DOTFILES_DIR="$HOME/dotfiles"
 cd $DOTFILES_DIR
 
+echo "🚀 Copy or replace Stow Local Ignore file"
 cp $DOTFILES_DIR/stow-local-ignore $HOME/.stow-local-ignore
 
+echo "🚀 Loading ZSH Functions"
 source ~/dotfiles/.oh-my-zsh/custom/alex/functions.zsh
 
 setup_color
@@ -20,6 +22,7 @@ if ! command_exists brew; then
 fi
 ok
 
+echo "🚀 Running Stow with --adopt flag"
 stow . --adopt
 
 source "$HOME/.zshrc"

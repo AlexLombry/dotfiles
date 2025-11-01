@@ -28,6 +28,7 @@ cask "viscosity"
 cask "zed"
 
 # CLI software
+brew "stow"
 brew "ack"
 brew "ccat"
 brew "cloc"
