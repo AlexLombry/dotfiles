@@ -6,7 +6,7 @@ CURRENT_WIDTH=$(tput cols)
 COLUMNS=$(( CURRENT_WIDTH > MAX_WIDTH ? MAX_WIDTH : CURRENT_WIDTH ))
 printf '%*s\n' "${COLUMNS}" '' | tr ' ' =
 
-SCRIPTS_DIR="$HOME/dotfiles/tools/kymsupdate/plugins.d"
+SCRIPTS_DIR="$HOME/dotfiles/install/tools/kymsupdate/plugins.d"
 
 for script in $(ls $SCRIPTS_DIR); do
   if [ -x "$SCRIPTS_DIR/$script" ]; then
