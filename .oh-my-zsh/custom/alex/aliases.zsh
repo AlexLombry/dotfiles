@@ -223,3 +223,4 @@ alias nte="nvim $HOME/Desktop/myBigNotesRandom.log"
 alias mm="cd /Volumes/ManoManoCode/"
 
 alias safe-open=$HOME/dotfiles/zsh/alex/safe-open.sh
+alias yz=yazi

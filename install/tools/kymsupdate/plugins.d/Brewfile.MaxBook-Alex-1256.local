@@ -137,6 +137,7 @@ brew "watch"
 brew "wget"
 brew "wrk"
 brew "xh"
+brew "xmlstarlet"
 brew "xsv"
 brew "yarn"
 brew "yazi"
@@ -149,7 +150,6 @@ brew "derailed/k9s/k9s"
 brew "go-task/tap/go-task"
 brew "golangci/tap/golangci-lint"
 brew "hashicorp/tap/vault"
-brew "jlhonora/lsusb/lsusb"
 brew "joemiller/taps/vault-token-helper"
 brew "joshmedeski/sesh/sesh"
 brew "kong/deck/deck"
@@ -159,6 +159,7 @@ cask "1password", args: { appdir: "/Applications" }
 cask "1password-cli"
 cask "android-platform-tools"
 cask "arc"
+cask "bruno"
 cask "discord"
 cask "dropbox", args: { appdir: "/Applications" }
 cask "font-fira-code", args: { appdir: "/Applications" }
@@ -176,7 +177,6 @@ cask "logitech-options", args: { appdir: "/Applications" }
 cask "microsoft-auto-update"
 cask "microsoft-office", args: { appdir: "/Applications" }
 cask "miro"
-cask "postman", args: { appdir: "/Applications" }
 cask "postman-cli"
 cask "protonvpn", args: { appdir: "/Applications" }
 cask "raycast", args: { appdir: "/Applications" }
@@ -186,7 +186,6 @@ cask "slack", args: { appdir: "/Applications" }
 cask "tor-browser", args: { appdir: "/Applications" }
 cask "transmit", args: { appdir: "/Applications" }
 cask "vlc", args: { appdir: "/Applications" }
-cask "wireshark-app"
 cask "zed"
 mas "1Password for Safari", id: 1569813296
 mas "Developer", id: 640199958
@@ -195,7 +194,6 @@ mas "iNet Network Scanner", id: 403304796
 mas "Keeper Password Manager", id: 414781829
 mas "Keynote", id: 409183694
 mas "LanguageTool", id: 1534275760
-mas "MacDroid", id: 1476545828
 mas "Numbers", id: 409203825
 mas "Okta Verify", id: 490179405
 mas "Pages", id: 409201541

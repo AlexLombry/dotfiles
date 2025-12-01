@@ -102,8 +102,6 @@
 	defaultBranch = main
 [column]
 	ui = auto
-[branch]
-	sort = --committerdate
 [tag]
 	gpgSign = false
 [url "ssh://git@git.manomano.tech/"]
