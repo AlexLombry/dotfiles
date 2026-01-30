@@ -14,12 +14,25 @@ tasks:
       - bash macos.sh
       - echo "Setup OS done!"
 
-  kymsu:
-    silent: true
-    desc: "Install KYMSU"
+  brew:
+    silent: false
+    desc: "Install Homebrew bundle"
     cmds:
-      - bash tools/kymsupdate/install.sh
-      - echo "Setup KYMSU done"
+      - HOMEBREW_NO_AUTO_UPDATE=1 brew bundle --file=BrewFile
+
+  stow:
+    silent: true
+    desc: "Apply symlinks with GNU Stow"
+    cmds:
+      - stow . --adopt
+      - echo "Symlinks applied!"
+
+  mise:
+    silent: false
+    desc: "Install languages and tools with Mise"
+    cmds:
+      - mise install
+      - mise use -g
 
   neovim:
     silent: true
@@ -40,3 +53,13 @@ tasks:
     desc: "Install the current BrewFile bundle"
     cmds:
       - HOMEBREW_NO_AUTO_UPDATE=1 brew bundle
+
+  setup:
+    desc: "Complete setup for a new MacBook"
+    cmds:
+      - task: stow
+      - task: os
+      - task: brew
+      - task: mise
+      - task: neovim
+      - echo "🚀 MacBook Setup Complete! Please restart your terminal."

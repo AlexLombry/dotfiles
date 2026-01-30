@@ -20,7 +20,7 @@ fi
 if [ ! -d "$HOME/dotfiles" ]; then
     echo "🚀 Cloning Dotfiles from GitHub"
     git clone https://github.com/AlexLombry/dotfiles.git $HOME/dotfiles
-    cd $HOME/dotfiles
 fi
 
-exit 1
+cd $HOME/dotfiles
+exec ./install/install.sh
