@@ -189,16 +189,24 @@ cask "transmit", args: { appdir: "/Applications" }
 cask "vlc", args: { appdir: "/Applications" }
 cask "zed"
 mas "1Password for Safari", id: 1569813296
+mas "Compressor", id: 6746516157
 mas "Developer", id: 640199958
+mas "Final Cut Pro", id: 1631624924
+mas "Goodnotes", id: 1444383602
 mas "iMovie", id: 408981434
 mas "iNet Network Scanner", id: 403304796
 mas "Keeper Password Manager", id: 414781829
 mas "Keynote", id: 409183694
+mas "Keynote", id: 361285480
 mas "LanguageTool", id: 1534275760
+mas "Logic Pro", id: 1615087040
+mas "Numbers", id: 361304891
 mas "Numbers", id: 409203825
 mas "Okta Verify", id: 490179405
 mas "Pages", id: 409201541
+mas "Pages", id: 361309726
 mas "Parcel", id: 375589283
+mas "Pixelmator Pro", id: 6746662575
 mas "Pixelmator Pro", id: 1289583905
 mas "RunCat", id: 1429033973
 mas "The Unarchiver", id: 425424353

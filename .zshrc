@@ -89,6 +89,70 @@ export SDKMAN_DIR="/Users/alex/.sdkman"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Open Buffer for command
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^x' edit-command-line
+
+# -------------------------------------------
+# 2. Undo in ZSH
+# -------------------------------------------
+# Press Ctrl+_ (Ctrl+Underscore) to undo
+# This is built-in, no configuration needed!
+# Redo widget exists but has no default binding:
+# bindkey '^Y' redo  # Example binding if you want it
+
+# -------------------------------------------
+# 3. Magic Space - Expand History
+# -------------------------------------------
+# Expands history expressions like !! or !$ when you press space
+bindkey ' ' magic-space
+
+
+alias -s json=jless
+alias -s md=bat
+alias -s go='$EDITOR'
+alias -s rs='$EDITOR'
+alias -s txt=bat
+alias -s log=bat
+alias -s py='$EDITOR'
+alias -s js='$EDITOR'
+alias -s ts='$EDITOR'
+alias -s html=open  # macOS: open in default browser
+
+# Pipe to jq
+alias -g J='| jq'
+
+# Copy output to clipboard (macOS)
+alias -g C='| pbcopy'
+
+# -------------------------------------------
+# zmv - Advanced Batch Rename/Move
+# -------------------------------------------
+# Enable zmv
+autoload -Uz zmv
+
+# Usage examples:
+# zmv '(*).log' '$1.txt'           # Rename .log to .txt
+# zmv -w '*.log' '*.txt'           # Same thing, simpler syntax
+# zmv -n '(*).log' '$1.txt'        # Dry run (preview changes)
+# zmv -i '(*).log' '$1.txt'        # Interactive mode (confirm each)
+
+# Helpful aliases for zmv
+alias zcp='zmv -C'  # Copy with patterns
+alias zln='zmv -L'  # Link with patterns
+
+# -------------------------------------------
+# Named Directories - Bookmark Folders
+# -------------------------------------------
+# Access with ~name syntax, e.g., cd ~yt or ls ~yt
+hash -d dot=~/.dotfiles
+hash -d dl=~/Downloads
+
+
+bindkey -s '^Gc' 'git commit -m ""\C-b'
+
+
 typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
 
 # export NVM_DIR="$HOME/.nvm"
