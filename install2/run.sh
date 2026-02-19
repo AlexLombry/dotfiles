@@ -38,8 +38,10 @@ if [ ! -f "packages.conf" ]; then
 fi
 
 # Update the system first
+
 echo "Updating system..."
 if ! xcode-select -p &> /dev/null; then
+    echo "🚀 Install mandatory XCode Developer Tools and Signing licence"
     xcode-select --install &> /dev/null
     # Wait until the Xcode Command Line Tools are installed
     while ! xcode-select -p &> /dev/null; do
@@ -48,3 +50,14 @@ if ! xcode-select -p &> /dev/null; then
     # After successful installation, prompt user to agree to the license.
     sudo xcodebuild -license
 fi
+
+if [ ! -d "$HOME/dotfiles" ]; then
+    echo "🚀 Cloning Dotfiles from GitHub"
+    git clone https://github.com/AlexLombry/dotfiles.git $HOME/dotfiles
+fi
+
+echo "Please launch the following command in a new terminal"
+echo "cd $HOME/dotfiles"
+echo "./install/install.sh"
+
+exit 0

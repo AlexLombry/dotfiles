@@ -1,12 +1,12 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
 # zmodload zsh/zprof
 # Default and Original ZSHRC file
+# Homebrew
+if [[ -f /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -f /usr/local/bin/brew ]]; then
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
 export ZSH="$HOME/.oh-my-zsh"
 export GPG_TTY=$(tty)
 
@@ -14,8 +14,7 @@ HISTSIZE=
 SAVEHIST=
 
 # Which theme did you want to use
-ZSH_THEME="powerlevel10k/powerlevel10k"
-# ZSH_THEME="awesomepanda"
+ZSH_THEME="awesomepanda"
 
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM="$ZSH/custom"
@@ -27,7 +26,6 @@ plugins=(
     zsh-completions
     extract
     ssh-agent
-    gpg-agent
     docker-compose
     fancy-ctrl-z
     kubectl
@@ -108,7 +106,6 @@ bindkey '^x' edit-command-line
 # Expands history expressions like !! or !$ when you press space
 bindkey ' ' magic-space
 
-
 alias -s json=jless
 alias -s md=bat
 alias -s go='$EDITOR'
@@ -151,19 +148,10 @@ hash -d dl=~/Downloads
 
 bindkey -s '^Gc' 'git commit -m ""\C-b'
 
+#export GPG_TTY="$(tty)"
+#export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+#gpgconf --launch gpg-agent
 
-typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
-
-# export NVM_DIR="$HOME/.nvm"
-#   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-#   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-export GPG_TTY="$(tty)"
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
 export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
 export DOCKER_HOST=unix://${HOME}/.colima/docker.sock
 
@@ -171,13 +159,4 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# bun completions
-[ -s "/Users/alex/.bun/_bun" ] && source "/Users/alex/.bun/_bun"
-
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
-# Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/alex/.lmstudio/bin"
-# End of LM Studio CLI section
+eval "$(starship init zsh)"

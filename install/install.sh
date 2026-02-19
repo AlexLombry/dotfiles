@@ -28,8 +28,39 @@ ok
 running "Now that it's done, install Homebrew, Mise and Go Task"
 if ! command_exists brew; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    
+    # Add Homebrew to PATH for the current session
+    if [[ -f /opt/homebrew/bin/brew ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [[ -f /usr/local/bin/brew ]]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+    fi
 fi
+
+# Ensure brew is available in PATH
+if ! command_exists brew; then
+    if [[ -f /opt/homebrew/bin/brew ]]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [[ -f /usr/local/bin/brew ]]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+    fi
+fi
+
+if ! command_exists brew; then
+  error "Homebrew not found. Please install it manually."
+  exit 1
+fi
+
 HOMEBREW_NO_AUTO_UPDATE=1 brew install mise go-task stow
+
+# Ensure task is available in PATH (installed by brew)
+if ! command_exists task; then
+    if [[ -f /opt/homebrew/bin/task ]]; then
+        export PATH="/opt/homebrew/bin:$PATH"
+    elif [[ -f /usr/local/bin/task ]]; then
+        export PATH="/usr/local/bin:$PATH"
+    fi
+fi
 ok
 
 running "Running Complete Setup with Go Task"

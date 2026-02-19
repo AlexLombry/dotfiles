@@ -3,8 +3,10 @@
 	name = Alex LOMBRY
 	email = alex.lombry@manomano.com
 	signingkey = 0x5D76737B74264274
-[includeIf "gitdir:/Users/alex/Code/"]
-    path = /Users/alex/Code/.gitconfig
+[includeIf "gitdir:/Users/alex.lombry/dotfiles/"]
+  path = /Users/alex.lombry/Code/.gitconfig
+[includeIf "gitdir:/Users/alex.lombry/Code/"]
+    path = /Users/alex.lombry/Code/.gitconfig
 [push]
 	default = current
 [credential]
@@ -41,7 +43,7 @@
 	who = blame
 	ac = commit -am
 [core]
-	excludesfile = /Users/alex/.gitignore_global
+	excludesfile = /Users/alex.lombry/.gitignore_global
   quotepath = false
 	editor = 'nvim'
 
@@ -80,7 +82,7 @@
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [commit]
-	gpgsign = true
+	gpgSign = false
 [rerere]
 	enable = true
 [pull]
