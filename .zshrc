@@ -125,7 +125,6 @@ alias -g J='| jq'
 
 # Copy output to clipboard (macOS)
 alias -g C='| pbcopy'
-
 # -------------------------------------------
 # zmv - Advanced Batch Rename/Move
 # -------------------------------------------

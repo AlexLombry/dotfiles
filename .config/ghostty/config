@@ -9,11 +9,11 @@ window-height = 42
 mouse-hide-while-typing = true
 cursor-style = block
 
-font-size = 15
+font-size = 21
 font-family = "SF Mono Powerline"
 font-thicken = true
 font-variation-bold = wght=400
-background-opacity = 0.95
+background-opacity = 0.99
 
 cursor-style = block
 cursor-style-blink = true
