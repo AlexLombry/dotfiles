@@ -6,7 +6,7 @@ echo "🚀 Setting up your Command Line Tools"
 chsh -s '/bin/zsh'
 
 # First of all install Xcode Command Line Tools
-echo "XCode Command Line Tools"
+echo "⚙️ XCode Command Line Tools"
 if ! xcode-select -p &> /dev/null; then
     xcode-select --install &> /dev/null
     # Wait until the Xcode Command Line Tools are installed
@@ -22,5 +22,6 @@ if [ ! -d "$HOME/dotfiles" ]; then
     git clone https://github.com/AlexLombry/dotfiles.git $HOME/dotfiles
 fi
 
-cd $HOME/dotfiles
-exec ./install/install.sh
+echo "Please launch the following command in a new terminal"
+echo "cd $HOME/dotfiles"
+echo "./install/install.sh"

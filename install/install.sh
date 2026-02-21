@@ -10,25 +10,21 @@ cp $DOTFILES_DIR/stow-local-ignore $HOME/.stow-local-ignore
 echo "🚀 Loading ZSH Functions"
 source ~/dotfiles/.oh-my-zsh/custom/alex/functions.zsh
 
-setup_color
-
 # Check if zsh is our shell
 if [[ "$SHELL" != *zsh ]]; then
-  running "Switching to zsh"
+  echo "✅ Switching to zsh"
   chsh -s $(which zsh)
-  ok
 fi
 
-running "Install Oh My ZSH"
+echo "Install Oh My ZSH"
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
-ok
 
-running "Now that it's done, install Homebrew, Mise and Go Task"
+echo "✅ Now that it's done, install Homebrew, Mise and Go Task"
 if ! command_exists brew; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    
+
     # Add Homebrew to PATH for the current session
     if [[ -f /opt/homebrew/bin/brew ]]; then
         eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -37,22 +33,12 @@ if ! command_exists brew; then
     fi
 fi
 
-# Ensure brew is available in PATH
 if ! command_exists brew; then
-    if [[ -f /opt/homebrew/bin/brew ]]; then
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-    elif [[ -f /usr/local/bin/brew ]]; then
-        eval "$(/usr/local/bin/brew shellenv)"
-    fi
-fi
-
-if ! command_exists brew; then
-  error "Homebrew not found. Please install it manually."
+  echo "🔴 Homebrew not found. Please install it manually."
   exit 1
 fi
 
 HOMEBREW_NO_AUTO_UPDATE=1 brew install mise go-task stow
-
 # Ensure task is available in PATH (installed by brew)
 if ! command_exists task; then
     if [[ -f /opt/homebrew/bin/task ]]; then
@@ -61,17 +47,13 @@ if ! command_exists task; then
         export PATH="/usr/local/bin:$PATH"
     fi
 fi
-ok
 
-running "Running Complete Setup with Go Task"
+echo "🚀 Running Complete Setup with Go Task"
 task setup
-ok
 
 "$(brew --prefix)/opt/fzf/install" --all  # fzf installation
-ok
 
 # Removed: Homebrew Python installation (now managed by mise)
 
-running "Fixing fonts"
+echo "⚙️ Fixing fonts"
 sudo chmod 775 ~/Library/Fonts/**/
-ok
