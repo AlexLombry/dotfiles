@@ -14,7 +14,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # Using GPG + YubiKey for ssh.
 # Don't execute when in dev container
 
-
 if [[ -z "$REMOTE_CONTAINERS" && -z "$CODESPACES" && -z "$DEVCONTAINER_TYPE" ]]; then
   export GPG_TTY="$(tty)"
   unset SSH_AGENT_PID
@@ -25,7 +24,6 @@ if [[ -z "$REMOTE_CONTAINERS" && -z "$CODESPACES" && -z "$DEVCONTAINER_TYPE" ]];
 
   gpgconf --launch gpg-agent
   gpg-connect-agent updatestartuptty /bye > /dev/null 2>&1
-
 fi
 
 # ~~~~~~~~~~~~~~~ History ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -39,14 +37,6 @@ setopt HIST_IGNORE_DUPS   # Don't save duplicate lines
 setopt SHARE_HISTORY      # Share history between sessions
 
 # ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
-
-# Set to superior editing mode
-
-# set -o vi
-
-# export VISUAL=nvim
-# export EDITOR=nvim
-# export TERM="tmux-256color"
 
 # Which theme did you want to use
 ZSH_THEME="awesomepanda"
@@ -191,12 +181,7 @@ alias zln='zmv -L'  # Link with patterns
 hash -d dot=~/.dotfiles
 hash -d dl=~/Downloads
 
-
 bindkey -s '^Gc' 'git commit -m ""\C-b'
-
-#export GPG_TTY="$(tty)"
-#export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-#gpgconf --launch gpg-agent
 
 export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
 export DOCKER_HOST=unix://${HOME}/.colima/docker.sock
