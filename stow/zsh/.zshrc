@@ -9,6 +9,10 @@ fi
 
 export ZSH="$HOME/.oh-my-zsh"
 
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+    eval "$(ssh-agent -s)" >/dev/null
+fi
+
 # ~~~~~~~~~~~~~~~ SSH ~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Using GPG + YubiKey for ssh.
