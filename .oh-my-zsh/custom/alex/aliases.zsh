@@ -225,3 +225,6 @@ alias mm="cd /Volumes/ManoManoCode/"
 alias safe-open=$HOME/dotfiles/zsh/alex/safe-open.sh
 alias yz=yazi
 alias omm="open /Users/ManoManoCode.dmg"
+alias myip="dig +short txt ch whoami.cloudflare @1.0.0.1"
+alias lastmod='find . -type f -not -path "*/\.*" -exec ls -lrt {} +'
+# alternative with FD : fd -t f -x ls -lrt

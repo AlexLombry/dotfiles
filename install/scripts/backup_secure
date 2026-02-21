@@ -1,0 +1,123 @@
+#!/bin/zsh
+set -euo pipefail
+
+# =======================
+# CONFIG BACKUP
+# =======================
+BACKUP_ROOT="$HOME/backups"
+KEYCHAIN_SERVICE="backup-gpg"
+KEYCHAIN_ACCOUNT="$USER"
+
+DOTFILES=(.zshrc .zprofile .zshenv .gitconfig .gitignore_global)
+DIRS=(.ssh .gnupg .config .docker .aws .kube)
+LIBDIRS=(Keychains)
+
+# =======================
+# CONFIG SMB (NAS)
+# =======================
+NAS_HOST="CapsuleNas"
+NAS_USER="NaetoH"
+SHARE_NAME="Documents"          # <- confirmé par smbutil view
+REMOTE_SUBDIR="backups"         # dossier dans le share
+MOUNT_POINT="$HOME/mnt_capsulenas"
+
+log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*"; }
+
+cleanup() {
+  [[ -n "${WORK_DIR:-}" && -d "${WORK_DIR:-}" ]] && rm -rf "$WORK_DIR" || true
+  [[ -n "${ARCHIVE:-}" && -f "${ARCHIVE:-}" ]] && rm -f "$ARCHIVE" || true
+  if mount | grep -q "on ${MOUNT_POINT} "; then
+    umount "$MOUNT_POINT" || true
+  fi
+}
+trap cleanup EXIT
+
+mkdir -p "$BACKUP_ROOT"
+
+TIMESTAMP="$(date +"%Y-%m-%d_%H-%M-%S")"
+WORK_DIR="$BACKUP_ROOT/backup_$TIMESTAMP"
+ARCHIVE="$BACKUP_ROOT/backups_$TIMESTAMP.tar.gz"
+ENCRYPTED_ARCHIVE="$ARCHIVE.gpg"
+
+log "Create folder: $WORK_DIR"
+mkdir -p "$WORK_DIR"
+
+log "Copying dotfiles..."
+for file in "${DOTFILES[@]}"; do
+  [[ -e "$HOME/$file" ]] && cp -R "$HOME/$file" "$WORK_DIR/"
+done
+
+log "Copying sensitive folders..."
+for dir in "${DIRS[@]}"; do
+  [[ -d "$HOME/$dir" ]] && cp -R "$HOME/$dir" "$WORK_DIR/"
+done
+
+log "Copying Library items..."
+mkdir -p "$WORK_DIR/Library"
+for libdir in "${LIBDIRS[@]}"; do
+  [[ -d "$HOME/Library/$libdir" ]] && cp -R "$HOME/Library/$libdir" "$WORK_DIR/Library/"
+done
+
+log "Creating archive: $ARCHIVE"
+tar -czf "$ARCHIVE" -C "$BACKUP_ROOT" "backup_$TIMESTAMP"
+
+log "Reading passphrase from Keychain..."
+PASS="$(security find-generic-password -w -s "$KEYCHAIN_SERVICE" -a "$KEYCHAIN_ACCOUNT" | tr -d '\n')"
+if [[ -z "$PASS" ]]; then
+  echo "ERROR: Keychain returned empty passphrase (service=$KEYCHAIN_SERVICE account=$KEYCHAIN_ACCOUNT)" >&2
+  exit 1
+fi
+
+log "Encrypting with GPG -> $ENCRYPTED_ARCHIVE"
+print -rn -- "$PASS" \
+| gpg --batch --yes --pinentry-mode loopback --passphrase-fd 0 \
+      --symmetric --cipher-algo AES256 \
+      --output "$ENCRYPTED_ARCHIVE" "$ARCHIVE"
+
+log "Removing unencrypted data..."
+rm -rf "$WORK_DIR"
+rm -f "$ARCHIVE"
+
+log "Compute local SHA-256..."
+LOCAL_SHA="$(shasum -a 256 "$ENCRYPTED_ARCHIVE" | awk '{print $1}')"
+log "Local SHA-256:  $LOCAL_SHA"
+
+log "Preparing mount point: $MOUNT_POINT"
+mkdir -p "$MOUNT_POINT"
+
+if ! mount | grep -q "on ${MOUNT_POINT} "; then
+  log "Mounting SMB share: //$NAS_USER@$NAS_HOST/$SHARE_NAME"
+  mount_smbfs -N "//$NAS_USER@$NAS_HOST/$SHARE_NAME" "$MOUNT_POINT"
+fi
+
+log "Ensuring remote subdir exists: $REMOTE_SUBDIR"
+mkdir -p "$MOUNT_POINT/$REMOTE_SUBDIR"
+
+DEST_PATH="$MOUNT_POINT/$REMOTE_SUBDIR/$(basename "$ENCRYPTED_ARCHIVE")"
+
+log "Copying to NAS: $DEST_PATH"
+cp -f "$ENCRYPTED_ARCHIVE" "$DEST_PATH"
+sync
+
+log "Compute remote SHA-256..."
+REMOTE_SHA="$(shasum -a 256 "$DEST_PATH" | awk '{print $1}')"
+log "Remote SHA-256: $REMOTE_SHA"
+
+if [[ "$LOCAL_SHA" != "$REMOTE_SHA" ]]; then
+  echo "ERROR: Integrity check FAILED (SHA-256 mismatch)." >&2
+  exit 1
+fi
+
+log "✅ Upload OK + integrity verified."
+
+log "Unmounting..."
+umount "$MOUNT_POINT"
+
+log "Done. Encrypted backup: $ENCRYPTED_ARCHIVE"
+
+## To restore the archive :
+# gpg --output backup.tar.gz --decrypt backups_DATE.tar.gz.gpg
+# tar -xzf backup.tar.gz
+
+# 0 9 * * * /bin/zsh -lc '/Users/alex.lombry/dotfiles/install/scripts/backup_secure' >> /Users/alex.lombry/Library/Logs/dailyscript.out 2>> /Users/alex.lombry/Library/Logs/dailyscript.err
+#

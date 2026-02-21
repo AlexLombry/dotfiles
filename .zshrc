@@ -8,10 +8,45 @@ elif [[ -f /usr/local/bin/brew ]]; then
 fi
 
 export ZSH="$HOME/.oh-my-zsh"
-export GPG_TTY=$(tty)
 
-HISTSIZE=
-SAVEHIST=
+# ~~~~~~~~~~~~~~~ SSH ~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Using GPG + YubiKey for ssh.
+# Don't execute when in dev container
+
+
+if [[ -z "$REMOTE_CONTAINERS" && -z "$CODESPACES" && -z "$DEVCONTAINER_TYPE" ]]; then
+  export GPG_TTY="$(tty)"
+  unset SSH_AGENT_PID
+
+  if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+  fi
+
+  gpgconf --launch gpg-agent
+  gpg-connect-agent updatestartuptty /bye > /dev/null 2>&1
+
+fi
+
+# ~~~~~~~~~~~~~~~ History ~~~~~~~~~~~~~~~~~~~~~~~~
+
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
+
+setopt HIST_IGNORE_SPACE  # Don't save when prefixed with space
+setopt HIST_IGNORE_DUPS   # Don't save duplicate lines
+setopt SHARE_HISTORY      # Share history between sessions
+
+# ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
+
+# Set to superior editing mode
+
+# set -o vi
+
+# export VISUAL=nvim
+# export EDITOR=nvim
+# export TERM="tmux-256color"
 
 # Which theme did you want to use
 ZSH_THEME="awesomepanda"
@@ -39,6 +74,10 @@ export GOPATH="$HOME/go"
 # export GOPATH=$(go env GOPATH)/bin
 # User configuration
 
+# ~~~~~~~~~~~~~~~ Path configuration ~~~~~~~~~~~~~~~~~~~~~~~~
+
+setopt extended_glob null_glob
+
 path=(
     $path
     ~/.local/bin
@@ -55,7 +94,14 @@ path=(
     /opt/homebrew/opt/openjdk@17/bin
     $(yarn global bin)
     $HOME/.composer/vendor/bin
+    $HOME/dotfiles/install/scripts
 )
+
+# Remove duplicate entries and non-existent directories
+typeset -U path
+path=($^path(N-/))
+
+export PATH
 
 if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
   export PATH=/opt/homebrew/opt/ruby/bin:$PATH
