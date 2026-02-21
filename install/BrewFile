@@ -1,83 +1,84 @@
 cask_args appdir: "/Applications"
 
-# Taps
-tap "homebrew/bundle"
-tap "homebrew/cask-fonts"
-tap "homebrew/cask-versions"
-tap "homebrew/services"
 tap "go-task/tap"
-tap "teamookla/speedtest"
 tap "hashicorp/tap"
 tap "shivammathur/php"
-
-# GUI Software
-cask "arc"
-cast "bruno"
-cask "transmit"
-cask "vlc"
-cask "raycast"
-cask "dropbox"
-cask "protonvpn"
-cask "setapp"
-cask "slack"
-cask "microsoft-office"
-cask "1password"
-cask "viscosity"
-cask "zed"
-
-# CLI software
-brew "stow"
 brew "ack"
 brew "ccat"
 brew "cloc"
+brew "colima", restart_service: :changed
 brew "coreutils"
 brew "ctags"
 brew "curl"
 brew "dnsmasq"
+brew "docker"
 brew "eza"
+brew "fd"
 brew "ffmpeg"
-brew "scc"
 brew "fswatch"
 brew "fzf"
 brew "gawk"
 brew "gd"
 brew "git"
+brew "glab"
 brew "go-task"
 brew "htop"
 brew "httpie"
 brew "inetutils"
-brew "jq"
 brew "jd"
+brew "jq"
+brew "k9s"
+brew "luajit", args: ["HEAD"]
+brew "luarocks"
+brew "luv"
 brew "mas"
+brew "mise"
+brew "neovim", args: ["HEAD"]
+brew "node"
+brew "nvm"
 brew "pv"
 brew "pwgen"
 brew "reattach-to-user-namespace"
+brew "ripgrep"
 brew "rsync"
 brew "sbt"
-brew "screen"
-brew "ripgrep"
-brew "shellcheck"
+brew "scc"
 brew "ssh-copy-id"
+brew "sshpass"
+brew "stow"
+brew "tmux"
 brew "tree"
-brew "glab"
 brew "watch"
 brew "wget"
-brew "wrk"
-brew "jlhonora/lsusb/lsusb"
-brew "hadolint"
-brew "mycli"
-brew "speedtest"
-
-# Font face
-cask "font-fira-code"
-cask "font-hack"
-cask "font-hack-nerd-font"
-cask "font-roboto-mono"
-cask "font-source-code-pro-for-powerline"
-cask "font-cascadia"
-
-# GUI Software from App Store
-mas "iMazing HEIC Converter", id: 1292198261
+brew "yarn"
+brew "zoxide"
+cask "1password"
+cask "1password-cli"
+cask "arc"
+cask "bazecor"
+cask "bruno"
+cask "dropbox"
+cask "firefox"
+cask "font-roboto-mono", args: { appdir: "/Applications" }
+cask "font-source-code-pro-for-powerline", args: { appdir: "/Applications" }
+cask "ghostty"
+cask "gpg-suite"
+cask "jetbrains-toolbox"
+cask "miro"
+cask "protonvpn"
+cask "qwerty-fr"
+cask "raycast"
+cask "setapp"
+cask "slack"
+cask "transmit"
+cask "viscosity"
+cask "vlc"
+cask "zed"
+mas "1Password for Safari", id: 1569813296
+mas "Developer", id: 640199958
+mas "iMazing Converter", id: 1292198261
 mas "iNet Network Scanner", id: 403304796
-mas "Parcel", id: 639968404
+mas "Okta Verify", id: 490179405
+mas "Parcel Classic", id: 639968404
 mas "The Unarchiver", id: 425424353
+mas "Xcode", id: 497799835
