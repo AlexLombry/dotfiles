@@ -8,7 +8,6 @@ echo "🚀 Copy or replace Stow Local Ignore file"
 cp $DOTFILES_DIR/stow-local-ignore $HOME/.stow-local-ignore
 
 echo "🚀 Loading ZSH Functions"
-source ~/dotfiles/.oh-my-zsh/custom/alex/functions.zsh
 
 # Check if zsh is our shell
 if [[ "$SHELL" != *zsh ]]; then

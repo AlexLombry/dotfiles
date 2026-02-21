@@ -1,5 +1,4 @@
 alias vimdiff='nvim -d'
-export EDITOR=nvim
 alias vim="nvim"
 alias oldvim="\vim"
 alias cc="clear"
@@ -86,30 +85,9 @@ alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v exten
 
 # Divers
 alias loadsshkey="cat ~/.ssh/id_rsa.pub | pbcopy && echo 'Copied to clipboard.'"
-alias checkphp="find -L . -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l"
-alias vrc="vim ~/.config/nvim/init.vim"
 alias zrc="vim ~/.zshrc"
-##alias :q="exit"
 
-# Wi-Fi Commands
-alias airport="/System/Library/PrivateFrameworks/Apple80211.framework/Versions/A/Resources/airport"
-alias wifi-clean="sudo python ~/dotfiles/tools/cleanwifi_macos.py;"
-alias wifi-reboot="networksetup -setairportpower en0 off; networksetup -setairportpower en0 on"
-alias wifi-hardware="networksetup -listallhardwareports"
-alias wifi-scan="airport scan"
-alias wifi-take="networksetup -setairportnetwork en0 $1"
-alias wifi-ssid="airport -I|awk '/^ *SSID/ {print $2}'"
 alias iface="networksetup -listallhardwareports|grep -A1 Wi-Fi|awk '/Device:/ {print $2}'"
-
-# iOS
-alias simulator-run="open -a Simulator.app --args -CurrentDeviceUDID $1"
-alias simulator-list="xcrun simctl list"
-
-# Unix
-alias -s rb=nvim
-alias -s log="less -MN"
-alias -s html="open"
-alias -s php=nvim
 
 alias mute="osascript -e 'set volume output muted true'"
 alias sup="osascript -e 'set volume 10'"
@@ -130,23 +108,14 @@ alias files-usage-user='sudo fs_usage -e -f filesystem|grep -v CACHE_HIT|grep -v
 
 alias deletefilerecursive="find . -type f -print0 | xargs -0 rm"
 
-# Print each PATH entry on a separate line
-alias paths='echo -e ${PATH//:/\\n}'
-
 alias lr='ls -R | grep ":$" | sed -e '\''s/:$//'\'' -e '\''s/[^-][^\/]*\//--/g'\'' -e '\''s/^/   /'\'' -e '\''s/-/|/'\'''
 alias dss='du -sck * | sort -n'
 
 alias bubu="brew update && brew upgrade && brew cleanup"
-alias brewup='brew update; brew upgrade; brew prune; brew cleanup; brew doctor'
+alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
 alias bsr="brew services restart $1"
 
-alias ng-web="ngrok http $1 -subdomain=webapp --region=eu"
-alias ng-api="ngrok http $1 -subdomain=webapi --region=eu"
-alias ng-lo="ngrok http $1 --subdomain=alombry"
-
 alias generate-secure-string="openssl rand -base64 32"
-
-alias opcode="phpdbg -p $1"
 
 alias perm_number="stat -f '%A %N' *"
 
@@ -190,15 +159,8 @@ alias rest="timer 5m && say -v Samantha 'Get back to work' && terminal-notifier 
 alias sl=l
 alias b=bat
 
-alias tun="ssh-tunnel -a create -e all -u alex.lombry"
-alias cltun="ssh-tunnel -a close"
-alias cleanflared="rm -rf $HOME/.cloudflared/*"
-
 alias zip-encrypt="zip -e -r $1.zip $1"
 alias p=python3
-
-# VIM
-alias v="/opt/homebrew/bin/nvim"
 
 # Nmap
 alias nm="nmap -sC -sV -oN nmap"
@@ -220,11 +182,9 @@ alias btc="better-commits"
 
 alias lg=lazygit
 alias nte="nvim $HOME/Desktop/myBigNotesRandom.log"
-alias mm="cd /Volumes/ManoManoCode/"
 
 alias safe-open=$HOME/dotfiles/zsh/alex/safe-open.sh
 alias yz=yazi
-alias omm="open /Users/ManoManoCode.dmg"
 alias myip="dig +short txt ch whoami.cloudflare @1.0.0.1"
 alias lastmod='find . -type f -not -path "*/\.*" -exec ls -lrt {} +'
 # alternative with FD : fd -t f -x ls -lrt

@@ -24,7 +24,8 @@ tasks:
     silent: true
     desc: "Apply symlinks with GNU Stow"
     cmds:
-      - stow . --adopt
+      - cd $HOME/dotfiles/stow
+      - stow --adopt -t "$HOME" zsh git config else
       - echo "Symlinks applied!"
 
   mise:

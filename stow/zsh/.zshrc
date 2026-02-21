@@ -58,7 +58,7 @@ plugins=(
  mise)
 
 source $ZSH/oh-my-zsh.sh
-source $HOME/dotfiles/.oh-my-zsh/custom/alex/ext.zsh
+source $HOME/.oh-my-zsh/custom/alex/ext.zsh
 
 export GOPATH="$HOME/go"
 # export GOPATH=$(go env GOPATH)/bin
@@ -117,7 +117,6 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{n
 
 eval "$(zoxide init --cmd cd zsh)"
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/alex/.sdkman"
 [[ -s "/Users/alex/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/alex/.sdkman/bin/sdkman-init.sh"
 
