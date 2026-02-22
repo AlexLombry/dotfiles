@@ -1,12 +1,6 @@
 # zmodload zsh/zprof
 # Default and Original ZSHRC file
 # Homebrew
-if [[ -f /opt/homebrew/bin/brew ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-elif [[ -f /usr/local/bin/brew ]]; then
-  eval "$(/usr/local/bin/brew shellenv)"
-fi
-
 export ZSH="$HOME/.oh-my-zsh"
 
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
@@ -96,11 +90,6 @@ typeset -U path
 path=($^path(N-/))
 
 export PATH
-
-if [ -d "/opt/homebrew/opt/ruby/bin" ]; then
-  export PATH=/opt/homebrew/opt/ruby/bin:$PATH
-  export PATH=`gem environment gemdir`/bin:$PATH
-fi
 
 export CODEFOLDER="$HOME/code"
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"

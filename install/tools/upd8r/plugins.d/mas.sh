@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Mac Appstore plugin for KYMSU
-# https://github.com/welcoMattic/kymsu
-
 # No distract mode (no user interaction)
 [[ $@ =~ "-nodistract" || $@ =~ "-n" ]] && no_distract=true || no_distract=false
 
@@ -18,7 +15,6 @@ redbold="\033[1;31m"
 red="\033[31m"
 yellow="\033[33m"
 reset="\033[0m"
-
 
 echo -e "${bold}🍏  Mac App Store updates come fast as lightning ${reset}"
 
@@ -40,7 +36,7 @@ if hash mas 2>/dev/null; then
 	massy=$(mas outdated)
 	echo ""
 	#echo "$massy"
-	
+
 	nomoreatstore=$(echo "$massy" | grep "not found in store")
 	outdated=$(echo "$massy" | grep -v "not found in store")
 
@@ -49,15 +45,15 @@ if hash mas 2>/dev/null; then
 		echo "$outdated" | awk '{ $1=""; print}'
 		echo "--"
 		#echo "$outdated" | awk '{ $1=""; $3=""; print}'
-		
+
 		echo ""
-	
+
 		#if [ "$no_distract" = false ]
 		if [[ $testing -ne 1 ]]; then
 			a=$(echo -e "Do you wanna run \033[1mmas upgrade${reset} ? (y/n) ")
 			read -p "$a" choice
-			
-			if [ "$choice" == "y" ] || [ "$choice" == "Y" ] || [ "$choice" == "a" ] || [ "$choice" == "A" ]; then		
+
+			if [ "$choice" == "y" ] || [ "$choice" == "Y" ] || [ "$choice" == "a" ] || [ "$choice" == "A" ]; then
 
 				while IFS=\n read -r line
 				do
@@ -66,24 +62,24 @@ if hash mas 2>/dev/null; then
 					nom=$(echo "$line" | awk -F "(" '{print $1}' | awk '{ $1=""; print}' | xargs)
 					nom_version=$(echo "$line" | awk '{ $1=""; print}')
 					version=$(echo "$line" | awk -F "(" '{print $2}' | sed 's/.$//')
-					
+
 					echo "$idendifiant - $nom - $version"
 					echo "-- fin --"
-					
+
 				done <<< "$outdated"
 
 			else
 				echo -e "OK, let's continue..."
 			fi
 		fi
-	
+
 	else
 		echo -e "${italic}No availables mas updates.${reset}"
 	fi
-	
+
 	if [ -n "$nomoreatstore" ]; then
 		echo -e "\n${underline}Apps no more in App Store:${reset}"
-		
+
 		while IFS= read -r line
 		do
 			id=$(echo "$line" | awk '{print $3}')
@@ -93,7 +89,7 @@ if hash mas 2>/dev/null; then
 		done <<< "$nomoreatstore"
 
 	fi
-	
+
 else
 	echo -e "Please install mas: ${italic}brew install mas${reset}"
 fi

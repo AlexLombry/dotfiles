@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-# Homebrew plugin for KYMSU
-# https://github.com/welcoMattic/kymsu
-
 ###############################################################################################
 #
 # Settings:
@@ -46,7 +43,7 @@ box="\033[1;41m"
 reset="\033[0m"
 
 command -v terminal-notifier >/dev/null 2>&1 || { echo -e "You shoud intall ${bold}terminal-notifier${reset} for notification ${italic}(brew install terminal-notifier)${reset}.\n"; }
-command -v jq >/dev/null 2>&1 || { echo -e "${bold}kymsu2${reset} require ${bold}jq${reset} but it's not installed.\nRun ${italic}(brew install jq)${reset}\nAborting..." >&2; exit 1; }
+command -v jq >/dev/null 2>&1 || { echo -e "${bold}upd8r2${reset} require ${bold}jq${reset} but it's not installed.\nRun ${italic}(brew install jq)${reset}\nAborting..." >&2; exit 1; }
 
 notification() {
     sound="Basso"
@@ -64,7 +61,7 @@ get_info_cask() {
 	info="$1"
 	app="$2"
 	l1=""
-	
+
 	token=$(echo "$info" | jq -r '.[] | select(.token == "'${app}'") | (.token)')
 	name=$(echo "$info" | jq -r '.[] | select(.token == "'${app}'") | (.name)' | jq -r '.[0]')
 	homepage=$(echo "$info" | jq -r '.[] | select(.token == "'${app}'") | (.homepage)')
@@ -76,17 +73,17 @@ get_info_cask() {
 
 	installed_versions=$(echo "$upd_cask" | jq -r '.[] | select(.name == "'${app}'") | (.installed_versions)' | jq -r '.[]')
 	current_version=$(echo "$upd_cask" | jq -r '.[] | select(.name == "'${app}'") | (.current_version)')
-	
+
 	[[ "$desc" = "null" ]] && desc="${italic}No description${reset}"
-	
+
 	if [[ ! " ${casks_not_pinned} " =~ " ${token} " ]] && [[ ! " ${casks_latest_not_pinned} " =~ " ${token} " ]]; then
 		l1+="${red}$name ($token): installed: $installed_versions current: $current_version  [Do not update]${reset}\n"
 	else
-		l1+="${bold}$name ($token): installed: $installed_versions current: $current_version${reset}\n"	
+		l1+="${bold}$name ($token): installed: $installed_versions current: $current_version${reset}\n"
 	fi
 	l1+="$desc\n"
 	l1+="$homepage"
-	
+
 	echo -e "$l1\n"
 }
 
@@ -95,19 +92,19 @@ get_info_pkg() {
 	pkg="$2"
 	pkg2="$2"
 	l1=""
-	
+
 	#echo "pkg: $pkg"
 	if [[ " ${pkg} " =~ "/" ]]; then
 		pkg=$(echo "$pkg" | awk -F"/" '{print $NF}')
 	fi
 	#echo "pkg: $pkg"
-	
+
 	name=$(echo "$info" | jq -r '.[] | select(.name == "'${pkg}'") | (.name)')
 	#name=$(echo "$info" | jq -r '.[] | select(.name == "'${pkg}'")')
 	full_name=$(echo "$info" | jq -r '.[] | select(.name == "'${pkg}'") | (.full_name)')
 	desc=$(echo "$info" | jq -r '.[] | select(.name == "'${pkg}'") | (.desc)')
 	homepage=$(echo "$info" | jq -r '.[] | select(.name == "'${pkg}'") | (.homepage)')
-	
+
 	#urls=$(echo "$info" | jq -r '.[] | select(.name == "'${pkg}'") | (.urls)' | jq -r '.stable | .url')
 	keg_only=$(echo "$info" | jq -r '.[] | select(.name == "'${pkg}'") | (.keg_only)')
 	caveats=$(echo "$info" | jq -r '.[] | select(.name == "'${pkg}'") | (.caveats)')
@@ -115,16 +112,16 @@ get_info_pkg() {
 	#installed=$(echo "$info" | jq -r '.[] | select(.name == "'${pkg}'") | (.installed)' | jq -r '.[].version')
 	pinned=$(echo "$info" | jq -r '.[] | select(.name == "'${pkg}'") | (.pinned)')
 	#echo -e "installed: $installed\n"
-	
+
 	installed_versions=$(echo "$upd_package" | jq -r '.[] | select(.name == "'${pkg2}'") | (.installed_versions)' | jq -r '.[]')
-	
+
 	current_version=$(echo "$upd_package" | jq -r '.[] | select(.name == "'${pkg2}'") | (.current_version)')
 	#echo -e "installed_versions: $installed_versions\n"
 	#echo "stable: $current_version"
-	
+
 	#echo "name: $name"
 	#echo "desc: $desc"
-	
+
 	# Python@3.9 : multiples versions
 	ins=""
 	for i in $installed_versions
@@ -133,20 +130,20 @@ get_info_pkg() {
 	done
 	installed=$ins
 
-	if [ "$pinned" = "true" ]; then 	
+	if [ "$pinned" = "true" ]; then
 		pinned_v=$(echo "$upd_package" | jq -r '.[] | select(.name == "'${pkg}'") | (.pinned_version)')
-	
+
 		l1+="${red}$name: installed: $installed stable: $current_version [pinned at $pinned_v]"
 		[ "$keg_only" = true ] && l1+=" [keg-only]"
 		l1+="${reset}\n"
-	else 
+	else
 		l1+="${bold}$name: installed: $installed stable: $current_version"
 		[ "$keg_only" = true ] && l1+=" [keg-only]"
 		l1+="${reset}\n"
 	fi
 	if [ "$desc" != "null" ]; then l1+="$desc\n"; fi;
 	l1+="$homepage"
-	
+
 	echo -e "$l1\n"
 }
 
@@ -164,7 +161,7 @@ brew update
 
 echo ""
 brew_outdated=$(brew outdated --greedy --json=v2)
-	
+
 #echo "\nSearch for brew update...\n"
 upd_json=$(echo "$brew_outdated")
 
@@ -183,13 +180,13 @@ do
 	current_version=$(echo "$row" | jq -j '.current_version')
 	pinned=$(echo "$row" | jq -j '.pinned')
 	#pinned_version=$(echo "$row" | jq -j '.pinned_version')
-		
+
 	upd_pkgs+="$name "
 	if [ "$pinned" = true ]; then
 		upd_pkg_pinned+="$name "
 	elif [ "$pinned" = false ]; then
 		upd_pkg_notpinned+="$name "
-	fi	
+	fi
 done
 
 #echo "$upd_pkgs"
@@ -254,7 +251,7 @@ if [ -n "$upd_pkg_notpinned" ]; then
 					continue
 				fi
 				if [ "$choice" == "y" ] || [ "$choice" == "Y" ]; then
-					echo "$i" | xargs -p -n 1 brew upgrade 
+					echo "$i" | xargs -p -n 1 brew upgrade
 				elif [ "$choice" == "a" ] || [ "$choice" == "A" ]; then
 					echo "$i" | xargs -n 1 brew upgrade
 				fi
@@ -267,7 +264,7 @@ if [ -n "$upd_pkg_notpinned" ]; then
 		echo -e "Running ${bold}brew upgrade $upd_pkg_notpinned${reset}..."
 		echo "$upd_pkg_notpinned" | xargs -n 1 brew upgrade
 	fi
-	
+
 else
 	echo -e "\n${italic}No update package available...${reset}\n"
 fi
@@ -278,7 +275,7 @@ echo ""
 ### Casks ###
 #############
 
-#Casks update	
+#Casks update
 echo -e "\n🍺 ${underline}Casks...${reset}\n"
 upd_cask=$(echo "$brew_outdated" | jq '{casks} | .[]')
 # erreur avec PureVPN et plusieurs versions installées.
@@ -292,7 +289,7 @@ do
 	name=$(echo "$row" | jq -j '.name')
 	installed_versions=$(echo "$row" | jq -j '.installed_versions | .[]')
 	current_version=$(echo "$row" | jq -j '.current_version')
-	
+
 	if [ "$current_version" != "latest" ]; then
 		upd_casks+="$name "
 	elif [ "$current_version" == "latest" ]; then
@@ -308,7 +305,7 @@ if (( ${#cask_to_not_update[@]} )); then
 	# cask_to_not_update contient 1 cask ET/OU 1 latest
 
 	nbp=${#cask_to_not_update[*]}
-	
+
 	echo -e "${underline}List of${reset} ${box} $nbp ${reset} ${underline}'do not update' casks:${reset}"
 	echo -e "${red}${cask_to_not_update[*]}${reset}"
 	echo -e "To remove an app from this list, you need to edit the ${italic}do_not_update${reset} array."
@@ -337,7 +334,7 @@ else
 	casks_latest_not_pinned=$upd_casks_latest
 fi
 
-#Casks update	
+#Casks update
 echo -e "🍺 ${underline}Search for casks update...${reset}\n"
 
 [ -n "$casks_latest_not_pinned" ] && echo -e "Some Casks have ${italic}auto_updates true${reset} or ${italic}version :latest${reset}. Homebrew Cask cannot track versions of those apps."
@@ -373,7 +370,7 @@ if [ "$nb_casks_upd" -gt 0 ]; then
 			# yes/no/all
 			read -p "$a" choice
 
-			if [ "$choice" == "y" ] || [ "$choice" == "Y" ] || [ "$choice" == "a" ] || [ "$choice" == "A" ]; then		
+			if [ "$choice" == "y" ] || [ "$choice" == "Y" ] || [ "$choice" == "a" ] || [ "$choice" == "A" ]; then
 				echo ""
 				for i in $casks_not_pinned;
 				do
@@ -418,13 +415,13 @@ if [ -n "$casks_latest_not_pinned" ] && [ "$latest" == true ]; then
 			do
 				get_info_cask "$upd_casks_latest_info" "$row"
 			done
-		
+
 		else
 			[ "$nb_casks_latest_upd" -gt 1 ] && echo -e "${box} $nb_casks_latest_upd ${reset} ${array[@]/%/s}: ${bold}$upd_casks_latest${reset}" || echo -e "${box} $nb_casks_upd ${reset} ${array[@]}: ${bold}$upd_casks_latest${reset}"
 		fi
-	
+
 	fi
-	
+
 	if [ "$no_distract" = false ]; then
 		q=$(echo -e "Do you wanna run ${bold}brew upgrade $casks_latest_not_pinned${reset} ? (y/n/a) ")
 		read -p "$q" choice
@@ -478,19 +475,19 @@ echo "$test"
 
 php_versions=$(ls $(brew --prefix)/etc/php/ 2>/dev/null)
 for php in $php_versions
-do 	
+do
 	if [ -n "$upd_pkg" ]; then
 
-		# file modified since it was last read	
+		# file modified since it was last read
 		php_modified=$(find $(brew --prefix)/etc/php/$php/ -name php.ini -newer /tmp/checkpoint)
 		php_ini=$(brew --prefix)/etc/php/$php/php.ini
 		notif2="$php_ini has been modified"
-	
+
 		echo "$php_modified"
-	
+
 		[ ! -z $php_modified ] && echo -e "\033[1;31m❗️ ️$notif2\033[0m"
 		[ ! -z $php_modified ] && notification "$notif2"
-		
+
 	fi
 done
 echo ""
@@ -518,9 +515,9 @@ echo ""
 
 if [[ $1 == "--cleanup" ]]; then
   echo -e "🍺  Cleaning brewery..."
-  
+
   #HOMEBREW_NO_INSTALL_CLEANUP
-  
+
   brew cleanup --prune=30
   echo ""
 fi
