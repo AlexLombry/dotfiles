@@ -1,0 +1,47 @@
+# Justfile
+
+# Default recipe (equivalent to `task --list`)
+default:
+	@just --list
+
+# Configure macOS defaults
+os:
+	@bash macos.sh
+	@echo "Setup OS done!"
+
+# Install Homebrew bundle from BrewFile
+brew:
+	HOMEBREW_NO_AUTO_UPDATE=1 brew bundle --file=BrewFile
+
+# Apply symlinks with GNU Stow
+stow:
+	@cd $$HOME/dotfiles/stow && \
+	stow --adopt -t "$$HOME" zsh git config else
+	@echo "Symlinks applied!"
+
+# Install languages and tools with Mise
+mise:
+	mise install
+	mise use -g
+
+# Install NeoVim and dependencies
+neovim:
+	@brew install luarocks luv
+	@brew install --HEAD luajit
+	@brew install --HEAD neovim
+
+# Install NvChad
+chad:
+	@git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
+
+# Install current Brew bundle
+bundle:
+	HOMEBREW_NO_AUTO_UPDATE=1 brew bundle
+
+# Create GPG backup password
+gpg-pass:
+	security add-generic-password -a "$$USER" -s backup-gpg -w -U
+
+# Complete setup for a new MacBook
+setup: stow os brew mise neovim
+	@echo "🚀 MacBook Setup Complete! Please restart your terminal."

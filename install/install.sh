@@ -20,7 +20,7 @@ if [ ! -d "$HOME/.oh-my-zsh" ]; then
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 fi
 
-echo "✅ Now that it's done, install Homebrew, Mise and Go Task"
+echo "✅ Now that it's done, install Homebrew, Mise and Just"
 if ! command_exists brew; then
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
@@ -37,18 +37,18 @@ if ! command_exists brew; then
   exit 1
 fi
 
-HOMEBREW_NO_AUTO_UPDATE=1 brew install mise go-task stow
-# Ensure task is available in PATH (installed by brew)
-if ! command_exists task; then
-    if [[ -f /opt/homebrew/bin/task ]]; then
+HOMEBREW_NO_AUTO_UPDATE=1 brew install mise just stow
+# Ensure Just is available in PATH (installed by brew)
+if ! command_exists just; then
+    if [[ -f /opt/homebrew/bin/just ]]; then
         export PATH="/opt/homebrew/bin:$PATH"
-    elif [[ -f /usr/local/bin/task ]]; then
+    elif [[ -f /usr/local/bin/just ]]; then
         export PATH="/usr/local/bin:$PATH"
     fi
 fi
 
-echo "🚀 Running Complete Setup with Go Task"
-task setup
+echo "🚀 Running Complete Setup with Just"
+just setup
 
 "$(brew --prefix)/opt/fzf/install" --all  # fzf installation
 
