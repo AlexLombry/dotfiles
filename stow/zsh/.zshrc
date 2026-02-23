@@ -52,8 +52,10 @@ plugins=(
     docker-compose
     fancy-ctrl-z
     kubectl
-#    git-commit
- mise)
+    fzf
+    git-commit
+    mise
+)
 
 source $ZSH/oh-my-zsh.sh
 source $HOME/.oh-my-zsh/custom/alex/ext.zsh
