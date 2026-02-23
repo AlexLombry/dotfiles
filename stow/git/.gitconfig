@@ -4,9 +4,9 @@
 	email = alex.lombry@manomano.com
 	signingkey = 0x5D76737B74264274
 [includeIf "gitdir:/Users/alex.lombry/dotfiles/"]
-  path = /Users/alex.lombry/Code/.gitconfig
-[includeIf "gitdir:/Users/alex.lombry/Code/"]
-    path = /Users/alex.lombry/Code/.gitconfig
+  path = /Users/alex.lombry/Repositories/Alex/.gitconfig
+[includeIf "gitdir:/Users/alex.lombry/Repositories/Alex/"]
+    path = /Users/alex.lombry/Repositories/Alex/.gitconfig
 [push]
 	default = current
 [credential]

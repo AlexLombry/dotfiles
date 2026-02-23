@@ -1,13 +1,22 @@
 #!/bin/zsh
 set -e
 
+# launchctl bootstrap "gui/$(id -u)" ~/Library/LaunchAgents/com.alexlombry.backup_secure.plist
+# launchctl enable "gui/$(id -u)/com.alexlombry.backup_secure"
+
+# Test-run immediately (optional)
+# launchctl kickstart -k "gui/$(id -u)/com.alexlombry.backup_secure"
+
+# tail -n 200 ~/Library/Logs/dailyscript.err
+# tail -n 200 ~/Library/Logs/dailyscript.out
+
 BACKUP_ROOT="$HOME/backups"
 TIMESTAMP=$(date +"%Y-%m-%d_%H-%M-%S")
 WORK_DIR="$BACKUP_ROOT/backup_$TIMESTAMP"
 ARCHIVE="$BACKUP_ROOT/backups_$TIMESTAMP.tar.gz"
 ENCRYPTED_ARCHIVE="$ARCHIVE.gpg"
 
-echo "Create forlder $WORK_DIR"
+echo "Create $WORK_DIR folder"
 mkdir -p "$WORK_DIR"
 
 echo "Copying files..."

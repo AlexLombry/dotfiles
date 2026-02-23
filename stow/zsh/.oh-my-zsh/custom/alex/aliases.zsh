@@ -188,3 +188,6 @@ alias yz=yazi
 alias myip="dig +short txt ch whoami.cloudflare @1.0.0.1"
 alias lastmod='find . -type f -not -path "*/\.*" -exec ls -lrt {} +'
 # alternative with FD : fd -t f -x ls -lrt
+
+alias mm="cd $HOME/Repositories/ManoMano/"
+alias idea="$HOME/Applications/IntelliJ\ IDEA.app/Contents/MacOS/idea"
