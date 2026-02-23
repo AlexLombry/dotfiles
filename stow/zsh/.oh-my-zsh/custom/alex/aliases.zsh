@@ -191,3 +191,4 @@ alias lastmod='find . -type f -not -path "*/\.*" -exec ls -lrt {} +'
 
 alias mm="cd $HOME/Repositories/ManoMano/"
 alias idea="$HOME/Applications/IntelliJ\ IDEA.app/Contents/MacOS/idea"
+alias jrn="bat $HOME/.journal-log.md"

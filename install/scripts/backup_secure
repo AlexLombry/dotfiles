@@ -22,7 +22,7 @@ mkdir -p "$WORK_DIR"
 echo "Copying files..."
 
 # Mandatory dotfiles
-for file in .zshrc .zprofile .zshenv .gitconfig .gitignore_global; do
+for file in .journal-log.md .zshrc .zprofile .zshenv .gitconfig .gitignore_global; do
   [ -e "$HOME/$file" ] && cp -R "$HOME/$file" "$WORK_DIR"
 done
 

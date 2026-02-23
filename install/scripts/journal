@@ -1,0 +1,90 @@
+#!/usr/bin/env zsh
+set -euo pipefail
+
+log_file="${HOME}/.journal-log.md"
+
+if (( $# == 0 )); then
+  print -u2 'Usage: journal "ton texte..."'
+  exit 2
+fi
+
+msg="$*"
+
+# "Feb 23 2026" (mois en anglais, comme ton exemple)
+date_str="$(LC_TIME=C date '+%b %e %Y' | sed 's/  / /g')"
+header="# ${date_str}"
+
+touch "${log_file}"
+
+tmp="$(mktemp)"
+
+awk -v header="$header" -v msg="$msg" '
+BEGIN {
+  found = 0
+  inserted = 0
+  after_header = 0
+  printed_blank_after_msg = 0
+}
+
+# Si le fichier commence par la section du jour, on insère le message au bon endroit
+{
+  if ($0 == header) {
+    found = 1
+    after_header = 1
+    print $0
+    next
+  }
+
+  # On est dans le bloc du jour : on imprime les lignes existantes
+  # et quand on arrive au prochain header (ou fin), on injecte le msg juste avant.
+  if (found && after_header) {
+    if ($0 ~ /^# /) {
+      if (!inserted) {
+        print msg
+        print ""
+        inserted = 1
+      }
+      after_header = 0
+      print $0
+      next
+    } else {
+      print $0
+      next
+    }
+  }
+
+  print $0
+}
+
+END {
+  if (found) {
+    # Si on a trouvé le header mais jamais rencontré un autre header après,
+    # on ajoute le msg à la fin (si pas déjà inséré)
+    if (!inserted) {
+      # S’assure qu’on termine par une ligne vide avant d’ajouter
+      # (si le fichier finit déjà par une ligne vide, awk imprimera quand même msg correctement)
+      print msg
+      print ""
+    }
+  } else {
+    # Header du jour absent : on le crée en tête du fichier
+    # On réécrit tout en préfixant
+    # (astuce : on ne peut pas "remonter" dans awk, donc on fait un 2e passage via zsh)
+  }
+}
+' "${log_file}" > "${tmp}.pass1"
+
+# Si le header n’existait pas, on préfixe proprement
+if ! grep -Fxq "${header}" "${log_file}"; then
+  {
+    print -r -- "${header}"
+    print -r -- "${msg}"
+    print -r -- ""
+    cat "${log_file}"
+  } > "${tmp}"
+else
+  mv "${tmp}.pass1" "${tmp}"
+fi
+
+mv "${tmp}" "${log_file}"
+rm -f "${tmp}.pass1" 2>/dev/null || true

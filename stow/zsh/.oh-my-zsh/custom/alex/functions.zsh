@@ -440,7 +440,11 @@ function formatjsonlog() {
 }
 
 function resetipv6() {
-    networksetup -setv6off Ethernet || networksetup -setv6off Wi-Fi
+    networksetup -listallhardwareports | awk '/Hardware Port: .*Ethernet/ {p=1} p && /Device:/ {print $2; p=0}' | while read dev; do
+        echo "Disabling IPv6 on $dev"
+        networksetup -setv6off "$dev"
+        ifconfig "$dev" | grep inet6
+    done
 }
 
 function openSession () {
