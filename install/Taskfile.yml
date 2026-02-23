@@ -55,6 +55,12 @@ tasks:
     cmds:
       - HOMEBREW_NO_AUTO_UPDATE=1 brew bundle
 
+  gpg-pass:
+    silent: false
+    desc: "Create password for current user and backup"
+    cmds:
+      - security add-generic-password -a "$USER" -s backup-gpg -w -U
+
   setup:
     desc: "Complete setup for a new MacBook"
     cmds:

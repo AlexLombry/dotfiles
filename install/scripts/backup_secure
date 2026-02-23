@@ -62,5 +62,3 @@ rsync -av --progress \
 ## To restore the archive :
 # gpg --output backup.tar.gz --decrypt backups_DATE.tar.gz.gpg
 # tar -xzf backup.tar.gz
-#
-# 0 9 * * * /bin/zsh -lc '/Users/alex.lombry/dotfiles/install/scripts/backup_secure' >> /Users/alex.lombry/Library/Logs/dailyscript.out 2>> /Users/alex.lombry/Library/Logs/dailyscript.err
