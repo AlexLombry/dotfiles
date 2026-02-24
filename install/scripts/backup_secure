@@ -27,7 +27,7 @@ for file in .journal-log.md .zshrc .zprofile .zshenv .gitconfig .gitignore_globa
 done
 
 # Sensible folders
-for dir in .ssh .gnupg .config .docker .aws .kube; do
+for dir in .ssh .gnupg .config .docker .aws .kube .claude; do
   [ -d "$HOME/$dir" ] && cp -R "$HOME/$dir" "$WORK_DIR"
 done
 
