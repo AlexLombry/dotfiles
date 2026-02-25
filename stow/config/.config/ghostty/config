@@ -2,10 +2,12 @@
 # theme = dark:catppuccin-mocha,light:catppuccin-latte
 theme = catppuccin-mocha
 window-decoration = true
-window-padding-x = 10
-window-padding-y = 15
-window-width = 165
-window-height = 42
+
+window-width = 90
+window-height = 23
+window-position-x = 630
+window-position-y = 430
+
 mouse-hide-while-typing = true
 cursor-style = block
 
