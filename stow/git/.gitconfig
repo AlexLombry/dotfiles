@@ -2,7 +2,7 @@
 [user]
 	name = Alex LOMBRY
 	email = alex.lombry@manomano.com
-	signingkey = 0x5D76737B74264274
+	signingkey = 0x01A23B1816232B14
 [includeIf "gitdir:/Users/alex.lombry/dotfiles/"]
   path = /Users/alex.lombry/Repositories/Alex/.gitconfig
 [includeIf "gitdir:/Users/alex.lombry/Repositories/Alex/"]
@@ -93,7 +93,7 @@
 	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [commit]
-	gpgSign = false
+	gpgsign = false
 [rerere]
 	enable = true
 [pull]
@@ -118,6 +118,9 @@
 [tag]
 	gpgSign = false
 [url "ssh://git@git.manomano.tech/"]
+	insteadOf = https://git.manomano.tech/
+	insteadOf = http://git.manomano.tech/
+	insteadOf = //git.manomano.tech/
 	insteadOf = https://git.manomano.tech/
 	insteadOf = http://git.manomano.tech/
 	insteadOf = //git.manomano.tech/
