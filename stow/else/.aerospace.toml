@@ -74,7 +74,7 @@ if.app-name-regex-substring = 'whatsapp'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-name-regex-substring = 'messages'
+if.app-id = 'com.apple.MobileSMS'
 run = 'layout floating'
 
 [[on-window-detected]]
@@ -172,6 +172,8 @@ run = 'layout floating'
     alt-shift-3 = 'move-node-to-workspace 3'
     alt-shift-4 = 'move-node-to-workspace 4'
     alt-shift-5 = 'move-node-to-workspace 5'
+
+    alt-shift-f = 'fullscreen'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     alt-tab = 'workspace-back-and-forth'
