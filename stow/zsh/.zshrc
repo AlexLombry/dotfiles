@@ -112,8 +112,7 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{n
 
 eval "$(zoxide init --cmd cd zsh)"
 
-export SDKMAN_DIR="/Users/alex/.sdkman"
-[[ -s "/Users/alex/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/alex/.sdkman/bin/sdkman-init.sh"
+source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

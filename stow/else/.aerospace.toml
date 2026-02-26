@@ -81,6 +81,10 @@ run = 'layout floating'
 if.app-name-regex-substring = 'finder'
 run = 'layout floating'
 
+[[on-window-detected]]
+if.app-name-regex-substring = 'calendar'
+run = 'layout floating'
+
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
