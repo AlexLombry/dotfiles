@@ -485,7 +485,7 @@ function openSession () {
 function tm() {
     SESSION="StarK"
 
-    WORK_DIR="/Volumes/ManoMano"
+    WORK_DIR="$HOME/Repositories/ManoMano"
     tmux kill-session -t $SESSION
     tmux new-session -d -s $SESSION -n 'Dotfiles'
     tmux send-keys -t $SESSION:1 "cd $HOME/dotfiles && ll" Enter
@@ -493,11 +493,8 @@ function tm() {
     tmux new-window -t $SESSION:2 -n 'ManoMano'
     tmux send-keys -t $SESSION:2 "cd $WORK_DIR && ll" Enter
 
-    tmux new-window -t $SESSION:3 -n 'Dev Workspace'
-    tmux send-keys -t $SESSION:3 "cd $WORK_DIR/gradle-dev-workspace/web && ll" Enter
-
-    tmux new-window -t $SESSION:4 -n 'Custom'
-    tmux send-keys -t $SESSION:4 "cd $HOME/Desktop && ll" Enter
+    tmux new-window -t $SESSION:3 -n 'Custom'
+    tmux send-keys -t $SESSION:3 "cd $HOME/Desktop && ll" Enter
 
     # Attach the session
     tmux attach-session -t $SESSION
