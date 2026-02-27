@@ -443,11 +443,12 @@ function resetipv6() {
     networksetup -listallhardwareports | awk '/Hardware Port: .*Ethernet/ {p=1} p && /Device:/ {print $2; p=0}' | while read dev; do
         echo "Disabling IPv6 on $dev"
         networksetup -setv6off "$dev"
+
         ifconfig "$dev" | grep inet6
     done
 }
 
-function openSession () {
+function os () {
     WORK_DIR="~/dotfiles/"
     SESSION="works"
 
@@ -461,16 +462,16 @@ function openSession () {
     tmux rename-window 'Dotfiles'
 
     # MSF Seller Orders session
-    WORK_DIR="~/ManoMano/msf-seller-orders"
-    tmux new-window -t $SESSION:2 -n 'MSF Seller Orders'
+    WORK_DIR="~/Repositories/ManoMano/"
+    tmux new-window -t $SESSION:2 -n 'ManoMano Directories'
     tmux split-window -h -t $SESSION:2.1
     tmux split-window -v -t $SESSION:2.2
     tmux send-keys -t $SESSION:2.1 "cd $WORK_DIR && vim notes" Enter
     tmux send-keys -t $SESSION:2.1 "G" Enter
     tmux send-keys -t $SESSION:2.3 "cd $WORK_DIR && ll" Enter
 
-    WORK_DIR="/Volumes/ManoMano"
-    tmux new-window -t $SESSION:3 -n 'ManoMano Home Directory'
+    WORK_DIR="$HOME/Repositories/ManoMano/scriptings/"
+    tmux new-window -t $SESSION:3 -n 'Scripting Directory'
     tmux split-window -h -t $SESSION:3.1
     tmux split-window -v -t $SESSION:3.2
     tmux send-keys -t $SESSION:3.1 "cd $WORK_DIR && vim notes" Enter
@@ -486,6 +487,7 @@ function tm() {
     SESSION="StarK"
 
     WORK_DIR="$HOME/Repositories/ManoMano"
+
     tmux kill-session -t $SESSION
     tmux new-session -d -s $SESSION -n 'Dotfiles'
     tmux send-keys -t $SESSION:1 "cd $HOME/dotfiles && ll" Enter
