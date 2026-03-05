@@ -118,6 +118,6 @@ return {
         })
 
         -- Enable only the servers you configured above
-        vim.lsp.enable({ "svelte", "graphql", "emmet_ls", "lua_ls" })
+        vim.lsp.enable({ "svelte", "graphql", "emmet_ls", "lua_ls", "intelephense" })
     end,
 }

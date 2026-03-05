@@ -448,55 +448,26 @@ function resetipv6() {
     done
 }
 
-function os () {
-    WORK_DIR="~/dotfiles/"
-    SESSION="works"
-
-    tmux kill-session -t $SESSION
-    tmux new-session -d -s $SESSION
-
-    # ManoMano session
-    tmux split-window -h -t $SESSION:1.1
-    tmux send-keys -t $SESSION:1.1 "cd $WORK_DIR && vim $WORK_DIR" Enter
-    tmux send-keys -t $SESSION:1.2 "cd $WORK_DIR && ll" Enter
-    tmux rename-window 'Dotfiles'
-
-    # MSF Seller Orders session
-    WORK_DIR="~/Repositories/ManoMano/"
-    tmux new-window -t $SESSION:2 -n 'ManoMano Directories'
-    tmux split-window -h -t $SESSION:2.1
-    tmux split-window -v -t $SESSION:2.2
-    tmux send-keys -t $SESSION:2.1 "cd $WORK_DIR && vim notes" Enter
-    tmux send-keys -t $SESSION:2.1 "G" Enter
-    tmux send-keys -t $SESSION:2.3 "cd $WORK_DIR && ll" Enter
-
-    WORK_DIR="$HOME/Repositories/ManoMano/scriptings/"
-    tmux new-window -t $SESSION:3 -n 'Scripting Directory'
-    tmux split-window -h -t $SESSION:3.1
-    tmux split-window -v -t $SESSION:3.2
-    tmux send-keys -t $SESSION:3.1 "cd $WORK_DIR && vim notes" Enter
-    tmux send-keys -t $SESSION:3.1 "G" Enter
-    tmux send-keys -t $SESSION:3.2 "cd $WORK_DIR && ll" Enter
-    tmux send-keys -t $SESSION:3.3 "cd $WORK_DIR && ll" Enter
-
-    # Attach the session
-    tmux attach-session -t $SESSION
-}
-
 function tm() {
     SESSION="StarK"
 
-    WORK_DIR="$HOME/Repositories/ManoMano"
+    WORK_DIR="$HOME/Repositories"
 
     tmux kill-session -t $SESSION
+
     tmux new-session -d -s $SESSION -n 'Dotfiles'
     tmux send-keys -t $SESSION:1 "cd $HOME/dotfiles && ll" Enter
 
     tmux new-window -t $SESSION:2 -n 'ManoMano'
-    tmux send-keys -t $SESSION:2 "cd $WORK_DIR && ll" Enter
+    tmux split-window -h -t $SESSION:2.1
+    tmux split-window -v -t $SESSION:2.2
+    tmux send-keys -t $SESSION:2 "cd $WORK_DIR/ManoMano && ll" Enter
 
-    tmux new-window -t $SESSION:3 -n 'Custom'
-    tmux send-keys -t $SESSION:3 "cd $HOME/Desktop && ll" Enter
+    tmux new-window -t $SESSION:3 -n 'Code'
+    tmux send-keys -t $SESSION:3 "cd $WORK_DIR/Alex && ll" Enter
+
+    tmux new-window -t $SESSION:4 -n 'Custom'
+    tmux send-keys -t $SESSION:4 "cd $HOME/Desktop && ll" Enter
 
     # Attach the session
     tmux attach-session -t $SESSION
