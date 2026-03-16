@@ -22,6 +22,7 @@ brew "gd"
 brew "gh"
 brew "git"
 brew "glab"
+brew "go"
 brew "go-task"
 brew "htop"
 brew "httpie"
@@ -38,6 +39,8 @@ brew "mise"
 brew "neovim", args: ["HEAD"]
 brew "node"
 brew "nvm"
+brew "parallel"
+brew "pinentry-mac"
 brew "pv"
 brew "pwgen"
 brew "reattach-to-user-namespace"
@@ -57,6 +60,7 @@ brew "wget"
 brew "xh"
 brew "yarn"
 brew "yazi"
+brew "yt-dlp"
 brew "zoxide"
 cask "1password"
 cask "1password-cli"
@@ -64,8 +68,11 @@ cask "nikitabobko/tap/aerospace"
 cask "arc"
 cask "bazecor"
 cask "bruno"
+cask "discord"
 cask "dropbox"
 cask "firefox"
+cask "font-geist-mono-nerd-font"
+cask "font-hack-nerd-font"
 cask "font-roboto-mono", args: { appdir: "/Applications" }
 cask "font-source-code-pro-for-powerline", args: { appdir: "/Applications" }
 cask "ghostty"
@@ -85,9 +92,16 @@ cask "vlc"
 cask "zed"
 mas "1Password for Safari", id: 1569813296
 mas "Developer", id: 640199958
+mas "Equinox", id: 1591510203
 mas "iMazing Converter", id: 1292198261
 mas "iNet Network Scanner", id: 403304796
+mas "LanguageTool", id: 1534275760
+mas "Numbers", id: 361304891
 mas "Okta Verify", id: 490179405
+mas "Pages", id: 361309726
 mas "Parcel Classic", id: 639968404
+mas "Pixelmator Pro", id: 1289583905
 mas "The Unarchiver", id: 425424353
 mas "Xcode", id: 497799835
+go "github.com/mitranim/gow"
+go "github.com/a-h/templ/cmd/templ"

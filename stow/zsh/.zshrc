@@ -30,6 +30,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
 
+export HISTIGNORE="journal*"
 setopt HIST_IGNORE_SPACE  # Don't save when prefixed with space
 setopt HIST_IGNORE_DUPS   # Don't save duplicate lines
 setopt SHARE_HISTORY      # Share history between sessions
@@ -177,7 +178,7 @@ hash -d dl=~/Downloads
 bindkey -s '^Gc' 'git commit -m ""\C-b'
 
 export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
-export DOCKER_HOST=unix://${HOME}/.colima/docker.sock
+export DOCKER_HOST=unix://${HOME}/.colima/default/docker.sock
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
