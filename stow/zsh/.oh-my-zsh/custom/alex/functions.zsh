@@ -554,3 +554,19 @@ func vaultcp() {
     # Use echo to pass the JSON keys to fzf, preview and bind must handle complex commands properly
     echo "$json" | jq -r 'keys[]' | fzf --preview "$previewCmd" --bind "enter:execute($bindCmd)"
 }
+
+set_aws_role() {
+    local role="${1:?Usage: set_aws_role <role_name>}"
+
+    # Optional: backup current config
+    local cfg="${AWS_CONFIG_FILE:-$HOME/.aws/config}"
+    [ -f "$cfg" ] && cp -a "$cfg" "$cfg.bak.$(date +%Y%m%d%H%M%S)"
+
+    # Iterate all profiles and set the role
+    while IFS= read -r p; do
+        [ -n "$p" ] || continue
+        aws configure set "profile.$p.sso_role_name" "$role"
+    done < <(aws configure list-profiles)
+
+    echo "Set sso_role_name=$role for all profiles."
+}
