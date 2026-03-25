@@ -80,10 +80,8 @@ path=(
     $HOME/.composer/vendor/bin
     $HOME/.symfony/bin
     /usr/local/sbin
-    /usr/local/opt/awscli@1/bin
-    $HOME/Library/Python/2.7/bin
     /opt/homebrew/opt/openjdk@17/bin
-    $(yarn global bin)
+    $HOME/.yarn/bin
     $HOME/.composer/vendor/bin
     $HOME/dotfiles/install/scripts
 )
@@ -103,7 +101,8 @@ export GIT_EDITOR='nvim'
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 for script in $ZSH_CUSTOM/alex/*.zsh; do source $script; done
-source ~/.mano.zsh
+[ -f ~/.mano.zsh ] && source ~/.mano.zsh
+[ -f ~/.work.zsh ] && source ~/.work.zsh
 
 # ZSH_TMUX_AUTOSTART=false
 # ZSH_TMUX_AUTOCONNECT=false
@@ -113,7 +112,11 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{n
 
 eval "$(zoxide init --cmd cd zsh)"
 
-source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk() {
+  unfunction sdk
+  source "$HOME/.sdkman/bin/sdkman-init.sh"
+  sdk "$@"
+}
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
@@ -172,17 +175,13 @@ alias zln='zmv -L'  # Link with patterns
 # Named Directories - Bookmark Folders
 # -------------------------------------------
 # Access with ~name syntax, e.g., cd ~yt or ls ~yt
-hash -d dot=~/.dotfiles
+hash -d dot=~/dotfiles
 hash -d dl=~/Downloads
 
 bindkey -s '^Gc' 'git commit -m ""\C-b'
 
 export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
 export DOCKER_HOST=unix://${HOME}/.colima/default/docker.sock
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 eval "$(starship init zsh)"
 
@@ -192,4 +191,4 @@ eval "$(starship init zsh)"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
-eval "$(tv init zsh)"
+command -v tv &>/dev/null && eval "$(tv init zsh)"

@@ -21,5 +21,3 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # zsh builtin to re-run last line. dangerous. do not want. use `!!`.
 disable r
 
-# autocd in these paths
-cdpath=($(echo $cdpath) $HOME/ManoMano/)

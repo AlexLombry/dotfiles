@@ -16,7 +16,7 @@ brew:
 # Apply symlinks with GNU Stow
 stow:
 	@cd $$HOME/dotfiles/stow && \
-	stow --adopt -t "$$HOME" zsh git config else
+	stow --adopt -t "$$HOME" zsh git config else work
 	@echo "Symlinks applied!"
 
 # Install languages and tools with Mise
@@ -41,6 +41,19 @@ bundle:
 # Create GPG backup password
 gpg-pass:
 	security add-generic-password -a "$$USER" -s backup-gpg -w -U
+
+# Unlink all stow symlinks
+unstow:
+	@cd $$HOME/dotfiles/stow && stow -D -t "$$HOME" zsh git config else work
+	@echo "Symlinks removed!"
+
+# Run upd8r to update all package managers
+update:
+	@$$HOME/dotfiles/install/tools/upd8r/upd8r.sh
+
+# Benchmark shell startup time
+bench:
+	@for i in 1 2 3; do /usr/bin/time zsh -i -c exit; done
 
 # Complete setup for a new MacBook
 setup: stow os brew mise neovim
