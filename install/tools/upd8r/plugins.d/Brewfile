@@ -53,6 +53,7 @@ brew "ssh-copy-id"
 brew "sshpass"
 brew "stow"
 brew "switchaudio-osx"
+brew "television"
 brew "tmux"
 brew "tree"
 brew "watch"
@@ -80,6 +81,7 @@ cask "gpg-suite"
 cask "jetbrains-toolbox"
 cask "logi-options+"
 cask "miro"
+cask "openlens"
 cask "postman"
 cask "protonvpn"
 cask "qwerty-fr"
@@ -96,12 +98,12 @@ mas "Equinox", id: 1591510203
 mas "iMazing Converter", id: 1292198261
 mas "iNet Network Scanner", id: 403304796
 mas "LanguageTool", id: 1534275760
+mas "Meet+", id: 1111405920
 mas "Numbers", id: 361304891
 mas "Okta Verify", id: 490179405
 mas "Pages", id: 361309726
 mas "Parcel Classic", id: 639968404
 mas "Pixelmator Pro", id: 1289583905
 mas "The Unarchiver", id: 425424353
-mas "Xcode", id: 497799835
 go "github.com/mitranim/gow"
 go "github.com/a-h/templ/cmd/templ"

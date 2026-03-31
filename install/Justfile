@@ -49,7 +49,7 @@ unstow:
 
 # Run upd8r to update all package managers
 update:
-	@$$HOME/dotfiles/install/tools/upd8r/upd8r.sh
+	@bash $HOME/dotfiles/install/tools/upd8r/upd8r.sh
 
 # Benchmark shell startup time
 bench:

@@ -397,42 +397,6 @@ pw () {
     pwgen -sync "${1:-48}" -1 | if command -v pbcopy > /dev/null 2>&1; then pbcopy; else xclip; fi
 }
 
-### Functions for setting and getting environment variables from the OSX keychain ###
-### Adapted from https://www.netmeister.org/blog/keychain-passwords.html ###
-
-# Use: keychain-environment-variable SECRET_ENV_VAR
-function keychain-environment-variable () {
-    security find-generic-password -w -a ${USER} -D "environment variable" -s "${1}"
-}
-
-# Use: set-keychain-environment-variable SECRET_ENV_VAR
-#   provide: super_secret_key_abc123
-function set-keychain-environment-variable () {
-    [ -n "$1" ] || print "Missing environment variable name"
-
-    # Note: if using bash, use `-p` to indicate a prompt string, rather than the leading `?`
-    read -s "?Enter Value for ${1}: " secret
-
-    ( [ -n "$1" ] && [ -n "$secret" ] ) || return 1
-    security add-generic-password -U -a ${USER} -D "environment variable" -s "${1}" -w "${secret}"
-}
-
-## Previously run
-#set-keychain-environment-variable SAML2AWS_USERNAME
-#set-keychain-environment-variable SAML2AWS_PASSWORD
-
-## Write to your zshrc file (or bashrc)
-#export SAML2AWS_USERNAME=$(keychain-environment-variable SAML2AWS_USERNAME);
-#export SAML2AWS_PASSWORD=$(keychain-environment-variable SAML2AWS_PASSWORD);
-
-function pass-init() {
-    set-keychain-environment-variable $1
-}
-
-function pass-get() {
-    keychain-environment-variable $1;
-}
-
 function formatjsonlog() {
   while read -r data; do
     printf "%s" "$data" | jq -r '.["@timestamp"][11:22] + " " + .level + " " + .message + "\n" + .error.stack'
@@ -569,4 +533,22 @@ set_aws_role() {
     done < <(aws configure list-profiles)
 
     echo "Set sso_role_name=$role for all profiles."
+}
+
+# Exemple of usage :
+# pass-init GITLAB_TOKEN
+#
+# echo $(pass-get GITLAB_TOKEN)
+function pass-init() {
+    [ -n "$1" ] || print "Missing environment variable name"
+
+    # Note: if using bash, use `-p` to indicate a prompt string, rather than the leading `?`
+    read -s "?Enter Value for ${1}: " secret
+
+    ( [ -n "$1" ] && [ -n "$secret" ] ) || return 1
+    security add-generic-password -U -a ${USER} -D "environment variable" -s "${1}" -w "${secret}"
+}
+
+function pass-get() {
+    security find-generic-password -w -a ${USER} -D "environment variable" -s "${1}"
 }
