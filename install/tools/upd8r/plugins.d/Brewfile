@@ -105,5 +105,8 @@ mas "Pages", id: 361309726
 mas "Parcel Classic", id: 639968404
 mas "Pixelmator Pro", id: 1289583905
 mas "The Unarchiver", id: 425424353
+mas "Warplanes/ WW1 Sky Aces", id: 1474377509
+mas "Warplanes/ WW2 Dogfight", id: 1364367974
+mas "Xcode", id: 497799835
 go "github.com/mitranim/gow"
 go "github.com/a-h/templ/cmd/templ"

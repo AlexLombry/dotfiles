@@ -129,4 +129,4 @@
 	insteadOf = http://git.manomano.tech/
 	insteadOf = //git.manomano.tech/
 [oh-my-zsh]
-	git-commit-alias = 4daba1431696953a7737c7b64fc46cb05a736282
+	git-commit-alias = e42ac8c57bc7eb473b689ffcbb98473ba45dbab8
