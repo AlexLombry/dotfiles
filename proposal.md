@@ -2,149 +2,117 @@
 
 ## Bugs / Correctness Issues
 
-### 1. Wrong dotfiles bookmark path
-**File:** `stow/zsh/.zshrc:175`
+### 1. `ZSH_THEME` is dead config
+**File:** `stow/zsh/.zshrc:41`
+
+`ZSH_THEME="awesomepanda"` is set but then overridden by `eval "$(starship init zsh)"` at line 186.
+Starship replaces the prompt entirely — the theme variable does nothing. Remove it.
+
+### 2. Triple SSH agent management conflict
+**File:** `stow/zsh/.zshrc:6-25, 53`
+
+Three mechanisms compete:
+- Manual `ssh-agent` spawn (lines 6–8)
+- Oh My Zsh `ssh-agent` plugin (line 53)
+- GPG-for-SSH block (lines 15–25)
+
+The manual spawn at lines 6–8 is redundant since the GPG block handles `SSH_AUTH_SOCK`.
+The OMZ `ssh-agent` plugin may fight with the YubiKey/GPG setup.
+Fix: remove lines 6–8 and drop `ssh-agent` from the OMZ plugins list.
+
+### 3. `$HOME/.composer/vendor/bin` duplicated in PATH
+**File:** `stow/zsh/.zshrc:80,85`
+
+Added twice. The `typeset -U path` deduplication catches it at runtime, but it's noise.
+
+### 4. Tools used but missing from BrewFile
+**File:** `stow/zsh/.zshrc`, `install/BrewFile`
+
+| Tool | Where used | Risk |
+|------|-----------|------|
+| `starship` | line 186 `eval` | fails silently if absent |
+| `bun` | lines 188–193 | PATH setup fails |
+| `uv` / `uvx` | lines 195–196 | completions silently skipped |
+| `tv` | line 194 | guarded with `command -v`, safe but inconsistent |
+
+### 5. `stow --adopt` is dangerous on re-runs
+**File:** `install/Justfile:19`
+
+`stow --adopt` moves existing `$HOME` files *into* the stow directory, overwriting tracked versions.
+Safe on a clean machine, destructive if re-run when symlinks exist and have local modifications.
+At minimum, document this behaviour. Consider using `--no-folding` without `--adopt` for re-runs.
+
+### 6. `go-task/tap` is an orphaned tap
+**File:** `install/BrewFile:1`
+
+The tap is declared but nothing from it is installed (`go-task` was removed; `just` is used instead).
+Remove the tap line.
+
+### 7. `kubectl` OMZ plugin but no `kubectl` in BrewFile
+**File:** `stow/zsh/.zshrc:55`
+
+The `kubectl` plugin is loaded but `kubectl` is not managed by Homebrew (k9s does not install it).
+Either add `brew "kubectl"` to BrewFile or remove the plugin.
+
+### 8. Dead commented-out line in GOPATH block
+**File:** `stow/zsh/.zshrc:65`
 
 ```zsh
-# Current (wrong)
-hash -d dot=~/.dotfiles
-
-# Fix: repo is at ~/dotfiles
-hash -d dot=~/dotfiles
+export GOPATH="$HOME/go"
+# export GOPATH=$(go env GOPATH)/bin   ← wrong path, dead code
 ```
 
-### 2. `~/.mano.zsh` is untracked
-**File:** `stow/zsh/.zshrc:106`
-
-This work config is sourced but lives outside the stow system. Add a fallback guard at minimum:
-
-```zsh
-[ -f ~/.mano.zsh ] && source ~/.mano.zsh
-```
-
-Long-term: create a `stow/work/` package with a `.work.zsh` file that gets conditionally symlinked.
-
-### 3. `jless` missing from BrewFile
-Used in a suffix alias (`alias -s json=jless`) but not declared in `install/BrewFile`.
-
-```ruby
-brew "jless"
-```
-
-### 4. `tv init zsh` references unknown tool
-**File:** `stow/zsh/.zshrc:195`
-
-`tv` is not in BrewFile. Either add it as a dependency or remove the stale line.
+Remove the commented line.
 
 ---
 
 ## Performance — Shell Startup
 
-### 5. `$(yarn global bin)` in PATH is slow
-**File:** `stow/zsh/.zshrc:86`
-
-Executes a subprocess on every shell start. Replace with a static path:
+### 9. `uv`/`uvx` completions spawn subprocesses on every start
+**File:** `stow/zsh/.zshrc:195-196`
 
 ```zsh
-# Remove this:
-$(yarn global bin)
-
-# Add this:
-$HOME/.yarn/bin
+eval "$(uv generate-shell-completion zsh)"
+eval "$(uvx --generate-shell-completion zsh)"
 ```
 
-### 6. Replace NVM with mise for Node.js
-NVM adds ~200-500ms to every shell startup. `mise` is already installed and can manage Node:
+Same pattern as the old `$(yarn global bin)` issue. Generate once and cache:
 
 ```zsh
-mise use -g node@lts
-```
+# Run once (e.g., in just mise or a setup script):
+mkdir -p ~/.zsh/completions
+uv generate-shell-completion zsh > ~/.zsh/completions/_uv
+uvx --generate-shell-completion zsh > ~/.zsh/completions/_uvx
 
-Then remove `nvm` from BrewFile and the NVM init block from `.zshrc` (lines 183-185).
-
-### 7. Lazy-load SDKMAN
-SDKMAN loads synchronously and is rarely needed on every shell. Lazy-load it:
-
-```zsh
-sdk() {
-  unfunction sdk
-  source "$HOME/.sdkman/bin/sdkman-init.sh"
-  sdk "$@"
-}
-```
-
-### 8. Enable startup profiling
-`zmodload zsh/zprof` is already prepared at line 1 of `.zshrc` but commented out.
-Uncomment it and add `zprof` at the very end to measure startup time breakdown.
-
----
-
-## Redundancies in BrewFile
-
-| Tool to remove | Superseded by |
-|----------------|---------------|
-| `ack` | `ripgrep` (already installed) |
-| `ccat` | `bat` (already installed) |
-| `go-task` | `just` (the actual task runner used) |
-| `nvm` | `mise` (already manages runtimes) |
-
----
-
-## Legacy PATH entries
-
-**File:** `stow/zsh/.zshrc`
-
-These paths are dead weight and slow down PATH resolution:
-
-```zsh
-/usr/local/opt/awscli@1/bin     # awscli v1 is EOL, upgrade to v2
-$HOME/Library/Python/2.7/bin    # Python 2.7 is EOL
+# In .zshrc, replace the two evals with:
+fpath=(~/.zsh/completions $fpath)
 ```
 
 ---
 
-## Justfile Improvements
+## Redundancies
 
-Add the following tasks to `install/Justfile`:
+### 10. `reattach-to-user-namespace` is legacy
+**File:** `install/BrewFile:40`
 
-```just
-# Unlink all stow symlinks
-unstow:
-    @cd $$HOME/dotfiles/stow && stow -D -t "$$HOME" zsh git config else
-    @echo "Symlinks removed!"
+Required for macOS/tmux clipboard integration before Sierra. Modern macOS doesn't need it. Remove.
 
-# Run upd8r to update all package managers
-update:
-    @$$HOME/dotfiles/install/tools/upd8r/upd8r.sh
+### 11. Justfile `neovim` task duplicates BrewFile
+**File:** `install/Justfile:28-31`, `install/BrewFile:31-35`
 
-# Benchmark shell startup time
-bench:
-    @for i in 1 2 3; do /usr/bin/time zsh -i -c exit; done
-```
+The `neovim` task runs `brew install luajit luarocks luv neovim --HEAD`, which are already declared
+in BrewFile. Running `just setup` installs them twice.
+
+Options:
+- Remove them from BrewFile and keep only the `neovim` task (preserves `--HEAD` intent)
+- Remove the `neovim` task and let BrewFile handle it (simpler, but loses explicit HEAD flag)
 
 ---
 
 ## Organization
 
-### Rename `stow/else/` to something meaningful
-`else` is vague. Consider `stow/wm/` (window manager configs: tmux, aerospace, sketchybar)
-or `stow/apps/` depending on what ends up there.
-
-### Consolidate work-specific config
-Work concerns are currently split between:
-- `stow/zsh/.oh-my-zsh/custom/alex/ext.zsh` (cdpath `$HOME/ManoMano/`)
-- `~/.mano.zsh` (untracked)
-
-Create a `stow/work/` stow package with `.work.zsh` for all ManoMano-specific config,
-sourced conditionally from `.zshrc`.
-
-### Add a README
-A minimal `README.md` at the repo root describing the bootstrap flow would help on a fresh machine:
-
-```
-curl https://raw.githubusercontent.com/AlexLombry/dotfiles/main/install/init.sh | zsh
-# → install.sh → just setup
-```
+### 12. Rename `stow/else/` to something meaningful
+`else` is vague. Consider `stow/wm/` (AeroSpace, tmux) or `stow/apps/` depending on contents.
 
 ---
 
@@ -152,13 +120,15 @@ curl https://raw.githubusercontent.com/AlexLombry/dotfiles/main/install/init.sh 
 
 | # | Change | Effort |
 |---|--------|--------|
-| 1 | Fix `hash -d dot` path | 30s |
-| 2 | Add `[ -f ]` guard on `.mano.zsh` | 1 min |
-| 3 | Add `jless` to BrewFile | 30s |
-| 4 | Remove `ack`, `ccat`, `go-task`, `nvm` from BrewFile | 2 min |
-| 5 | Replace `$(yarn global bin)` with static path | 1 min |
-| 6 | Remove legacy PATH entries (Python 2.7, awscli@1) | 1 min |
-| 7 | Add `unstow`, `update`, `bench` to Justfile | 5 min |
-| 8 | Lazy-load SDKMAN | 5 min |
-| 9 | Migrate Node from NVM to mise | 15 min |
-| 10 | Create `stow/work/` package | 30 min |
+| 1 | Remove duplicate `$HOME/.composer/vendor/bin` in PATH | 30s |
+| 2 | Remove dead `ZSH_THEME` line | 30s |
+| 3 | Remove dead commented GOPATH line | 30s |
+| 4 | Remove `go-task/tap` from BrewFile | 30s |
+| 5 | Remove `reattach-to-user-namespace` from BrewFile | 30s |
+| 6 | Fix SSH agent: remove lines 6–8, drop `ssh-agent` OMZ plugin | 2 min |
+| 7 | Add `starship`, `bun`, `uv`/`uvx`, `tv` to BrewFile | 2 min |
+| 8 | Add `kubectl` to BrewFile or remove OMZ plugin | 1 min |
+| 9 | Cache `uv`/`uvx` completions statically | 5 min |
+| 10 | Resolve Justfile `neovim` / BrewFile duplication | 5 min |
+| 11 | Document or fix `stow --adopt` behaviour | 10 min |
+| 12 | Rename `stow/else/` | 15 min |
