@@ -7,13 +7,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 All tasks run from `install/Justfile` via `just` (from the repo root or `install/` directory):
 
 ```bash
-just setup        # Full installation: stow → os → brew → mise → neovim
-just stow         # Symlink all packages (zsh git config else work) into $HOME
+just setup        # Full installation: stow → os → brew → mise → completions
+just stow         # Symlink all packages (zsh git config apps work) into $HOME
 just unstow       # Remove all symlinks
 just brew         # Install from install/BrewFile via Homebrew Bundle
 just mise         # Install language runtimes
+just completions  # Generate uv/uvx shell completions (run once after brew)
 just os           # Apply macOS system defaults (install/scripts/macos.sh)
-just neovim       # Install NeoVim with lua deps (luajit, luarocks, luv)
 just update       # Run upd8r to update all package managers
 just bench        # Measure zsh startup time (3 runs)
 just gpg-pass     # Store GPG backup password in macOS keychain
@@ -35,7 +35,7 @@ GNU Stow symlinks packages from `stow/*/` into `$HOME`. The `stow/` directory co
 - **zsh** — `.zshrc`, `.zprofile`, `.ideavimrc`, Oh My Zsh theme/plugins
 - **git** — `.gitconfig`, `.gitignore_global`
 - **config** — `.config/nvim/`, `.config/ghostty/`, `.config/rectangle/`, `.config/iterm2/`
-- **else** — `.tmux.conf`, `.aerospace.toml`, `.dir_colors`, `.crontab`, `~/Library/` app configs
+- **apps** — `.tmux.conf`, `.aerospace.toml`, `.dir_colors`, `.crontab`, `~/Library/` app configs
 - **work** — `.work.zsh` (work-specific aliases and env vars)
 
 Each package maps directly to `$HOME` layout. Adding a file at `stow/zsh/.zshrc` means `~/.zshrc` will be symlinked to it after `just stow`.
@@ -48,7 +48,8 @@ Each package maps directly to `$HOME` layout. Adding a file at `stow/zsh/.zshrc`
 | **Just** | Task runner wrapping all installation steps |
 | **Homebrew** | System packages and apps (`install/BrewFile`) |
 | **Mise** | Language runtime manager (Node, Python, Ruby, etc.) |
-| **Oh My Zsh** | Zsh plugin ecosystem (theme: `awesomepanda`) |
+| **Oh My Zsh** | Zsh plugin ecosystem |
+| **Starship** | Shell prompt (overrides OMZ theme) |
 
 ### NeoVim Config
 
@@ -61,9 +62,10 @@ Located at `stow/config/.config/nvim/` — Lua-based, modular:
 
 ### Shell Config
 
-- `.zshrc` sources `~/.mano.zsh` for work config (untracked, not in this repo)
-- Runtime managers: NVM (Node legacy), SDKMAN (Java), Mise (everything else)
-- GPG/SSH agent configured in `.zprofile`
+- `.zshrc` sources `~/.mano.zsh` and `~/.work.zsh` for work config (untracked, not in this repo)
+- Runtime managers: SDKMAN (Java, lazy-loaded), Mise (everything else)
+- GPG/SSH agent via YubiKey — configured in `.zshrc`, skipped in dev containers
+- uv/uvx completions served from `~/.zsh/completions/` (regenerate with `just completions`)
 
 ### Installation Scripts
 

@@ -33,7 +33,6 @@ setopt SHARE_HISTORY      # Share history between sessions
 
 # ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
 
-# Which theme did you want to use
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM="$ZSH/custom"
 
@@ -101,8 +100,6 @@ for script in $ZSH_CUSTOM/alex/*.zsh; do source $script; done
 export LIBRARY_PATH="/opt/homebrew/lib"
 export CPATH="/opt/homebrew/include"
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git,out,build}"'
-
-eval "$(zoxide init --cmd cd zsh)"
 
 sdk() {
   unfunction sdk
@@ -185,3 +182,4 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 command -v tv &>/dev/null && eval "$(tv init zsh)"
 # uv/uvx completions loaded via fpath — regenerate with: just completions
+eval "$(zoxide init --cmd cd zsh)"
