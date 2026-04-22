@@ -17,8 +17,8 @@ brew:
 # WARNING: --adopt moves existing $HOME files INTO the stow dir, overwriting tracked versions.
 # Safe on a clean machine; dangerous on re-runs with local modifications.
 stow:
-	@cd $$HOME/dotfiles/stow && \
-	stow --adopt -t "$$HOME" zsh git config apps work
+	@cd $HOME/dotfiles/stow && \
+	stow --adopt -t "$HOME" zsh git config apps work
 	@echo "Symlinks applied!"
 
 # Install languages and tools with Mise
@@ -40,7 +40,7 @@ gpg-pass:
 
 # Unlink all stow symlinks
 unstow:
-	@cd $$HOME/dotfiles/stow && stow -D -t "$$HOME" zsh git config apps work
+	@cd $HOME/dotfiles/stow && stow -D -t "$HOME" zsh git config apps work
 	@echo "Symlinks removed!"
 
 # Run upd8r to update all package managers
