@@ -1,0 +1,15 @@
+# IDE / tools
+.idea/
+.serena/
+.vscode/
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Sensitive / local
+backup/
+.env
+.env.local
+*.swp
+*.swo

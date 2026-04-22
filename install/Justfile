@@ -28,7 +28,11 @@ mise:
 
 # Install NvChad
 chad:
-	@git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
+	@if [ ! -d ~/.config/nvim ]; then \
+		git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim; \
+	else \
+		echo "NvChad already installed at ~/.config/nvim"; \
+	fi
 
 # Install current Brew bundle
 bundle:

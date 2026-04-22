@@ -1,43 +1,77 @@
 # Dotfiles
 
-## macOS Setup
+Personal macOS dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/) and [Just](https://just.systems/).
 
-The installation script (install/install.sh) will install all the necessary program you need like Brew, Zsh and configuring macOS with my own preferences.
+## Fresh machine setup
 
-The installer launch also the installation of [Go Task](https://github.com/go-task/task) which is used to create some bash script in a Yaml format.
+### Step 1 — Bootstrap
 
-To install everything on a new Mac, simply run:
+Run this in a terminal. It installs Xcode CLT and clones the repo to `~/dotfiles`:
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/AlexLombry/dotfiles/main/install/init.sh | zsh
 ```
 
-### What happens under the hood?
+### Step 2 — Install everything
 
-1.  **Bootstrap (`init.sh`)**:
-    *   Ensures Xcode Command Line Tools are installed.
-    *   Clones this repository to `~/dotfiles`.
-    *   Executes `install/install.sh`.
-2.  **Core Tooling (`install.sh`)**:
-    *   Sets Zsh as the default shell.
-    *   Installs **Oh My Zsh** (unattended).
-    *   Installs **Homebrew**, **Mise**, **Go Task**, and **GNU Stow**.
-    *   Hands over the rest to `task setup`.
-3.  **Unified Setup (`Taskfile.yml`)**:
-    *   **Stow**: Applies symlinks (using `--adopt` to merge existing configs).
-    *   **OS**: Configures macOS system preferences.
-    *   **Brew**: Installs all apps/tools via `Brewfile`.
-    *   **Mise**: Installs language runtimes (Python, Node, etc.).
-    *   **Plugins**: Configures specialized tools like NeoVim.
+Open a **new terminal**, then:
 
-### Modular Control
-
-Every command can also be run individually with Go Task if you already have Brew and Go Task installed.
-Simply run `task --list` to see available tasks.
-
-For example, to only refresh symlinks:
 ```bash
-task stow
+cd ~/dotfiles && ./install/install.sh
 ```
 
-Your Mac is now ready! 😉
+This installs Oh My Zsh, Homebrew, Mise, Just, and GNU Stow — then runs `just setup` automatically.
+
+### Step 3 — NeoVim
+
+After setup completes, install NvChad (safe to re-run):
+
+```bash
+just chad
+```
+
+### Step 4 — Restart your terminal
+
+Shell config is now symlinked. Open a fresh terminal session to pick up all changes.
+
+---
+
+## What `just setup` does
+
+| Step | Task | What it does |
+|------|------|-------------|
+| 1 | `stow` | Symlinks all packages (`zsh`, `git`, `config`, `apps`, `work`) into `$HOME` |
+| 2 | `os` | Applies macOS system defaults (`install/scripts/macos.sh`) |
+| 3 | `brew` | Installs all packages and apps from `install/BrewFile` |
+| 4 | `mise` | Installs language runtimes (Python 3.12, Node 22, Ruby 3.3) |
+| 5 | `completions` | Generates `uv`/`uvx` shell completions into `~/.zsh/completions/` |
+
+---
+
+## Day-to-day commands
+
+```bash
+just              # List all available tasks
+just stow         # Re-apply symlinks (e.g. after adding a new dotfile)
+just unstow       # Remove all symlinks
+just brew         # Sync Homebrew packages with BrewFile
+just mise         # Reinstall/update language runtimes
+just update       # Update all package managers (brew, pip, npm, cargo…)
+just bench        # Measure zsh startup time (3 runs)
+just os           # Re-apply macOS system defaults
+just completions  # Regenerate uv/uvx completions
+just gpg-pass     # Store GPG backup password in macOS Keychain
+```
+
+To stow or unstow a single package:
+
+```bash
+stow -d ~/dotfiles/stow -t ~ zsh        # Symlink only zsh
+stow -d ~/dotfiles/stow -t ~ -D config  # Remove symlinks for config
+```
+
+---
+
+## Work config
+
+`~/.zshrc` sources `~/.work.zsh` and `~/.mano.zsh` for work-specific aliases and environment variables. These are not tracked in this repo — create them manually on a work machine.

@@ -4,10 +4,10 @@
 	email = alex.lombry@manomano.com
 	signingkey = 0x01A23B1816232B14
 	signinkey = 01A23B1816232B14
-[includeIf "gitdir:/Users/alex.lombry/dotfiles/"]
-  path = /Users/alex.lombry/Repositories/Alex/.gitconfig
-[includeIf "gitdir:/Users/alex.lombry/Repositories/Alex/"]
-    path = /Users/alex.lombry/Repositories/Alex/.gitconfig
+[includeIf "gitdir:~/dotfiles/"]
+  path = ~/Repositories/Alex/.gitconfig
+[includeIf "gitdir:~/Repositories/Alex/"]
+    path = ~/Repositories/Alex/.gitconfig
 [push]
 	default = current
 [credential]
@@ -55,7 +55,7 @@
 	test = "!a() {\nlocal _scope _attention _message\nwhile [ $# -ne 0 ]; do\ncase $1 in\n  -s | --scope )\n    if [ -z $2 ]; then\n      echo \"Missing scope!\"\n      return 1\n    fi\n    _scope=\"$2\"\n    shift 2\n    ;;\n  -a | --attention )\n    _attention=\"!\"\n    shift 1\n    ;;\n  * )\n    _message=\"${_message} $1\"\n    shift 1\n    ;;\nesac\ndone\ngit commit -m \"test${_scope:+(${_scope})}${_attention}:${_message}\"\n}; a"
 	wip = "!a() {\nlocal _scope _attention _message\nwhile [ $# -ne 0 ]; do\ncase $1 in\n  -s | --scope )\n    if [ -z $2 ]; then\n      echo \"Missing scope!\"\n      return 1\n    fi\n    _scope=\"$2\"\n    shift 2\n    ;;\n  -a | --attention )\n    _attention=\"!\"\n    shift 1\n    ;;\n  * )\n    _message=\"${_message} $1\"\n    shift 1\n    ;;\nesac\ndone\ngit commit -m \"wip${_scope:+(${_scope})}${_attention}:${_message}\"\n}; a"
 [core]
-	excludesfile = /Users/alex.lombry/.gitignore_global
+	excludesfile = ~/.gitignore_global
   quotepath = false
 	editor = 'nvim'
 
@@ -104,7 +104,7 @@
 [github]
     user = AlexLombry
 [gpg]
-	program = /usr/local/bin/gpg
+	program = gpg
 [rebase]
 	autostash = true
 	autosquash = true
