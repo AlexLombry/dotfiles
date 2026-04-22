@@ -14,21 +14,17 @@ brew:
 	HOMEBREW_NO_AUTO_UPDATE=1 brew bundle --file=BrewFile
 
 # Apply symlinks with GNU Stow
+# WARNING: --adopt moves existing $HOME files INTO the stow dir, overwriting tracked versions.
+# Safe on a clean machine; dangerous on re-runs with local modifications.
 stow:
 	@cd $$HOME/dotfiles/stow && \
-	stow --adopt -t "$$HOME" zsh git config else work
+	stow --adopt -t "$$HOME" zsh git config apps work
 	@echo "Symlinks applied!"
 
 # Install languages and tools with Mise
 mise:
 	mise install
 	mise use -g
-
-# Install NeoVim and dependencies
-neovim:
-	@brew install luarocks luv
-	@brew install --HEAD luajit
-	@brew install --HEAD neovim
 
 # Install NvChad
 chad:
@@ -44,7 +40,7 @@ gpg-pass:
 
 # Unlink all stow symlinks
 unstow:
-	@cd $$HOME/dotfiles/stow && stow -D -t "$$HOME" zsh git config else work
+	@cd $$HOME/dotfiles/stow && stow -D -t "$$HOME" zsh git config apps work
 	@echo "Symlinks removed!"
 
 # Run upd8r to update all package managers
@@ -55,6 +51,13 @@ update:
 bench:
 	@for i in 1 2 3; do /usr/bin/time zsh -i -c exit; done
 
+# Generate shell completions for uv/uvx (run once after brew)
+completions:
+	@mkdir -p ~/.zsh/completions
+	@uv generate-shell-completion zsh > ~/.zsh/completions/_uv
+	@uvx --generate-shell-completion zsh > ~/.zsh/completions/_uvx
+	@echo "Completions generated!"
+
 # Complete setup for a new MacBook
-setup: stow os brew mise neovim
+setup: stow os brew mise completions
 	@echo "🚀 MacBook Setup Complete! Please restart your terminal."

@@ -3,10 +3,6 @@
 # Homebrew
 export ZSH="$HOME/.oh-my-zsh"
 
-if ! pgrep -u "$USER" ssh-agent > /dev/null; then
-    eval "$(ssh-agent -s)" >/dev/null
-fi
-
 # ~~~~~~~~~~~~~~~ SSH ~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Using GPG + YubiKey for ssh.
@@ -38,8 +34,6 @@ setopt SHARE_HISTORY      # Share history between sessions
 # ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Which theme did you want to use
-ZSH_THEME="awesomepanda"
-
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM="$ZSH/custom"
 
@@ -49,7 +43,6 @@ plugins=(
     zsh-autosuggestions
     zsh-completions
     extract
-    ssh-agent
     docker-compose
     fancy-ctrl-z
     kubectl
@@ -58,11 +51,11 @@ plugins=(
     mise
 )
 
+fpath=(~/.zsh/completions $fpath)
 source $ZSH/oh-my-zsh.sh
 source $HOME/.oh-my-zsh/custom/alex/ext.zsh
 
 export GOPATH="$HOME/go"
-# export GOPATH=$(go env GOPATH)/bin
 # User configuration
 
 # ~~~~~~~~~~~~~~~ Path configuration ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -82,7 +75,6 @@ path=(
     /usr/local/sbin
     /opt/homebrew/opt/openjdk@17/bin
     $HOME/.yarn/bin
-    $HOME/.composer/vendor/bin
     $HOME/dotfiles/install/scripts
 )
 
@@ -192,5 +184,4 @@ eval "$(starship init zsh)"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 command -v tv &>/dev/null && eval "$(tv init zsh)"
-eval "$(uv generate-shell-completion zsh)"
-eval "$(uvx --generate-shell-completion zsh)"
+# uv/uvx completions loaded via fpath — regenerate with: just completions
