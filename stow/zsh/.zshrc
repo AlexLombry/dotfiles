@@ -172,10 +172,10 @@ bindkey -s '^Gc' 'git commit -m ""\C-b'
 export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
 export DOCKER_HOST=unix://${HOME}/.colima/default/docker.sock
 
-eval "$(starship init zsh)"
+command -v starship &>/dev/null && eval "$(starship init zsh)"
 
 # bun completions
-[ -s "/Users/alex.lombry/.bun/_bun" ] && source "/Users/alex.lombry/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"

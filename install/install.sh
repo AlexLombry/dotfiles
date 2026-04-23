@@ -4,10 +4,10 @@ set -euo pipefail
 DOTFILES_DIR="$HOME/dotfiles"
 cd $DOTFILES_DIR
 
-echo "🚀 Copy or replace Stow Local Ignore file"
-cp $DOTFILES_DIR/stow-local-ignore $HOME/.stow-local-ignore
+command_exists() { command -v "$1" &>/dev/null; }
 
-echo "🚀 Loading ZSH Functions"
+echo "🚀 Copy or replace Stow Local Ignore file"
+cp $DOTFILES_DIR/install/stow-local-ignore $HOME/.stow-local-ignore
 
 # Check if zsh is our shell
 if [[ "$SHELL" != *zsh ]]; then

@@ -3,7 +3,6 @@
 	name = Alex LOMBRY
 	email = alex.lombry@manomano.com
 	signingkey = 0x01A23B1816232B14
-	signinkey = 01A23B1816232B14
 [includeIf "gitdir:~/dotfiles/"]
   path = ~/Repositories/Alex/.gitconfig
 [includeIf "gitdir:~/Repositories/Alex/"]
@@ -119,12 +118,6 @@
 [tag]
 	gpgSign = true
 [url "ssh://git@git.manomano.tech/"]
-	insteadOf = https://git.manomano.tech/
-	insteadOf = http://git.manomano.tech/
-	insteadOf = //git.manomano.tech/
-	insteadOf = https://git.manomano.tech/
-	insteadOf = http://git.manomano.tech/
-	insteadOf = //git.manomano.tech/
 	insteadOf = https://git.manomano.tech/
 	insteadOf = http://git.manomano.tech/
 	insteadOf = //git.manomano.tech/

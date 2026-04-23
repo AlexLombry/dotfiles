@@ -119,7 +119,6 @@ alias generate-secure-string="openssl rand -base64 32"
 
 alias perm_number="stat -f '%A %N' *"
 
-alias cat=ccat
 alias messydesk="defaults write com.apple.finder CreateDesktop"
 
 alias bench="ab -n 500 -c 100 $1"
@@ -132,8 +131,6 @@ alias heictojpgdir="magick mogrify -monitor -format jpg *.HEIC"
 
 alias meh="echo '¯\\\_(ツ)_/¯' | pbcopy"
 alias speed="speedtest --server-id=24215"
-alias vim=nvim
-
 alias t='tm'
 alias tt='tmux attach -t StarK'
 
