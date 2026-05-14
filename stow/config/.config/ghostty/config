@@ -17,8 +17,8 @@ font-thicken = true
 font-variation-bold = wght=400
 background-opacity = 0.99
 
-background-image = "~/dotfiles/install/images/kungfu-2.png"
-background-image-opacity = 0.03
+background-image = "~/dotfiles/install/images/beddar-2.png"
+background-image-opacity = 0.02
 background-image-position = center
 background-image-fit = cover
 
