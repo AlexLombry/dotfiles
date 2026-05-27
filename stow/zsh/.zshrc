@@ -105,7 +105,6 @@ for script in "$ZSH_CUSTOM"/alex/*.zsh(N); do
     source "$script"
 done
 
-[ -f "$HOME/.mano.zsh" ] && source "$HOME/.mano.zsh"
 [ -f "$HOME/.work.zsh" ] && source "$HOME/.work.zsh"
 
 # -----------------------------------------------------------------------------

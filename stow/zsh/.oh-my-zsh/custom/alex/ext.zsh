@@ -2,8 +2,10 @@
 # (Env vars previously here were moved to .zprofile so they propagate to
 # non-interactive child processes — scripts, cron, launchd-spawned GUIs.)
 
-GPG_TTY=$(tty)
-export GPG_TTY
+if [[ -z "$REMOTE_CONTAINERS" && -z "$CODESPACES" && -z "$DEVCONTAINER_TYPE" ]]; then
+    GPG_TTY=$(tty)
+    export GPG_TTY
+fi
 
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 

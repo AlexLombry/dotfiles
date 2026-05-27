@@ -1,4 +1,4 @@
-# Work-specific shell configuration (ManoMano)
+# Work-specific shell configuration (Code)
 
 # Auto-cd paths for work projects
-cdpath=($(echo $cdpath) $HOME/ManoMano/)
+cdpath=($(echo $cdpath) $HOME/Code/)

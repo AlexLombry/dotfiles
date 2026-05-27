@@ -1,6 +1,6 @@
 # Dotfiles
 
-![ManoMano](install/images/mm.png)
+![KungFu](install/images/kungfu-2.png)
 
 Personal macOS dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/) and [Just](https://just.systems/).
 
@@ -11,7 +11,7 @@ Personal macOS dotfiles managed with [GNU Stow](https://www.gnu.org/software/sto
 Run this in a terminal. It installs Xcode CLT and clones the repo to `~/dotfiles`:
 
 ```bash
-curl -fsSL https://git.manomano.tech/alex.lombry/dotfiles/-/raw/master/install/init.sh | zsh
+curl -fsSL https://raw.githubusercontent.com/AlexLombry/dotfiles/refs/heads/main/install/init.sh | zsh
 ```
 
 ### Step 2 — Install everything
@@ -79,4 +79,4 @@ This project uses a custom NeoVim configuration located in `stow/config/.config/
 
 ## Work config
 
-`~/.zshrc` sources `~/.work.zsh` and `~/.mano.zsh` for work-specific aliases and environment variables. These are not tracked in this repo — create them manually on a work machine.
+`~/.zshrc` sources `~/.work.zsh` for work-specific aliases and environment variables. This file is not tracked in this repo — create it manually on a work machine.

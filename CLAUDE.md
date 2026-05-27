@@ -65,7 +65,7 @@ Located at `stow/config/.config/nvim/` — Lua-based, modular:
 
 ### Shell Config
 
-- `.zshrc` sources `~/.mano.zsh` and `~/.work.zsh` for work config (untracked, not in this repo)
+- `.zshrc` sources `~/.work.zsh` for work config (untracked, not in this repo)
 - Runtime managers: SDKMAN (Java, lazy-loaded), Mise (everything else)
 - GPG/SSH agent via YubiKey — configured in `.zshrc`, skipped in dev containers
 - uv/uvx completions served from `~/.zsh/completions/` (regenerate with `just completions`)
