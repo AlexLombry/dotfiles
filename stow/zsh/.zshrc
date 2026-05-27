@@ -47,7 +47,6 @@ plugins=(
     kubectl
     fzf
     git-commit
-    mise
 )
 
 fpath=(~/.zsh/completions $fpath)
