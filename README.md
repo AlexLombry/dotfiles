@@ -35,7 +35,7 @@ Shell config and custom NeoVim setup are now symlinked. Open a fresh terminal se
 | Step | Task | What it does |
 |------|------|-------------|
 | 1 | `check` | Verifies prerequisites (Homebrew, Just, Stow, Xcode CLT) |
-| 2 | `stow` | Symlinks all packages (`zsh`, `git`, `config`, `apps`, `work`) into `$HOME` |
+| 2 | `stow-fresh` | Symlinks all packages into `$HOME` using `--adopt` (first-time only) |
 | 3 | `os` | Applies optimized macOS system defaults (`install/macos.sh`) |
 | 4 | `brew` | Installs grouped packages and apps from `install/BrewFile` |
 | 5 | `mise` | Installs language runtimes (Python, Node, Ruby) via `mise` |
@@ -49,12 +49,15 @@ Shell config and custom NeoVim setup are now symlinked. Open a fresh terminal se
 ```bash
 just              # List all available tasks
 just check        # Verify if all prerequisites are installed
-just stow         # Re-apply symlinks (e.g. after adding a new dotfile)
+just stow         # Re-apply symlinks (safe re-run, e.g. after adding a dotfile)
+just stow-fresh   # First-time stow with --adopt (clean machine only)
 just stow-check   # Dry-run check for symlinks
 just unstow       # Remove all symlinks
+just doctor       # Diagnose stow conflicts, brew drift, stale caches
 just brew         # Sync Homebrew packages with BrewFile
 just mise         # Reinstall/update language runtimes
 just init-shell   # Regenerate static shell init files
+just backup-agent # Install/reload the backup_secure LaunchAgent
 just update       # Update all package managers (brew, mise, mas…)
 just bench        # Measure zsh startup time (3 runs)
 just os           # Re-apply macOS system defaults
@@ -79,4 +82,4 @@ This project uses a custom NeoVim configuration located in `stow/config/.config/
 
 ## Work config
 
-`~/.zshrc` sources `~/.work.zsh` for work-specific aliases and environment variables. This file is not tracked in this repo — create it manually on a work machine.
+`~/.zshrc` sources `~/.work.zsh` for work-specific aliases and environment variables. This file is tracked in the repo via the `work` stow package (`stow/work/.work.zsh`) and symlinked to `~/.work.zsh` during `just stow`.
