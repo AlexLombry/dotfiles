@@ -7,13 +7,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 All tasks run from `install/Justfile` via `just` (from the repo root or `install/` directory):
 
 ```bash
-just setup        # Full installation: stow → os → brew → mise → completions
+just setup        # Full installation: check → stow → os → brew → mise → completions → init-shell
+just check        # Verify prerequisites (brew, just, stow, Xcode CLT)
 just stow         # Symlink all packages (zsh git config apps work) into $HOME
+just stow-check   # Dry-run stow to preview what would be linked
 just unstow       # Remove all symlinks
 just brew         # Install from install/BrewFile via Homebrew Bundle
 just mise         # Install language runtimes
 just completions  # Generate uv/uvx shell completions (run once after brew)
-just os           # Apply macOS system defaults (install/scripts/macos.sh)
+just init-shell   # Pre-generate starship/zoxide init for faster shell startup
+just os           # Apply macOS system defaults (install/macos.sh)
 just update       # Run upd8r to update all package managers
 just bench        # Measure zsh startup time (3 runs)
 just gpg-pass     # Store GPG backup password in macOS keychain
@@ -57,8 +60,8 @@ Located at `stow/config/.config/nvim/` — Lua-based, modular:
 
 - `init.lua` — entry point
 - `lua/plugins/` — one file per plugin group (lsp, completion, UI, telescope, gitsigns, etc.)
-- Uses NvChad as the base configuration (`just chad` clones it)
 - LSP managed via Mason (`mason.lua`, `lspconfig.lua`)
+- Custom configuration using `lazy.nvim` (NVChad is no longer used)
 
 ### Shell Config
 
@@ -69,8 +72,8 @@ Located at `stow/config/.config/nvim/` — Lua-based, modular:
 
 ### Installation Scripts
 
-`install/scripts/` — standalone shell utilities:
-- `macos.sh` — macOS system defaults (run via `just os`)
-- `journal`, `backup_secure`, `path`, `push` — personal utilities
+`install/macos.sh` — macOS system defaults (run via `just os`)
+
+`install/scripts/` — standalone shell utilities: `backup_secure`, `path`, `push`
 
 `install/tools/upd8r/` — shell script updating brew, pip, npm, cargo, etc. (run via `just update`)

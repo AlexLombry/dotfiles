@@ -71,15 +71,11 @@ return {
             vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
         end
 
-        -- Keep compatibility if you *don't* have a global on_attach
-        local _on_attach = on_attach
-
-        -- Define server configs using Neovim 0.11+ API
+        -- Define server configs using Neovim 0.11+ API.
+        -- Per-buffer LSP keymaps live in the LspAttach autocmd above; no per-server on_attach needed.
         vim.lsp.config("svelte", {
             capabilities = capabilities,
-            on_attach = function(client, bufnr)
-                if _on_attach then _on_attach(client, bufnr) end
-
+            on_attach = function(client, _)
                 vim.api.nvim_create_autocmd("BufWritePost", {
                     pattern = { "*.js", "*.ts" },
                     callback = function(ctx)
@@ -91,19 +87,16 @@ return {
 
         vim.lsp.config("graphql", {
             capabilities = capabilities,
-            on_attach = _on_attach,
             filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
         })
 
         vim.lsp.config("emmet_ls", {
             capabilities = capabilities,
-            on_attach = _on_attach,
             filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
         })
 
         vim.lsp.config("lua_ls", {
             capabilities = capabilities,
-            on_attach = _on_attach,
             settings = {
                 Lua = {
                     diagnostics = { globals = { "vim" } },
@@ -118,6 +111,6 @@ return {
         })
 
         -- Enable only the servers you configured above
-        vim.lsp.enable({ "svelte", "graphql", "emmet_ls", "lua_ls", "intelephense" })
+        vim.lsp.enable({ "svelte", "graphql", "emmet_ls", "lua_ls" })
     end,
 }

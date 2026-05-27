@@ -2,13 +2,14 @@
 .idea/
 .serena/
 .vscode/
+.junie/
+.backup/
 
 # macOS
 .DS_Store
 **/.DS_Store
 
 # Sensitive / local
-backup/
 .env
 .env.local
 *.swp

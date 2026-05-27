@@ -1,132 +1,136 @@
-# zmodload zsh/zprof
-# Default and Original ZSHRC file
-# Homebrew
-export ZSH="$HOME/.oh-my-zsh"
-
-# ~~~~~~~~~~~~~~~ SSH ~~~~~~~~~~~~~~~~~~~~~~~~
-
-# Using GPG + YubiKey for ssh.
-# Don't execute when in dev container
-
-if [[ -z "$REMOTE_CONTAINERS" && -z "$CODESPACES" && -z "$DEVCONTAINER_TYPE" ]]; then
-  export GPG_TTY="$(tty)"
-  unset SSH_AGENT_PID
-
-  if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
-  export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
-  fi
-
-  gpgconf --launch gpg-agent
-  gpg-connect-agent updatestartuptty /bye > /dev/null 2>&1
+# -----------------------------------------------------------------------------
+# Paths / core env
+# -----------------------------------------------------------------------------
+if [[ -f /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+elif [[ -f /usr/local/bin/brew ]]; then
+    eval "$(/usr/local/bin/brew shellenv)"
 fi
 
-# ~~~~~~~~~~~~~~~ History ~~~~~~~~~~~~~~~~~~~~~~~~
+export ZSH="$HOME/.oh-my-zsh"
+export ZSH_CUSTOM="$ZSH/custom"
 
-HISTFILE=~/.zsh_history
+export GOPATH="$HOME/go"
+export CODEFOLDER="$HOME/code"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+
+if [[ -n "$HOMEBREW_PREFIX" ]]; then
+    export LIBRARY_PATH="$HOMEBREW_PREFIX/lib"
+    export CPATH="$HOMEBREW_PREFIX/include"
+fi
+export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+export DOCKER_HOST="unix://${HOME}/.colima/default/docker.sock"
+
+# -----------------------------------------------------------------------------
+# History
+# -----------------------------------------------------------------------------
+HISTFILE="$HOME/.zsh_history"
 HISTSIZE=100000
 SAVEHIST=100000
-
 export HISTIGNORE="journal*"
-setopt HIST_IGNORE_SPACE  # Don't save when prefixed with space
-setopt HIST_IGNORE_DUPS   # Don't save duplicate lines
-setopt SHARE_HISTORY      # Share history between sessions
+setopt HIST_IGNORE_SPACE
+setopt HIST_IGNORE_DUPS
+setopt SHARE_HISTORY
+setopt extended_glob
+setopt null_glob
 
-# ~~~~~~~~~~~~~~~ Environment Variables ~~~~~~~~~~~~~~~~~~~~~~~~
+# -----------------------------------------------------------------------------
+# PATH
+# -----------------------------------------------------------------------------
+path=(
+    ~/.local/bin
+    /opt/homebrew/opt/ruby/bin
+    "$GOPATH/bin"
+    "${KREW_ROOT:-$HOME/.krew}/bin"
+    "$HOME/.composer/vendor/bin"
+    "$HOME/.symfony/bin"
+    /usr/local/sbin
+    "$HOME/.yarn/bin"
+    "$HOME/dotfiles/install/scripts"
+    $path
+    "$HOME/.bun/bin"
+)
+typeset -U path
+path=($^path(N-/))
+export PATH
 
-# Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM="$ZSH/custom"
+# -----------------------------------------------------------------------------
+# Completions
+# Keep this early, but cache aggressively.
+# -----------------------------------------------------------------------------
+fpath=(
+    "$HOME/.zsh/completions"
+    $fpath
+)
+
+autoload -Uz compinit
+# Use cached dump when possible; fewer checks, faster startup.
+compinit -C -d "${ZDOTDIR:-$HOME}/.zcompdump"
+
+# -----------------------------------------------------------------------------
+# Oh My Zsh
+# -----------------------------------------------------------------------------
+# Explicitly disable OMZ theme to avoid conflicts with Starship
+ZSH_THEME=""
 
 plugins=(
     git
-    zsh-syntax-highlighting
-    zsh-autosuggestions
-    zsh-completions
     extract
     docker-compose
     fancy-ctrl-z
     kubectl
     fzf
     git-commit
+    mise
 )
 
-fpath=(~/.zsh/completions $fpath)
-source $ZSH/oh-my-zsh.sh
-source $HOME/.oh-my-zsh/custom/alex/ext.zsh
+source "$ZSH/oh-my-zsh.sh"
 
-export GOPATH="$HOME/go"
-# User configuration
+# -----------------------------------------------------------------------------
+# SSH / GPG
+# -----------------------------------------------------------------------------
+if [[ -z "$REMOTE_CONTAINERS" && -z "$CODESPACES" && -z "$DEVCONTAINER_TYPE" ]]; then
+    unset SSH_AGENT_PID
 
-# ~~~~~~~~~~~~~~~ Path configuration ~~~~~~~~~~~~~~~~~~~~~~~~
+    if [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ]; then
+        export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+    fi
+fi
 
-setopt extended_glob null_glob
+# -----------------------------------------------------------------------------
+# Custom scripts
+# Source after compinit so compdef exists.
+# -----------------------------------------------------------------------------
+for script in "$ZSH_CUSTOM"/alex/*.zsh(N); do
+    source "$script"
+done
 
-path=(
-    $path
-    ~/.local/bin
-    /usr/local/opt/mysql-client/bin
-    /usr/local/opt/python/libexec/bin
-    /opt/homebrew/opt/ruby/bin
-    $GOPATH/bin/
-    ${KREW_ROOT:-$HOME/.krew}/bin
-    $HOME/.composer/vendor/bin
-    $HOME/.symfony/bin
-    /usr/local/sbin
-    /opt/homebrew/opt/openjdk@17/bin
-    $HOME/.yarn/bin
-    $HOME/dotfiles/install/scripts
-)
+[ -f "$HOME/.mano.zsh" ] && source "$HOME/.mano.zsh"
+[ -f "$HOME/.work.zsh" ] && source "$HOME/.work.zsh"
 
-# Remove duplicate entries and non-existent directories
-typeset -U path
-path=($^path(N-/))
-
-export PATH
-
-export CODEFOLDER="$HOME/code"
-export MANPAGER="sh -c 'col -bx | bat -l man -p'"
-
-export EDITOR='nvim'
-export GIT_EDITOR='nvim'
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-for script in $ZSH_CUSTOM/alex/*.zsh; do source $script; done
-[ -f ~/.mano.zsh ] && source ~/.mano.zsh
-[ -f ~/.work.zsh ] && source ~/.work.zsh
-
-# ZSH_TMUX_AUTOSTART=false
-# ZSH_TMUX_AUTOCONNECT=false
-export LIBRARY_PATH="/opt/homebrew/lib"
-export CPATH="/opt/homebrew/include"
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git,out,build}"'
-
+# -----------------------------------------------------------------------------
+# Optional tooling: lazy-load instead of startup-load
+# -----------------------------------------------------------------------------
 sdk() {
-  unfunction sdk
-  source "$HOME/.sdkman/bin/sdkman-init.sh"
-  sdk "$@"
+    unfunction sdk
+    source "$HOME/.sdkman/bin/sdkman-init.sh"
+    sdk "$@"
 }
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# -----------------------------------------------------------------------------
+# UI / keybindings
+# -----------------------------------------------------------------------------
+test -e "$HOME/.iterm2_shell_integration.zsh" && source "$HOME/.iterm2_shell_integration.zsh"
 
-# Open Buffer for command
-autoload -Uz edit-command-line
+autoload -Uz edit-command-line zmv
 zle -N edit-command-line
 bindkey '^x' edit-command-line
-
-# -------------------------------------------
-# 2. Undo in ZSH
-# -------------------------------------------
-# Press Ctrl+_ (Ctrl+Underscore) to undo
-# This is built-in, no configuration needed!
-# Redo widget exists but has no default binding:
-# bindkey '^Y' redo  # Example binding if you want it
-
-# -------------------------------------------
-# 3. Magic Space - Expand History
-# -------------------------------------------
-# Expands history expressions like !! or !$ when you press space
 bindkey ' ' magic-space
+bindkey -s '^Gc' 'git commit -m ""\C-b'
 
+# -----------------------------------------------------------------------------
+# Aliases / helpers
+# -----------------------------------------------------------------------------
 alias -s json=jless
 alias -s md=bat
 alias -s go='$EDITOR'
@@ -136,49 +140,56 @@ alias -s log=bat
 alias -s py='$EDITOR'
 alias -s js='$EDITOR'
 alias -s ts='$EDITOR'
-alias -s html=open  # macOS: open in default browser
+alias -s html=open
 
-# Pipe to jq
 alias -g J='| jq'
-
-# Copy output to clipboard (macOS)
 alias -g C='| pbcopy'
-# -------------------------------------------
-# zmv - Advanced Batch Rename/Move
-# -------------------------------------------
-# Enable zmv
-autoload -Uz zmv
 
-# Usage examples:
-# zmv '(*).log' '$1.txt'           # Rename .log to .txt
-# zmv -w '*.log' '*.txt'           # Same thing, simpler syntax
-# zmv -n '(*).log' '$1.txt'        # Dry run (preview changes)
-# zmv -i '(*).log' '$1.txt'        # Interactive mode (confirm each)
+alias zcp='zmv -C'
+alias zln='zmv -L'
 
-# Helpful aliases for zmv
-alias zcp='zmv -C'  # Copy with patterns
-alias zln='zmv -L'  # Link with patterns
-
-# -------------------------------------------
-# Named Directories - Bookmark Folders
-# -------------------------------------------
-# Access with ~name syntax, e.g., cd ~yt or ls ~yt
 hash -d dot=~/dotfiles
 hash -d dl=~/Downloads
 
-bindkey -s '^Gc' 'git commit -m ""\C-b'
+# -----------------------------------------------------------------------------
+# Tools that are fine to init after core shell is ready
+# -----------------------------------------------------------------------------
+if command -v rg &>/dev/null; then
+    export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git,out,build}"'
+fi
 
-export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
-export DOCKER_HOST=unix://${HOME}/.colima/default/docker.sock
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-command -v starship &>/dev/null && eval "$(starship init zsh)"
+# Syntax highlighting & Autosuggestions (from Homebrew)
+for plugin in \
+    /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+    /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh \
+    /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh \
+    /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+do
+    [ -f "$plugin" ] && source "$plugin"
+done
 
-# bun completions
+if command -v starship &>/dev/null; then
+    if [ -f ~/.zsh/starship-init.zsh ]; then
+        source ~/.zsh/starship-init.zsh
+    else
+        eval "$(starship init zsh)"
+    fi
+fi
+
+command -v tv &>/dev/null && eval "$(tv init zsh)"
+
+# bun completions ($HOME/.bun/bin is in the path=() array above)
+export BUN_INSTALL="$HOME/.bun"
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-command -v tv &>/dev/null && eval "$(tv init zsh)"
-# uv/uvx completions loaded via fpath — regenerate with: just completions
-eval "$(zoxide init --cmd cd zsh)"
+# zoxide must be initialized last
+if command -v zoxide &>/dev/null; then
+    if [ -f ~/.zsh/zoxide-init.zsh ]; then
+        source ~/.zsh/zoxide-init.zsh
+    else
+        eval "$(zoxide init zsh)"
+    fi
+fi
+

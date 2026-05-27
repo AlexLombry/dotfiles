@@ -2,11 +2,7 @@
 [user]
 	name = Alex LOMBRY
 	email = alex.lombry@manomano.com
-	signingkey = 0x01A23B1816232B14
-[includeIf "gitdir:~/dotfiles/"]
-  path = ~/Repositories/Alex/.gitconfig
-[includeIf "gitdir:~/Repositories/Alex/"]
-    path = ~/Repositories/Alex/.gitconfig
+	signingkey = 0x6FE8125D7046C6BA
 [push]
 	default = current
 [credential]
@@ -103,7 +99,7 @@
 [github]
     user = AlexLombry
 [gpg]
-	program = gpg
+	program = /usr/local/MacGPG2/bin/gpg2
 [rebase]
 	autostash = true
 	autosquash = true
