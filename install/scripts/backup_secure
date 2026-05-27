@@ -1,5 +1,11 @@
 #!/bin/zsh
-set -e
+set -euo pipefail
+
+# Per-machine config (NAS destination, etc.) lives outside this repo so the
+# script can be shared safely. Create ~/.config/backup_secure.env with at least:
+#   BACKUP_DEST="user@host:/path/"
+[ -f "$HOME/.config/backup_secure.env" ] && . "$HOME/.config/backup_secure.env"
+: "${BACKUP_DEST:?BACKUP_DEST must be set (in ~/.config/backup_secure.env or env)}"
 
 # launchctl bootstrap "gui/$(id -u)" ~/Library/LaunchAgents/com.alexlombry.backup_secure.plist
 # launchctl enable "gui/$(id -u)/com.alexlombry.backup_secure"
@@ -53,11 +59,10 @@ rm -f "$ARCHIVE"
 echo "Cyphered backup created :"
 echo "$ENCRYPTED_ARCHIVE"
 
-sshpass -p $(security find-generic-password -w -s "backup-gpg" -a "$USER") \
 rsync -av --progress \
-  -e "ssh -o StrictHostKeyChecking=no" \
+  -e "ssh" \
   "$ENCRYPTED_ARCHIVE" \
-  "NaetoH@192.168.1.53:/volume1/Documents/"
+  "$BACKUP_DEST"
 
 ## To restore the archive :
 # gpg --output backup.tar.gz --decrypt backups_DATE.tar.gz.gpg

@@ -12,7 +12,7 @@ cp $DOTFILES_DIR/install/stow-local-ignore $HOME/.stow-local-ignore
 # Check if zsh is our shell
 if [[ "$SHELL" != *zsh ]]; then
   echo "✅ Switching to zsh"
-  chsh -s $(which zsh)
+  chsh -s "$(which zsh)"
 fi
 
 echo "Install Oh My ZSH"

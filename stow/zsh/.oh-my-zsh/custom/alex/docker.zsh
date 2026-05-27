@@ -34,7 +34,7 @@ function resetdock() {
     read images
     if [[ $images =~ ^[Yy]$ ]]; then
         docker images
-        docker images rmi $(docker images --filter "dangling=true" -q --no-trunc)
+        docker rmi $(docker images --filter "dangling=true" -q --no-trunc)
         docker images | grep "none"
         docker rmi $(docker images | grep "none" | awk '/ / { print $3 }')
     fi

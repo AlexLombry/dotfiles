@@ -19,7 +19,7 @@ fi
 
 if [ ! -d "$HOME/dotfiles" ]; then
     echo "🚀 Cloning Dotfiles from GitHub"
-    git clone https://github.com/AlexLombry/dotfiles.git $HOME/dotfiles
+    git clone git@github.com:AlexLombry/dotfiles.git $HOME/dotfiles
 fi
 
 echo "Please launch the following command in a new terminal"

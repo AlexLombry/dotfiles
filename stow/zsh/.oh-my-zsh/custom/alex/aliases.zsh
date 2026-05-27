@@ -46,7 +46,9 @@ alias cleanup="find . -name '*.DS_Store' -type f -ls -delete"
 alias clsym="find -L . -name . -o -type d -prune -o -type l -exec rm {} +"
 
 # URL-encode strings
-alias urlencode='python -c "import sys, urllib as ul; print ul.quote_plus(sys.argv[1]);"'
+urlencode() {
+    python3 -c "import sys, urllib.parse as ul; print(ul.quote_plus(sys.argv[1]))" "$1"
+}
 
 # Intuitive map function (from @mathiasbynens)
 # For example, to list all directories that contain a certain file:
@@ -113,7 +115,7 @@ alias dss='du -sck * | sort -n'
 
 alias bubu="brew update && brew upgrade && brew cleanup"
 alias brewup='brew update; brew upgrade; brew cleanup; brew doctor'
-alias bsr="brew services restart $1"
+bsr() { brew services restart "$1"; }
 
 alias generate-secure-string="openssl rand -base64 32"
 
@@ -121,12 +123,12 @@ alias perm_number="stat -f '%A %N' *"
 
 alias messydesk="defaults write com.apple.finder CreateDesktop"
 
-alias bench="ab -n 500 -c 100 $1"
+bench() { ab -n 500 -c 100 "$1"; }
 
 alias gentags="ctags -R --exclude=.git --exclude=node_modules --exclude=build --exclude=out"
 
 # ImageMagick
-alias heictojpg="magick convert $1 $1.jpg"
+heictojpg() { magick convert "$1" "$1.jpg"; }
 alias heictojpgdir="magick mogrify -monitor -format jpg *.HEIC"
 
 alias meh="echo '¯\\\_(ツ)_/¯' | pbcopy"
@@ -134,7 +136,6 @@ alias speed="speedtest --server-id=24215"
 alias t='tm'
 alias tt='tmux attach -t StarK'
 
-#alias ldk="DOCKER_HOST=unix:///Users/$USER/.colima/docker.sock lazydocker"
 alias ta="tmux attach"
 
 # I'll be doing another one for Linux, but this one will give you
@@ -156,7 +157,7 @@ alias rest="timer 5m && say -v Samantha 'Get back to work' && terminal-notifier 
 alias sl=l
 alias b=bat
 
-alias zip-encrypt="zip -e -r $1.zip $1"
+zip-encrypt() { zip -e -r "$1.zip" "$1"; }
 alias p=python3
 
 # Nmap
@@ -166,27 +167,27 @@ alias k="kubectl"
 alias ka="kubectl apply -f"
 alias kg="kubectl get"
 alias kd="kubectl describe"
-alias kl="kubectl logs"
 alias kgpo="kubectl get pod"
 alias kgd="kubectl get deployments"
 alias kc="kubectx"
 alias kns="kubens"
 alias kl="kubectl logs -f"
+alias klnf="kubectl logs"
 alias ke="kubectl exec -it"
 alias kcns='kubectl config set-context --current --namespace'
-alias splitpdf="pdftoppm -jpeg $1 $2"
+splitpdf() { pdftoppm -jpeg "$1" "$2"; }
 alias btc="better-commits"
 
 alias lg=lazygit
 alias nte="nvim $HOME/Desktop/myBigNotesRandom.log"
 
-alias safe-open=$HOME/dotfiles/zsh/alex/safe-open.sh
 alias yz=yazi
 alias myip="dig +short txt ch whoami.cloudflare @1.0.0.1"
 alias lastmod='find . -type f -not -path "*/\.*" -exec ls -lrt {} +'
 # alternative with FD : fd -t f -x ls -lrt
 
-alias mm="cd $HOME/Repositories/ManoMano/"
-alias idea="$HOME/Applications/IntelliJ\ IDEA.app/Contents/MacOS/idea"
+idea() { "$HOME/Applications/IntelliJ IDEA.app/Contents/MacOS/idea" "$@"; }
 alias jrn="bat $HOME/.journal-log.md"
-alias vdl="yt-dlp -t mp4 $1"
+vdl() { yt-dlp -t mp4 "$1"; }
+alias wjournal="bash ~/dotfiles/install/tools/journal.sh"
+alias rjournal="gpg -d ~/.journal.log.gpg | less"

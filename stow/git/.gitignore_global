@@ -1,11 +1,15 @@
 .DS_Store
+.DS_Store?
 Thumbs.db
+ehthumbs.db
 *~
+\#*\#
 *.swp
+*.swo
+*.orig
 .AppleDouble
 .LSOverride
 Icon
-.idea
 tags
 
 # Thumbnails
@@ -21,21 +25,12 @@ tags
 # typescript command garbage
 tscommand*.txt
 
-.DS_Store
-.DS_Store?
-
-
-Thumbs.db
-ehthumbs.db
-*.swp
-*.swo
-*.orig
-*~
-\#*\#
-
 .ropeproject/
 .idea/
+.junie/
 *.iml
 
 coverage/
 yarn-error.log
+
+**/.claude/settings.local.json
