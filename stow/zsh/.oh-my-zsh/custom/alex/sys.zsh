@@ -139,7 +139,7 @@ resetipv6() {
 
 calculate_taxes() {
     echo "🏃 CD Into taxes folder"
-    cd $HOME/dotfiles/tools/DanTaxes
+    cd $HOME/dotfiles/install/tools/DanTaxes
 
     # current year
     year=$(date +"%Y")
@@ -150,7 +150,7 @@ calculate_taxes() {
     go run main.go #> search.txt
     #value=$(cat search.txt | sed 's/ //g' | tr '\n' '+' | sed 's/+$//' | bc)
 
-    rm -rf $HOME/dotfiles/tools/DanTaxes/files/sala*
+    rm -rf $HOME/dotfiles/install/tools/DanTaxes/files/sala*
 }
 
 qbrew() {
@@ -177,4 +177,26 @@ pass-init() {
 
 pass-get() {
     security find-generic-password -w -a ${USER} -D "environment variable" -s "${1}"
+}
+
+# Extract archives - use: extract <file>
+extract() {
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2) tar xjf $1 ;;
+            *.tar.gz)  tar xzf $1 ;;
+            *.bz2)     bunzip2 $1 ;;
+            *.rar)     rar x $1 ;;
+            *.gz)      gunzip $1 ;;
+            *.tar)     tar xf $1 ;;
+            *.tbz2)    tar xjf $1 ;;
+            *.tgz)     tar xzf $1 ;;
+            *.zip)     unzip $1 ;;
+            *.Z)       uncompress $1 ;;
+            *.7z)      7z x $1 ;;
+            *) echo "'$1' cannot be extracted via extract()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
 }
