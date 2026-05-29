@@ -32,6 +32,20 @@ stow -d stow -t ~ zsh          # Symlink only the zsh package
 stow -d stow -t ~ -D config    # Remove symlinks for the config package
 ```
 
+## Web Interface
+
+A local web UI lives in `web/` for managing symlinks via browser instead of the CLI.
+
+```bash
+cd web && npm install   # first time only
+just web               # → http://localhost:3131
+```
+
+- **`web/server.js`** — Express backend; scans stow packages, runs whitelisted `just` commands, streams output via SSE, handles backup/rollback
+- **`web/public/`** — Vanilla JS + Catppuccin Mocha dark UI (no build step)
+
+The scanner resolves both file-level and directory-level stow symlinks (stow tree-folding). Auto-generated conflict backups (`backup/YYYY-MM-DD*/`) are git-ignored; named backups like `Raise2` are tracked.
+
 ## Architecture
 
 ### Dotfile Management Flow

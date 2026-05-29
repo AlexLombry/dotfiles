@@ -4,6 +4,10 @@
 default:
 	@just --list
 
+# Start the web interface at http://localhost:3131
+web:
+	@cd $HOME/dotfiles/web && npm start
+
 # Configure macOS defaults
 os:
 	@bash macos.sh

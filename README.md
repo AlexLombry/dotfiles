@@ -44,6 +44,25 @@ Shell config and custom NeoVim setup are now symlinked. Open a fresh terminal se
 
 ---
 
+## Web interface
+
+A local web UI is available for managing symlinks without touching the CLI.
+
+```bash
+cd ~/dotfiles/web && npm install   # first time only
+just web                           # → http://localhost:3131
+```
+
+**What it does:**
+- Scans all stow packages and shows each file as `linked / missing / conflict`
+- Dry-run preview, backup-before-overwrite, install, and remove — per package or all at once
+- Streams real-time output for every `just` command via a built-in terminal panel
+- Backup history with one-click rollback
+
+> Timestamped conflict backups land in `backup/YYYY-MM-DD.../` and are git-ignored.
+
+---
+
 ## Day-to-day commands
 
 ```bash
