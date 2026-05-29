@@ -4,7 +4,7 @@ _register() {
   fi
 }
 
-aliases=(
+_commit_types=(
   'build'
   'chore'
   'ci'
@@ -18,6 +18,6 @@ aliases=(
   'test'
 )
 
-for alias in "${aliases[@]}"; do
-  _register $alias
+for _commit_type in "${_commit_types[@]}"; do
+  _register $_commit_type
 done
