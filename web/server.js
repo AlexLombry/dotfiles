@@ -43,16 +43,41 @@ function* walkDir(dir) {
   }
 }
 
+// Stow uses directory-level "tree folding" symlinks, e.g.:
+//   ~/.config/nvim  →  ../../dotfiles/stow/config/.config/nvim
+// Individual files under that dir aren't symlinks themselves but are
+// effectively linked. Walk dest's ancestor dirs to detect this case.
+function isEffectivelyLinked(src, dest) {
+  const parts = dest.split(path.sep).filter(Boolean);
+  for (let i = parts.length - 1; i > 0; i--) {
+    const parentDest = path.sep + parts.slice(0, i).join(path.sep);
+    const remaining  = parts.slice(i).join(path.sep);
+    let lstat;
+    try { lstat = fs.lstatSync(parentDest); } catch { continue; }
+    if (!lstat.isSymbolicLink()) continue;
+    try {
+      const target   = fs.readlinkSync(parentDest);
+      const resolved = path.resolve(path.dirname(parentDest), target);
+      if (path.join(resolved, remaining) === src) return true;
+    } catch {}
+  }
+  return false;
+}
+
 function symlinkStatus(src, dest) {
   let lstat;
-  try { lstat = fs.lstatSync(dest); } catch { return 'missing'; }
-  if (!lstat.isSymbolicLink()) return 'conflict';
-  try {
-    // Resolve the symlink target and compare to src
-    const target = fs.readlinkSync(dest);
-    const resolved = path.resolve(path.dirname(dest), target);
-    return resolved === src ? 'linked' : 'conflict';
-  } catch { return 'broken'; }
+  try { lstat = fs.lstatSync(dest); } catch {
+    return isEffectivelyLinked(src, dest) ? 'linked' : 'missing';
+  }
+  if (lstat.isSymbolicLink()) {
+    try {
+      const target   = fs.readlinkSync(dest);
+      const resolved = path.resolve(path.dirname(dest), target);
+      return resolved === src ? 'linked' : 'conflict';
+    } catch { return 'broken'; }
+  }
+  // dest is a real file — check if a parent dir symlink covers it
+  return isEffectivelyLinked(src, dest) ? 'linked' : 'conflict';
 }
 
 function scanPackage(name) {
