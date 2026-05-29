@@ -54,7 +54,7 @@ GNU Stow symlinks packages from `stow/*/` into `$HOME`. The `stow/` directory co
 
 - **zsh** — `.zshrc`, `.zprofile`, `.ideavimrc`, Oh My Zsh theme/plugins
 - **git** — `.gitconfig`, `.gitignore_global`
-- **config** — `.config/nvim/`, `.config/ghostty/`, `.config/rectangle/`, `.config/mise/`
+- **config** — `.config/nvim/`, `.config/ghostty/`, `.config/mise/`
 - **apps** — `.tmux.conf`, `.aerospace.toml`, `.dir_colors`, `.crontab`, `~/Library/` app configs
 - **work** — `.work.zsh` (work-specific aliases and env vars)
 
@@ -62,14 +62,14 @@ Each package maps directly to `$HOME` layout. Adding a file at `stow/zsh/.zshrc`
 
 ### Toolchain
 
-| Tool | Role |
-|------|------|
-| **GNU Stow** | Symlink manager — the core mechanism |
-| **Just** | Task runner wrapping all installation steps |
-| **Homebrew** | System packages and apps (`install/BrewFile`) |
-| **Mise** | Language runtime manager (Node, Python, Ruby, etc.) |
-| **Oh My Zsh** | Zsh plugin ecosystem |
-| **Starship** | Shell prompt (overrides OMZ theme) |
+| Tool          | Role                                                |
+| ------------- | --------------------------------------------------- |
+| **GNU Stow**  | Symlink manager — the core mechanism                |
+| **Just**      | Task runner wrapping all installation steps         |
+| **Homebrew**  | System packages and apps (`install/BrewFile`)       |
+| **Mise**      | Language runtime manager (Node, Python, Ruby, etc.) |
+| **Oh My Zsh** | Zsh plugin ecosystem                                |
+| **Starship**  | Shell prompt (overrides OMZ theme)                  |
 
 ### NeoVim Config
 
