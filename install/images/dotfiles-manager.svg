@@ -1,0 +1,203 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      text { font-family: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', ui-monospace, monospace; }
+    </style>
+    <clipPath id="window">
+      <rect width="1280" height="640"/>
+    </clipPath>
+  </defs>
+
+  <!-- ── Outer background ── -->
+  <rect width="1280" height="640" fill="#0d0e14"/>
+
+  <!-- ── Browser chrome ── -->
+  <rect x="0" y="0" width="1280" height="40" fill="#11111b"/>
+  <circle cx="22" cy="20" r="6" fill="#ff5f57"/>
+  <circle cx="42" cy="20" r="6" fill="#ffbd2e"/>
+  <circle cx="62" cy="20" r="6" fill="#28c840"/>
+  <rect x="490" y="9" width="300" height="22" rx="5" fill="#313244"/>
+  <text x="640" y="24" font-size="11" fill="#6c7086" text-anchor="middle">localhost:3131</text>
+
+  <!-- ── App header ── -->
+  <rect x="0" y="40" width="1280" height="52" fill="#11111b"/>
+  <line x1="0" y1="92" x2="1280" y2="92" stroke="#313244" stroke-width="1"/>
+
+  <!-- Logo icon -->
+  <g transform="translate(24,55)">
+    <rect width="22" height="22" rx="3" fill="none" stroke="#cba6f7" stroke-width="1.5"/>
+    <line x1="0" y1="8" x2="22" y2="8" stroke="#cba6f7" stroke-width="1.5"/>
+    <line x1="8" y1="8" x2="8" y2="22" stroke="#cba6f7" stroke-width="1.5"/>
+  </g>
+  <text x="54"  y="69" font-size="14" fill="#cba6f7" font-weight="700">Dotfiles Manager</text>
+  <text x="54"  y="84" font-size="10" fill="#6c7086">/Users/alex.lombry/dotfiles</text>
+
+  <!-- Status pills -->
+  <rect x="840" y="55" width="88" height="22" rx="11" fill="rgba(166,227,161,.12)" stroke="rgba(166,227,161,.3)" stroke-width="1"/>
+  <text x="884" y="70" font-size="10" fill="#a6e3a1" text-anchor="middle" font-weight="500">71 linked</text>
+  <rect x="936" y="55" width="88" height="22" rx="11" fill="rgba(249,226,175,.12)" stroke="rgba(249,226,175,.3)" stroke-width="1"/>
+  <text x="980" y="70" font-size="10" fill="#f9e2af" text-anchor="middle" font-weight="500">0 missing</text>
+  <rect x="1032" y="55" width="92" height="22" rx="11" fill="rgba(243,139,168,.12)" stroke="rgba(243,139,168,.3)" stroke-width="1"/>
+  <text x="1078" y="70" font-size="10" fill="#f38ba8" text-anchor="middle" font-weight="500">0 conflicts</text>
+  <rect x="1138" y="55" width="76" height="22" rx="5" fill="transparent" stroke="#45475a" stroke-width="1"/>
+  <text x="1176" y="70" font-size="10" fill="#cdd6f4" text-anchor="middle">↻ Refresh</text>
+
+  <!-- ── Tab bar ── -->
+  <rect x="0" y="92" width="1280" height="36" fill="#181825"/>
+  <line x1="0" y1="128" x2="1280" y2="128" stroke="#313244" stroke-width="1"/>
+  <text x="24"  y="115" font-size="12" fill="#cba6f7" font-weight="500">Packages</text>
+  <line x1="24" y1="128" x2="84"  y2="128" stroke="#cba6f7" stroke-width="2"/>
+  <text x="108" y="115" font-size="12" fill="#7f849c">Quick Actions</text>
+  <text x="228" y="115" font-size="12" fill="#7f849c">Backups</text>
+  <text x="295" y="115" font-size="12" fill="#7f849c">System Check</text>
+
+  <!-- ── Toolbar ── -->
+  <rect x="0" y="128" width="1280" height="44" fill="#1e1e2e"/>
+  <rect x="24" y="142" width="14" height="14" rx="2" fill="none" stroke="#585b70" stroke-width="1.5"/>
+  <text x="44"  y="153" font-size="11" fill="#cdd6f4">Select all packages</text>
+  <rect x="740" y="140" width="76" height="24" rx="5" fill="transparent" stroke="#45475a" stroke-width="1"/>
+  <text x="778"  y="156" font-size="10" fill="#cdd6f4" text-anchor="middle">🔍 Dry Run</text>
+  <rect x="824" y="140" width="134" height="24" rx="5" fill="#45475a"/>
+  <text x="891"  y="156" font-size="10" fill="#cdd6f4" text-anchor="middle">💾 Backup Conflicts</text>
+  <rect x="966" y="140" width="90" height="24" rx="5" fill="#a6e3a1"/>
+  <text x="1011" y="156" font-size="10" fill="#11111b" text-anchor="middle" font-weight="700">⚡ Install</text>
+  <rect x="1064" y="140" width="88" height="24" rx="5" fill="#f38ba8"/>
+  <text x="1108" y="156" font-size="10" fill="#11111b" text-anchor="middle" font-weight="700">✕ Remove</text>
+
+  <!-- ── Package cards ── -->
+  <!-- Layout: 5 cards, 232px each, 16px gap, left margin 24px -->
+  <!-- x: 24 / 272 / 520 / 768 / 1016   right edge: 1248 (margin 32px) -->
+
+  <!-- zsh -->
+  <rect x="24"   y="184" width="232" height="144" rx="10" fill="#181825" stroke="#313244" stroke-width="1"/>
+  <rect x="24"   y="184" width="14"  height="144" rx="10" fill="#181825"/><!-- fix left border overlap -->
+  <text x="42"   y="208" font-size="15">🐚</text>
+  <text x="64"   y="208" font-size="13" fill="#cdd6f4" font-weight="600">zsh</text>
+  <rect x="106"  y="193" width="72"  height="19" rx="4" fill="rgba(166,227,161,.15)"/>
+  <text x="142"  y="206" font-size="10" fill="#a6e3a1" text-anchor="middle">25 linked</text>
+  <text x="236"  y="207" font-size="10" fill="#585b70">▼</text>
+  <line x1="24"  y1="218" x2="256"  y2="218" stroke="#313244" stroke-width="1"/>
+  <circle cx="38" cy="233" r="3" fill="#a6e3a1"/>
+  <text x="46" y="237" font-size="10" fill="#a6adc8">.zshrc</text>
+  <circle cx="38" cy="250" r="3" fill="#a6e3a1"/>
+  <text x="46" y="254" font-size="10" fill="#a6adc8">.zprofile</text>
+  <circle cx="38" cy="267" r="3" fill="#a6e3a1"/>
+  <text x="46" y="271" font-size="10" fill="#a6adc8">.ideavimrc</text>
+  <circle cx="38" cy="284" r="3" fill="#a6e3a1"/>
+  <text x="46" y="288" font-size="10" fill="#a6adc8">aliases.zsh</text>
+  <circle cx="38" cy="301" r="3" fill="#a6e3a1"/>
+  <text x="46" y="305" font-size="10" fill="#585b70">+ 21 more…</text>
+
+  <!-- git -->
+  <rect x="272"  y="184" width="232" height="144" rx="10" fill="#181825" stroke="#313244" stroke-width="1"/>
+  <text x="290"  y="208" font-size="15">🔀</text>
+  <text x="312"  y="208" font-size="13" fill="#cdd6f4" font-weight="600">git</text>
+  <rect x="350"  y="193" width="72"  height="19" rx="4" fill="rgba(166,227,161,.15)"/>
+  <text x="386"  y="206" font-size="10" fill="#a6e3a1" text-anchor="middle">2 linked</text>
+  <text x="484"  y="207" font-size="10" fill="#585b70">▼</text>
+  <line x1="272" y1="218" x2="504"  y2="218" stroke="#313244" stroke-width="1"/>
+  <circle cx="286" cy="233" r="3" fill="#a6e3a1"/>
+  <text x="294" y="237" font-size="10" fill="#a6adc8">.gitconfig</text>
+  <circle cx="286" cy="250" r="3" fill="#a6e3a1"/>
+  <text x="294" y="254" font-size="10" fill="#a6adc8">.gitignore_global</text>
+
+  <!-- config (selected — mauve border) -->
+  <rect x="520"  y="184" width="232" height="144" rx="10" fill="#181825" stroke="#cba6f7" stroke-width="1.5"/>
+  <!-- Checkbox checked -->
+  <rect x="536"  y="192" width="13"  height="13" rx="2" fill="#cba6f7"/>
+  <polyline points="539,198 542,202 547,196" fill="none" stroke="#11111b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="558"  y="208" font-size="15">⚙</text>
+  <text x="578"  y="208" font-size="13" fill="#cba6f7" font-weight="600">config</text>
+  <rect x="638"  y="193" width="72"  height="19" rx="4" fill="rgba(166,227,161,.15)"/>
+  <text x="674"  y="206" font-size="10" fill="#a6e3a1" text-anchor="middle">38 linked</text>
+  <text x="732"  y="207" font-size="10" fill="#585b70">▲</text>
+  <line x1="520" y1="218" x2="752"  y2="218" stroke="#45475a" stroke-width="1"/>
+  <circle cx="534" cy="233" r="3" fill="#a6e3a1"/>
+  <text x="542" y="237" font-size="10" fill="#a6adc8">nvim/init.lua</text>
+  <circle cx="534" cy="250" r="3" fill="#a6e3a1"/>
+  <text x="542" y="254" font-size="10" fill="#a6adc8">ghostty/config</text>
+  <circle cx="534" cy="267" r="3" fill="#a6e3a1"/>
+  <text x="542" y="271" font-size="10" fill="#a6adc8">mise/config.toml</text>
+  <circle cx="534" cy="284" r="3" fill="#a6e3a1"/>
+  <text x="542" y="288" font-size="10" fill="#a6adc8">rectangle/Config.json</text>
+  <circle cx="534" cy="301" r="3" fill="#a6e3a1"/>
+  <text x="542" y="305" font-size="10" fill="#585b70">+ 33 more…</text>
+
+  <!-- apps -->
+  <rect x="768"  y="184" width="232" height="144" rx="10" fill="#181825" stroke="#313244" stroke-width="1"/>
+  <text x="786"  y="208" font-size="15">📦</text>
+  <text x="808"  y="208" font-size="13" fill="#cdd6f4" font-weight="600">apps</text>
+  <rect x="852"  y="193" width="72"  height="19" rx="4" fill="rgba(166,227,161,.15)"/>
+  <text x="888"  y="206" font-size="10" fill="#a6e3a1" text-anchor="middle">5 linked</text>
+  <text x="980"  y="207" font-size="10" fill="#585b70">▼</text>
+  <line x1="768" y1="218" x2="1000" y2="218" stroke="#313244" stroke-width="1"/>
+  <circle cx="782" cy="233" r="3" fill="#a6e3a1"/>
+  <text x="790" y="237" font-size="10" fill="#a6adc8">.tmux.conf</text>
+  <circle cx="782" cy="250" r="3" fill="#a6e3a1"/>
+  <text x="790" y="254" font-size="10" fill="#a6adc8">.aerospace.toml</text>
+  <circle cx="782" cy="267" r="3" fill="#a6e3a1"/>
+  <text x="790" y="271" font-size="10" fill="#a6adc8">.dir_colors</text>
+  <circle cx="782" cy="284" r="3" fill="#a6e3a1"/>
+  <text x="790" y="288" font-size="10" fill="#a6adc8">.crontab</text>
+  <circle cx="782" cy="301" r="3" fill="#a6e3a1"/>
+  <text x="790" y="305" font-size="10" fill="#a6adc8">backup_secure.plist</text>
+
+  <!-- work -->
+  <rect x="1016" y="184" width="240" height="144" rx="10" fill="#181825" stroke="#313244" stroke-width="1"/>
+  <text x="1034" y="208" font-size="15">💼</text>
+  <text x="1056" y="208" font-size="13" fill="#cdd6f4" font-weight="600">work</text>
+  <rect x="1104" y="193" width="72"  height="19" rx="4" fill="rgba(166,227,161,.15)"/>
+  <text x="1140" y="206" font-size="10" fill="#a6e3a1" text-anchor="middle">1 linked</text>
+  <text x="1234" y="207" font-size="10" fill="#585b70">▼</text>
+  <line x1="1016" y1="218" x2="1256" y2="218" stroke="#313244" stroke-width="1"/>
+  <circle cx="1030" cy="233" r="3" fill="#a6e3a1"/>
+  <text x="1038" y="237" font-size="10" fill="#a6adc8">.work.zsh</text>
+  <text x="1038" y="260" font-size="10" fill="#585b70">Work-specific aliases</text>
+  <text x="1038" y="276" font-size="10" fill="#585b70">and environment vars.</text>
+
+  <!-- ── Terminal panel ── -->
+  <rect x="0" y="340" width="1280" height="300" fill="#11111b"/>
+  <line x1="0" y1="340" x2="1280" y2="340" stroke="#45475a" stroke-width="1.5"/>
+
+  <!-- Terminal header -->
+  <circle cx="20"  cy="360" r="5" fill="#ff5f57"/>
+  <circle cx="36"  cy="360" r="5" fill="#ffbd2e"/>
+  <circle cx="52"  cy="360" r="5" fill="#28c840"/>
+  <text x="68"   y="365" font-size="11" fill="#bac2de" font-weight="600">Terminal</text>
+  <text x="122"  y="365" font-size="11" fill="#585b70">— just stow-check</text>
+  <text x="1196" y="365" font-size="10" fill="#585b70">Clear</text>
+  <text x="1242" y="365" font-size="10" fill="#585b70">▼</text>
+  <line x1="0" y1="374" x2="1280" y2="374" stroke="#1e1e2e" stroke-width="1"/>
+
+  <!-- Terminal output -->
+  <text x="24" y="398" font-size="11" fill="#89b4fa">$ just stow-check</text>
+
+  <text x="24" y="416" font-size="11" fill="#fab387">stow: LINK: .zshrc =&gt; dotfiles/stow/zsh/.zshrc</text>
+  <text x="24" y="432" font-size="11" fill="#fab387">stow: LINK: .zprofile =&gt; dotfiles/stow/zsh/.zprofile</text>
+  <text x="24" y="448" font-size="11" fill="#fab387">stow: LINK: .gitconfig =&gt; dotfiles/stow/git/.gitconfig</text>
+  <text x="24" y="464" font-size="11" fill="#fab387">stow: LINK: .gitignore_global =&gt; dotfiles/stow/git/.gitignore_global</text>
+  <text x="24" y="480" font-size="11" fill="#fab387">stow: LINK: .config/nvim =&gt; dotfiles/stow/config/.config/nvim</text>
+  <text x="24" y="496" font-size="11" fill="#fab387">stow: LINK: .config/ghostty =&gt; dotfiles/stow/config/.config/ghostty</text>
+  <text x="24" y="512" font-size="11" fill="#fab387">stow: LINK: .config/mise =&gt; dotfiles/stow/config/.config/mise</text>
+  <text x="24" y="528" font-size="11" fill="#fab387">stow: LINK: .tmux.conf =&gt; dotfiles/stow/apps/.tmux.conf</text>
+  <text x="24" y="544" font-size="11" fill="#fab387">stow: LINK: .aerospace.toml =&gt; dotfiles/stow/apps/.aerospace.toml</text>
+
+  <text x="24" y="564" font-size="11" fill="#a6e3a1" font-weight="700">[exit 0] ✓ Done</text>
+
+  <!-- Blinking cursor -->
+  <rect x="24" y="572" width="7" height="13" fill="#cba6f7" opacity="0.9"/>
+
+  <!-- Status bar -->
+  <line x1="0" y1="592" x2="1280" y2="592" stroke="#313244" stroke-width="1"/>
+  <text x="24"   y="610" font-size="10" fill="#585b70">just stow-check — succeeded (exit 0)</text>
+  <text x="1256" y="610" font-size="10" fill="#585b70" text-anchor="end"> main</text>
+
+  <!-- Bottom fade -->
+  <rect x="0" y="620" width="1280" height="20" fill="url(#fade)"/>
+  <defs>
+    <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#11111b" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#0d0e14" stop-opacity="1"/>
+    </linearGradient>
+  </defs>
+</svg>

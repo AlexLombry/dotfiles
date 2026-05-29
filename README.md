@@ -1,6 +1,6 @@
 # Dotfiles
 
-![KungFu](install/images/kungfu-2.png)
+![Dotfiles Manager](install/images/dotfiles-manager.svg)
 
 Personal macOS dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/) and [Just](https://just.systems/).
 
