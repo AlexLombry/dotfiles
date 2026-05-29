@@ -43,6 +43,11 @@ just web               # → http://localhost:3131
 
 - **`web/server.js`** — Express backend; scans stow packages, runs whitelisted `just` commands, streams output via SSE, handles backup/rollback
 - **`web/public/`** — Vanilla JS + Catppuccin Mocha dark UI (no build step)
+- **`web/test/server.test.js`** — 44 unit tests (Node.js built-in `node:test`) covering `shouldIgnore`, `isEffectivelyLinked`, `symlinkStatus`, and `scanPackage`
+
+```bash
+cd web && npm test   # run the test suite
+```
 
 The scanner resolves both file-level and directory-level stow symlinks (stow tree-folding). Auto-generated conflict backups (`backup/YYYY-MM-DD*/`) are git-ignored; named backups like `Raise2` are tracked.
 
