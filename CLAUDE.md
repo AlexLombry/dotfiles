@@ -32,6 +32,20 @@ stow -d stow -t ~ zsh          # Symlink only the zsh package
 stow -d stow -t ~ -D config    # Remove symlinks for the config package
 ```
 
+## Web Interface
+
+A local web UI lives in `web/` for managing symlinks via browser instead of the CLI.
+
+```bash
+cd web && npm install   # first time only
+just web               # → http://localhost:3131
+```
+
+- **`web/server.js`** — Express backend; scans stow packages, runs whitelisted `just` commands, streams output via SSE, handles backup/rollback
+- **`web/public/`** — Vanilla JS + Catppuccin Mocha dark UI (no build step)
+
+The scanner resolves both file-level and directory-level stow symlinks (stow tree-folding). Auto-generated conflict backups (`backup/YYYY-MM-DD*/`) are git-ignored; named backups like `Raise2` are tracked.
+
 ## Architecture
 
 ### Dotfile Management Flow
@@ -40,7 +54,7 @@ GNU Stow symlinks packages from `stow/*/` into `$HOME`. The `stow/` directory co
 
 - **zsh** — `.zshrc`, `.zprofile`, `.ideavimrc`, Oh My Zsh theme/plugins
 - **git** — `.gitconfig`, `.gitignore_global`
-- **config** — `.config/nvim/`, `.config/ghostty/`, `.config/rectangle/`, `.config/mise/`
+- **config** — `.config/nvim/`, `.config/ghostty/`, `.config/mise/`
 - **apps** — `.tmux.conf`, `.aerospace.toml`, `.dir_colors`, `.crontab`, `~/Library/` app configs
 - **work** — `.work.zsh` (work-specific aliases and env vars)
 
@@ -48,14 +62,14 @@ Each package maps directly to `$HOME` layout. Adding a file at `stow/zsh/.zshrc`
 
 ### Toolchain
 
-| Tool | Role |
-|------|------|
-| **GNU Stow** | Symlink manager — the core mechanism |
-| **Just** | Task runner wrapping all installation steps |
-| **Homebrew** | System packages and apps (`install/BrewFile`) |
-| **Mise** | Language runtime manager (Node, Python, Ruby, etc.) |
-| **Oh My Zsh** | Zsh plugin ecosystem |
-| **Starship** | Shell prompt (overrides OMZ theme) |
+| Tool          | Role                                                |
+| ------------- | --------------------------------------------------- |
+| **GNU Stow**  | Symlink manager — the core mechanism                |
+| **Just**      | Task runner wrapping all installation steps         |
+| **Homebrew**  | System packages and apps (`install/BrewFile`)       |
+| **Mise**      | Language runtime manager (Node, Python, Ruby, etc.) |
+| **Oh My Zsh** | Zsh plugin ecosystem                                |
+| **Starship**  | Shell prompt (overrides OMZ theme)                  |
 
 ### NeoVim Config
 

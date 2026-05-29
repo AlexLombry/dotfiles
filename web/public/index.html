@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dotfiles Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ── Header ─────────────────────────────────────────────────────────────── -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">
+      <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/>
+      </svg>
+      <div>
+        <h1>Dotfiles Manager</h1>
+        <code class="header-path" id="dotfiles-path">loading…</code>
+      </div>
+    </div>
+    <div class="header-right">
+      <div class="status-pills">
+        <span class="pill pill-green" id="pill-linked" title="Symlinks correctly in place">— linked</span>
+        <span class="pill pill-yellow" id="pill-missing" title="No file at destination — safe to install">— missing</span>
+        <span class="pill pill-red" id="pill-conflict" title="Destination exists but is not our symlink">— conflicts</span>
+      </div>
+      <button class="btn btn-ghost btn-sm" id="refresh-btn">↻ Refresh</button>
+    </div>
+  </div>
+</header>
+
+<!-- ── Navigation ─────────────────────────────────────────────────────────── -->
+<nav class="tabs">
+  <button class="tab active" data-tab="packages">Packages</button>
+  <button class="tab" data-tab="actions">Quick Actions</button>
+  <button class="tab" data-tab="backups">Backups</button>
+  <button class="tab" data-tab="prereqs">System Check</button>
+</nav>
+
+<!-- ── Main ───────────────────────────────────────────────────────────────── -->
+<main class="main">
+
+  <!-- Packages Tab -->
+  <section id="tab-packages" class="tab-content active">
+    <div class="toolbar">
+      <label class="checkbox-label">
+        <input type="checkbox" id="select-all" />
+        <span>Select all packages</span>
+      </label>
+      <div class="toolbar-actions">
+        <button class="btn btn-ghost btn-sm" id="btn-dry-run" title="Preview symlinks without making changes">🔍 Dry Run</button>
+        <button class="btn btn-secondary btn-sm" id="btn-backup" title="Copy conflicting files to backup/ before overwriting">💾 Backup Conflicts</button>
+        <button class="btn btn-success btn-sm" id="btn-stow" title="Create symlinks for selected packages">⚡ Install</button>
+        <button class="btn btn-danger btn-sm" id="btn-unstow" title="Remove managed symlinks">✕ Remove</button>
+      </div>
+    </div>
+    <div id="setup-banner" class="setup-banner hidden">
+      <div class="banner-content">
+        <strong>Fresh machine detected</strong> — many files are not yet installed.
+        <span>Run <em>Quick Actions → Full MacBook Setup</em> to get started, or install individual packages below.</span>
+      </div>
+    </div>
+    <div class="packages-grid" id="packages-grid">
+      <div class="loading">Scanning packages…</div>
+    </div>
+  </section>
+
+  <!-- Quick Actions Tab -->
+  <section id="tab-actions" class="tab-content">
+    <div class="section-header">
+      <h2 class="section-title">Quick Actions</h2>
+      <p class="section-desc">Run <code>just</code> commands from <code>install/Justfile</code>. Destructive actions show a confirmation prompt.</p>
+    </div>
+    <div class="actions-grid" id="actions-grid">
+      <div class="loading">Loading commands…</div>
+    </div>
+  </section>
+
+  <!-- Backups Tab -->
+  <section id="tab-backups" class="tab-content">
+    <div class="section-header">
+      <h2 class="section-title">Backups</h2>
+      <p class="section-desc">Files saved before overwriting. Each backup is timestamped and stored in <code>backup/</code>.</p>
+    </div>
+    <div id="backups-list"><div class="loading">Loading…</div></div>
+  </section>
+
+  <!-- System Check Tab -->
+  <section id="tab-prereqs" class="tab-content">
+    <div class="section-header">
+      <h2 class="section-title">System Check</h2>
+      <p class="section-desc">Required tools for the dotfiles setup.</p>
+    </div>
+    <div id="prereqs-list"><div class="loading">Checking…</div></div>
+  </section>
+
+</main>
+
+<!-- ── Terminal Panel ──────────────────────────────────────────────────────── -->
+<div id="terminal-panel" class="terminal-panel collapsed">
+  <div class="terminal-header" id="terminal-toggle-area">
+    <div class="terminal-left">
+      <span class="terminal-dot dot-red"></span>
+      <span class="terminal-dot dot-yellow"></span>
+      <span class="terminal-dot dot-green"></span>
+      <span class="terminal-label">Terminal</span>
+      <span class="terminal-job-name" id="terminal-job-name"></span>
+    </div>
+    <div class="terminal-controls">
+      <button class="btn-icon" id="terminal-clear" title="Clear terminal">Clear</button>
+      <button class="btn-icon" id="terminal-toggle-btn">▲</button>
+    </div>
+  </div>
+  <div class="terminal-body" id="terminal-body"></div>
+  <div class="terminal-status" id="terminal-status"></div>
+</div>
+
+<!-- ── Toast Container ────────────────────────────────────────────────────── -->
+<div id="toasts" aria-live="polite"></div>
+
+<!-- ── Modal ──────────────────────────────────────────────────────────────── -->
+<div id="modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <h3 id="modal-title"></h3>
+    <p id="modal-msg"></p>
+    <div id="modal-actions" class="modal-actions"></div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

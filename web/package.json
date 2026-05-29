@@ -1,0 +1,16 @@
+{
+  "name": "dotfiles-manager",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Web UI for managing dotfiles installation via GNU Stow",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
