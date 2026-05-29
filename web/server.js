@@ -379,7 +379,12 @@ app.get('/api/jobs/:id', (req, res) => {
   res.json({ id, label, status, exitCode, startedAt, finishedAt });
 });
 
-app.listen(PORT, () => {
-  console.log(`\n  Dotfiles Manager  →  http://localhost:${PORT}`);
-  console.log(`  Dotfiles root     →  ${DOTFILES_DIR}\n`);
-});
+// Export pure functions for testing; only start the server when run directly
+module.exports = { shouldIgnore, isEffectivelyLinked, symlinkStatus, scanPackage, app };
+
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`\n  Dotfiles Manager  →  http://localhost:${PORT}`);
+    console.log(`  Dotfiles root     →  ${DOTFILES_DIR}\n`);
+  });
+}

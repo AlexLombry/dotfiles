@@ -1,19 +1,14 @@
 #!/usr/bin/env bash
 
-# No distract mode (no user interaction)
-[[ $@ =~ "-nodistract" || $@ =~ "-n" ]] && no_distract=true || no_distract=false
+# No distract mode (no user interaction) — used by the commented-out interactive block below
+# shellcheck disable=SC2034
+[[ "$*" =~ -nodistract || "$*" =~ -n ]] && no_distract=true || no_distract=false
 
 testing=1
 
 italic="\033[3m"
 underline="\033[4m"
-ita_under="\033[3;4m"
 bold="\033[1m"
-bold_under="\033[1;4m"
-redbox="\033[1;41m"
-redbold="\033[1;31m"
-red="\033[31m"
-yellow="\033[33m"
 reset="\033[0m"
 
 echo -e "${bold}🍏  Mac App Store updates come fast as lightning ${reset}"
@@ -55,12 +50,11 @@ if hash mas 2>/dev/null; then
 
 			if [ "$choice" == "y" ] || [ "$choice" == "Y" ] || [ "$choice" == "a" ] || [ "$choice" == "A" ]; then
 
-				while IFS=\n read -r line
+				while IFS=$'\n' read -r line
 				do
 					echo "$line"
 					idendifiant=$(echo "$line" | awk '{print $1}')
 					nom=$(echo "$line" | awk -F "(" '{print $1}' | awk '{ $1=""; print}' | xargs)
-					nom_version=$(echo "$line" | awk '{ $1=""; print}')
 					version=$(echo "$line" | awk -F "(" '{print $2}' | sed 's/.$//')
 
 					echo "$idendifiant - $nom - $version"
