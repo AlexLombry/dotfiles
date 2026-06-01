@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 # Source UI helpers (try symlinked path first, then local repo path)
 if [[ -f "$HOME/.oh-my-zsh/custom/alex/ui.zsh" ]]; then
     source "$HOME/.oh-my-zsh/custom/alex/ui.zsh"

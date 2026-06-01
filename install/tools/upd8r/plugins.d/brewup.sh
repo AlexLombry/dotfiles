@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 PATH="/usr/local/bin:/usr/local/sbin:/Users/${USER}/.local/bin:/usr/bin:/usr/sbin:/bin:/sbin"
 
 ## M1 Brew PATH Fix
