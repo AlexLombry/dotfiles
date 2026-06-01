@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-set -euo pipefail
-
 cat <<'BANNER'
 
 ░██     ░██                   ░██  ░██████  ░█████████
@@ -22,7 +20,7 @@ CURRENT_WIDTH="$(tput cols 2>/dev/null || echo 80)"
 COLUMNS=$(( CURRENT_WIDTH > MAX_WIDTH ? MAX_WIDTH : CURRENT_WIDTH ))
 printf '%*s\n' "${COLUMNS}" '' | tr ' ' =
 
-SCRIPTS_DIR="$HOME/dotfiles/install/tools/upd8r/plugins.d"
+SCRIPTS_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/plugins.d"
 
 if [[ -d "$SCRIPTS_DIR" ]]; then
   shopt -s nullglob

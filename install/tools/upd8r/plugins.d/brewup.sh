@@ -17,20 +17,11 @@ blue=$(tput setaf 4)
 reset=$(tput sgr0)
 brewFileName="Brewfile"
 
-## Sets Working Dir as Real A Script Location
-if [ -z "$(which realpath)" ]; then
-  brew install coreutils
-fi
-cd "$(dirname "$(realpath "$0")")" || exit
+## Sets Working Dir as Script Location
+cd "$(dirname "$0")" || exit
 
 echo "${blue}==>${reset} Pulling latest changes from repo..."
 git pull 2>&1
-
-## Brew Diagnotic
-echo "${yellow}==>${reset} Running Brew Doctor diagnostics..."
-brew doctor 2>&1
-brew missing 2>&1
-echo -e "${green}==>${reset} Brew Doctor diagnotic finished."
 
 ## Brew packages update and cleanup
 echo "${yellow}==>${reset} Checking for brew updates..."
@@ -40,16 +31,17 @@ brew upgrade 2>&1
 brew cleanup -s 2>&1
 echo "${green}==>${reset} Finished brew updates"
 
-## Mac Store Updates
-## Disabled due to issues with mas
-echo "${yellow}==>${reset} Checking macOS App Store updates..."
-mas upgrade 2>&1
-echo "${green}==>${reset} Finished macOS App Store updates"
-
-## Creating Dump File with hostname
+## Creating Dump File and committing to repo
 brew bundle dump --force --file="./${brewFileName}"
 
-## Pushing to Repo
-echo "${blue}==>${reset} Pushing changes to repo..."
+if git diff --quiet "${brewFileName}"; then
+  echo "${green}==>${reset} Brewfile unchanged, nothing to commit."
+else
+  echo "${blue}==>${reset} Committing and pushing Brewfile changes..."
+  git add "${brewFileName}"
+  git commit -m "chore: update Brewfile [upd8r]"
+  git push
+  echo "${green}==>${reset} Brewfile pushed to remote."
+fi
 
-echo "${green}==>${reset} Finished updating brew and mas packages"
+echo "${green}==>${reset} Finished updating brew packages"
