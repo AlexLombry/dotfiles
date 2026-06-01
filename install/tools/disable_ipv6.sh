@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 # This script sets IPv6 to Link‑Local Only only on network interfaces that are currently active
 # (i.e. have an assigned IPv4 address, indicating they are used for Internet connectivity)
 

@@ -38,6 +38,7 @@ brew "luajit", args: ["HEAD"]
 brew "luarocks"
 brew "luv"
 brew "mas"
+brew "tree-sitter"
 brew "neovim", args: ["HEAD"]
 brew "node"
 brew "nvm"
@@ -101,7 +102,7 @@ mas "LanguageTool", id: 1534275760
 mas "Numbers", id: 361304891
 mas "Okta Verify", id: 490179405
 mas "Pages", id: 361309726
-mas "Parcel Classic", id: 639968404
+mas "Parcel", id: 375589283
 mas "Pixelmator Pro", id: 1289583905
 mas "The Unarchiver", id: 425424353
 mas "Xcode", id: 497799835

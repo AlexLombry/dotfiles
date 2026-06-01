@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 set -euo pipefail
 
 # Per-machine config (NAS destination, etc.) lives outside this repo so the
