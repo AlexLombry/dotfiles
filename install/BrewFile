@@ -30,6 +30,7 @@ brew "zsh-completions"
 
 # Development Tools
 brew "neovim", args: ["HEAD"]
+brew "tree-sitter"
 brew "gh"
 brew "glab"
 brew "httpie"
