@@ -4,6 +4,7 @@
 .vscode/
 .junie/
 .backup/
+.claude/
 
 # macOS
 .DS_Store
