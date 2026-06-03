@@ -6,7 +6,7 @@ const fs     = require('node:fs');
 const os     = require('node:os');
 const path   = require('node:path');
 
-const { shouldIgnore, isEffectivelyLinked, symlinkStatus, scanPackage } = require('../server');
+const { shouldIgnore, isEffectivelyLinked, symlinkStatus, scanPackage } = require('../dist/server/index');
 
 // ── shouldIgnore ──────────────────────────────────────────────────────────────
 

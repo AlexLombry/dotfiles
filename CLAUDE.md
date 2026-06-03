@@ -41,12 +41,15 @@ cd web && npm install   # first time only
 just web               # → http://localhost:3131
 ```
 
-- **`web/server.js`** — Express backend; scans stow packages, runs whitelisted `just` commands, streams output via SSE, handles backup/rollback
-- **`web/public/`** — Vanilla JS + Catppuccin Mocha dark UI (no build step)
+- **`web/src/server/`** — TypeScript Express backend; compiled to `dist/server/` by `tsc`
+- **`web/src/client/app.ts`** — TypeScript frontend; compiled to `public/app.js` by esbuild
+- **`web/src/shared/types.ts`** — shared domain types (FileEntry, Package, Job, …)
+- **`web/public/`** — Catppuccin Mocha dark UI; `app.js` is the compiled client artifact
 - **`web/test/server.test.js`** — 44 unit tests (Node.js built-in `node:test`) covering `shouldIgnore`, `isEffectivelyLinked`, `symlinkStatus`, and `scanPackage`
 
 ```bash
-cd web && npm test   # run the test suite
+cd web && npm test          # run the test suite (auto-builds server first)
+cd web && npm run typecheck # type-check server + client
 ```
 
 The scanner resolves both file-level and directory-level stow symlinks (stow tree-folding). Auto-generated conflict backups (`backup/YYYY-MM-DD*/`) are git-ignored; named backups like `Raise2` are tracked.
