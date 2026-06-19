@@ -8,7 +8,7 @@ alias amend='git commit --verbose --amend'
 # Open a github/gitlab repo in the browser
 hb() {
   if [ ! -d .git ] && ! git rev-parse --git-dir >/dev/null 2>&1; then
-    echo "ERROR: This isnt a git directory" && return false
+    echo "ERROR: This isnt a git directory" && return 1
   fi
   git_url=$(git config --get remote.origin.url)
   if [[ $git_url == https://gitlab* ]]; then
@@ -28,7 +28,7 @@ hb() {
     url=${url/\:/\/}
     url="https://${url%.git}"
   else
-    echo "ERROR: Remote origin is invalid" && return false
+    echo "ERROR: Remote origin is invalid" && return 1
   fi
   open $url
 }

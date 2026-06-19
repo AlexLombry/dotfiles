@@ -51,7 +51,6 @@ brew:
 # Install language runtimes with Mise (Node, Python, Ruby, …)
 mise:
     mise install
-    mise use -g
 
 # Apply macOS system defaults
 os:

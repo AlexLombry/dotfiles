@@ -4,7 +4,7 @@ alias oldvim="\vim"
 alias cc="clear"
 
 # reload zsh config
-alias rld='echo "Reloading Zshrc file" && source ~/.zshrc && tmux source-file $HOME/.tmux.conf && echo "Reload complete"'
+alias rld='echo "Reloading Zshrc file" && source ~/.zshrc && { [ -n "$TMUX" ] && tmux source-file "$HOME/.tmux.conf"; } && echo "Reload complete"'
 
 # Detect which `ls` flavor is in use
 if ls --color > /dev/null 2>&1; then # GNU `ls`

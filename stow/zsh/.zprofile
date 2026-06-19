@@ -27,12 +27,4 @@ export COMPOSE_HTTP_TIMEOUT=120
 
 # Locale
 export LANG="en_US.UTF-8"
-export LC_COLLATE="en_US.UTF-8"
-export LC_CTYPE=C
-export LC_MESSAGES="en_US.UTF-8"
-export LC_MONETARY="en_US.UTF-8"
-export LC_NUMERIC="en_US.UTF-8"
-export LC_TIME="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
-
-export DISPLAY=":0.0"

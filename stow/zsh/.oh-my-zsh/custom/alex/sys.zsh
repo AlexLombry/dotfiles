@@ -51,7 +51,7 @@ manp() {
 
 # kill all instances of a process by name
 skill() {
-    sudo kill -9 `ps ax | grep $1 | grep -v grep | awk '{print $1}'`
+    sudo pkill -9 "$1"
 }
 
 fixperms(){
@@ -106,14 +106,14 @@ gpgdec() {
 }
 
 sslenc() {
-    CUR_FILE=$1
-    openssl enc -aes-256-cbc -salt -in $CUR_FILE -out $CUR_FILE.enc
+    local CUR_FILE="$1"
+    openssl enc -aes-256-cbc -pbkdf2 -iter 600000 -salt -in "$CUR_FILE" -out "$CUR_FILE.enc"
 }
 
 ssldec() {
-    CUR_FILE=$1
-    STRIP=$(echo $1 | sed 's/.enc//')
-    openssl enc -d -aes-256-cbc -in $CUR_FILE -out $STRIP
+    local CUR_FILE="$1"
+    local STRIP="${CUR_FILE%.enc}"
+    openssl enc -d -aes-256-cbc -pbkdf2 -iter 600000 -in "$CUR_FILE" -out "$STRIP"
 }
 
 arc() {
@@ -137,21 +137,6 @@ resetipv6() {
     done
 }
 
-calculate_taxes() {
-    echo "🏃 CD Into taxes folder"
-    cd $HOME/dotfiles/install/tools/DanTaxes
-
-    # current year
-    year=$(date +"%Y")
-    echo "📂 Generate JPG file from PDF Salary"
-    pdftoppm -jpeg dan-$year.pdf files/salary-
-
-    echo "📄 Fetch all Amount to Deduct from taxes ..."
-    go run main.go #> search.txt
-    #value=$(cat search.txt | sed 's/ //g' | tr '\n' '+' | sed 's/+$//' | bc)
-
-    rm -rf $HOME/dotfiles/install/tools/DanTaxes/files/sala*
-}
 
 qbrew() {
     HOMEBREW_NO_INSTALL_CLEANUP=1 HOMEBREW_NO_ANALYTICS=1 HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1 HOMEBREW_NO_INSTALL_UPGRADE=1 brew $@

@@ -64,6 +64,9 @@ rsync -av --progress \
   "$ENCRYPTED_ARCHIVE" \
   "$BACKUP_DEST"
 
+echo "Rotating local archives (keeping last 7)..."
+find "$BACKUP_ROOT" -maxdepth 1 -name "backups_*.tar.gz.gpg" -type f | sort -r | tail -n +8 | xargs rm -f
+
 ## To restore the archive :
 # gpg --output backup.tar.gz --decrypt backups_DATE.tar.gz.gpg
 # tar -xzf backup.tar.gz
