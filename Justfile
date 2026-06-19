@@ -142,3 +142,8 @@ backup-agent:
 # Start the dotfiles web UI → http://localhost:3131
 web:
     @cd "{{_web}}" && npm run build && npm start
+
+# Install Secure Zip tooling
+secure:
+	@echo "🔏Install as a link the Secure files and folders tooling."
+	@sudo ln -sf "$HOME/dotfiles/install/tools/secure.sh" "/usr/local/bin/secure"
