@@ -2,108 +2,210 @@ tap "go-task/tap"
 tap "hashicorp/tap"
 tap "nikitabobko/tap"
 tap "shivammathur/php"
+# Search tool like grep, but optimized for programmers
 brew "ack"
+# Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
+# Like cat but displays content with syntax highlighting
 brew "ccat"
+# Statistics utility to count lines of code
 brew "cloc"
+# Container runtimes on MacOS (and Linux) with minimal setup
 brew "colima", restart_service: :changed
+# GNU File, Shell, and Text utilities
 brew "coreutils"
+# Reimplementation of ctags(1)
 brew "ctags"
+# Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# Lightweight DNS forwarder and DHCP server
 brew "dnsmasq"
-brew "docker"
+# Pack, ship and run any application as a lightweight container
+brew "docker", link: false
+# Isolated development environments using Docker
 brew "docker-compose"
+# Perl lib for reading and writing EXIF metadata
+brew "exiftool"
+# Modern, maintained replacement for ls
 brew "eza"
+# Simple, fast and user-friendly alternative to find
 brew "fd"
+# Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
+# Monitor a directory for changes and run a shell command
 brew "fswatch"
+# Command-line fuzzy finder written in Go
 brew "fzf"
+# GNU awk utility
 brew "gawk"
+# Graphics library to dynamically manipulate images
 brew "gd"
+# GitHub command-line tool
 brew "gh"
+# Distributed revision control system
 brew "git"
+# Open-source GitLab command-line tool
 brew "glab"
+# Render markdown on the CLI
 brew "glow"
+# Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Task is a task runner/build tool that aims to be simpler and easier to use
 brew "go-task"
+# Improved top (interactive process viewer)
 brew "htop"
+# User-friendly cURL replacement (command-line HTTP client)
 brew "httpie"
+# GNU utilities for networking
 brew "inetutils"
+# JSON diff and patch
 brew "jd"
+# Lightweight and flexible command-line JSON processor
 brew "jq"
+# Handy way to save and run project-specific commands
 brew "just"
+# Modern load testing tool, using Go and JavaScript
 brew "k6"
+# Kubernetes CLI To Manage Your Clusters In Style!
 brew "k9s"
+# Just-In-Time Compiler (JIT) for the Lua programming language
 brew "luajit", args: ["HEAD"]
+# Package manager for the Lua programming language
 brew "luarocks"
+# Bare libuv bindings for lua
 brew "luv"
+# Mac App Store command-line interface
 brew "mas"
+# Incremental parsing library
 brew "tree-sitter"
+# Ambitious Vim-fork focused on extensibility and agility
 brew "neovim", args: ["HEAD"]
+# Open-source, cross-platform JavaScript runtime environment
 brew "node"
+# Manage multiple Node.js versions
 brew "nvm"
+# Shell command parallelization utility
 brew "parallel"
+# General-purpose scripting language
 brew "php"
+# Pinentry for GPG on Mac
 brew "pinentry-mac"
+# Monitor data's progress through a pipe
 brew "pv"
+# Password generator
 brew "pwgen"
+# Reattach process (e.g., tmux) to background
 brew "reattach-to-user-namespace"
+# Search tool like grep and The Silver Searcher
 brew "ripgrep"
+# Utility that provides fast incremental file transfer
 brew "rsync"
-brew "ruby"
+# Powerful, clean, object-oriented scripting language
+brew "ruby", link: false
+# Build tool for Scala projects
 brew "sbt"
+# Fast and accurate code counter with complexity and COCOMO estimates
 brew "scc"
+# Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
+# Add a public key to a remote machine's authorized_keys file
 brew "ssh-copy-id"
+# Non-interactive SSH password auth
 brew "sshpass"
+# Organize software neatly under a single directory tree (e.g. /usr/local)
 brew "stow"
+# Change macOS audio source from the command-line
 brew "switchaudio-osx"
+# General purpose fuzzy finder TUI
 brew "television"
+# Terminal multiplexer
 brew "tmux"
+# Display directories as trees (with optional color/HTML output)
 brew "tree"
+# Executes a program periodically, showing output fullscreen
 brew "watch"
+# Internet file retriever
 brew "wget"
+# Generate your Xcode project from a spec file and your folder structure
+brew "xcodegen"
+# Friendly and fast tool for sending HTTP requests
 brew "xh"
+# JavaScript package manager
 brew "yarn"
+# Blazing fast terminal file manager written in Rust, based on async I/O
 brew "yazi"
+# Tool for managing your YubiKey configuration
 brew "ykman"
+# Feature-rich command-line audio/video downloader
 brew "yt-dlp"
+# Shell extension to navigate your filesystem faster
 brew "zoxide"
+# Password manager that keeps all passwords secure behind one password
 cask "1password"
+# Command-line interface for 1Password
 cask "1password-cli"
+# Chromium based browser
 cask "arc"
+# Graphical configurator for Dygma Raise keyboards
 cask "bazecor"
+# Anthropic's official Claude AI desktop app
 cask "claude"
+# Voice and text chat software
 cask "discord"
+# Client for the Dropbox cloud storage service
 cask "dropbox"
+# Web browser
 cask "firefox"
 cask "font-geist-mono-nerd-font"
 cask "font-hack-nerd-font"
 cask "font-roboto-mono", args: { appdir: "/Applications" }
 cask "font-source-code-pro-for-powerline", args: { appdir: "/Applications" }
+# Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# Tools to protect your emails and files
 cask "gpg-suite"
+# Software for Logitech devices
 cask "logi-options+"
+# VPN client focusing on security
 cask "protonvpn"
+# QWERTY-based layout. Type EU languages, greek, math, currencies, & more!
 cask "qwerty-fr"
+# Control your tools with a few keystrokes
 cask "raycast"
+# Collection of apps available by subscription
 cask "setapp"
+# Team communication and collaboration software
 cask "slack"
+# Native terminal coding agents command center
+cask "supacode"
+# File transfer application
 cask "transmit"
+# Multimedia player
 cask "vlc"
+# Multiplayer code editor
 cask "zed"
 mas "1Password for Safari", id: 1569813296
+mas "Compressor", id: 6746516157
 mas "DaVinci Resolve", id: 571213070
+mas "Developer", id: 640199958
 mas "Final Cut Pro", id: 1631624924
+mas "Hacktivate", id: 6748286602
 mas "iMazing Converter", id: 1292198261
 mas "iMovie", id: 408981434
 mas "iNet Network Scanner", id: 403304796
+mas "Keynote", id: 361285480
 mas "LanguageTool", id: 1534275760
+mas "Logic Pro", id: 1615087040
+mas "MainStage", id: 6746637089
+mas "Motion", id: 6746637149
 mas "Numbers", id: 361304891
 mas "Okta Verify", id: 490179405
 mas "Pages", id: 361309726
 mas "Parcel", id: 375589283
 mas "Pixelmator Pro", id: 1289583905
+mas "Pixelmator Pro", id: 6746662575
+mas "RocketSim", id: 1504940162
+mas "Swift Playground", id: 1496833156
 mas "The Unarchiver", id: 425424353
 mas "Xcode", id: 497799835
 go "github.com/mitranim/gow"
