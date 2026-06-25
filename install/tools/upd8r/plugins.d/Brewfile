@@ -152,8 +152,6 @@ cask "bazecor"
 cask "claude"
 # Voice and text chat software
 cask "discord"
-# Client for the Dropbox cloud storage service
-cask "dropbox"
 # Web browser
 cask "firefox"
 cask "font-geist-mono-nerd-font"

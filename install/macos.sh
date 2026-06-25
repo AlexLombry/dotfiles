@@ -123,12 +123,8 @@ set_default com.apple.finder FXPreferredViewStyle "Nlsv" -string
 ###############################################################################
 # Screen                                                                      #
 ###############################################################################
-running "Save screenshots to the desktop (or Dropbox if it exists)"
-SCREENSHOTS_DIR="${HOME}/Dropbox/Screenshots"
-if [[ ! -d "$SCREENSHOTS_DIR" ]]; then
-    SCREENSHOTS_DIR="${HOME}/Desktop"
-fi
-set_default com.apple.screencapture location "$SCREENSHOTS_DIR" -string
+running "Save screenshots to the desktop"
+set_default com.apple.screencapture location "${HOME}/Desktop" -string
 
 running "Save screenshots in PNG format"
 set_default com.apple.screencapture type "png" -string
