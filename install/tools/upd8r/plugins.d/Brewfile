@@ -21,7 +21,7 @@ brew "curl"
 # Lightweight DNS forwarder and DHCP server
 brew "dnsmasq"
 # Pack, ship and run any application as a lightweight container
-brew "docker", link: false
+brew "docker"
 # Isolated development environments using Docker
 brew "docker-compose"
 # Perl lib for reading and writing EXIF metadata
@@ -148,10 +148,14 @@ cask "1password-cli"
 cask "arc"
 # Graphical configurator for Dygma Raise keyboards
 cask "bazecor"
+# Desktop password and login vault
+cask "bitwarden"
 # Anthropic's official Claude AI desktop app
 cask "claude"
 # Voice and text chat software
 cask "discord"
+# Collaborative team software
+cask "figma"
 # Web browser
 cask "firefox"
 cask "font-geist-mono-nerd-font"
@@ -192,6 +196,7 @@ mas "iMazing Converter", id: 1292198261
 mas "iMovie", id: 408981434
 mas "iNet Network Scanner", id: 403304796
 mas "Keynote", id: 361285480
+mas "Kickstart", id: 6758355178
 mas "LanguageTool", id: 1534275760
 mas "Logic Pro", id: 1615087040
 mas "MainStage", id: 6746637089
@@ -199,9 +204,10 @@ mas "Motion", id: 6746637149
 mas "Numbers", id: 361304891
 mas "Okta Verify", id: 490179405
 mas "Pages", id: 361309726
+mas "Parachute Backup", id: 6748614170
 mas "Parcel", id: 375589283
-mas "Pixelmator Pro", id: 1289583905
 mas "Pixelmator Pro", id: 6746662575
+mas "Pixelmator Pro", id: 1289583905
 mas "RocketSim", id: 1504940162
 mas "Swift Playground", id: 1496833156
 mas "The Unarchiver", id: 425424353
