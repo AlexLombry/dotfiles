@@ -191,3 +191,4 @@ alias jrn="bat $HOME/.journal-log.md"
 vdl() { yt-dlp -t mp4 "$1"; }
 alias wjournal="bash ~/dotfiles/install/tools/journal.sh"
 alias rjournal="gpg -d ~/.journal.log.gpg | less"
+alias serve="python3 -m http.server 8765 --directory ."
