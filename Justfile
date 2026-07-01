@@ -77,6 +77,10 @@ completions:
 bench:
     @for i in 1 2 3; do /usr/bin/time zsh -i -c exit; done
 
+# Clone all private GitHub repos (except dotfiles) into ~/work
+clone-work:
+    @zsh "{{_install}}/scripts/clone_private_repos"
+
 # ── Maintenance ───────────────────────────────────────────────────────────────
 
 # Run upd8r to update brew, mise, composer, mas, and rust

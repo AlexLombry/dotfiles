@@ -1,0 +1,27 @@
+#!/bin/zsh
+set -euo pipefail
+
+work_dir="$HOME/work"
+mkdir -p "$work_dir"
+
+command -v gh >/dev/null 2>&1 || { echo "gh not installed."; exit 1; }
+
+gh auth status >/dev/null 2>&1 || gh auth login
+
+echo "Fetching private repos..."
+repos=$(gh repo list --visibility private --limit 1000 --json name,sshUrl \
+    --jq '.[] | select(.name != "dotfiles") | .name + " " + .sshUrl')
+
+[[ -z "$repos" ]] && { echo "No private repos found."; exit 0; }
+
+while IFS=' ' read -r name url; do
+    dest="$work_dir/$name"
+    if [[ -d "$dest" ]]; then
+        echo "Skip $name (already exists)"
+    else
+        echo "Clone $name"
+        git clone "$url" "$dest"
+    fi
+done <<< "$repos"
+
+echo "Done. Repos in $work_dir"
