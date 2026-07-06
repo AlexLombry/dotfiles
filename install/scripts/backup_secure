@@ -1,6 +1,10 @@
 #!/usr/bin/env zsh
 set -euo pipefail
 
+# LaunchAgent runs with a bare PATH (/usr/bin:/bin:/usr/sbin:/sbin), so Homebrew
+# (rsync) and /usr/local (gpg) binaries are invisible. Prepend them explicitly.
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
+
 # Per-machine config (NAS destination, etc.) lives outside this repo so the
 # script can be shared safely. Create ~/.config/backup_secure.env with at least:
 #   BACKUP_DEST="user@host:/path/"
@@ -32,10 +36,35 @@ for file in .journal-log.md .zshrc .zprofile .zshenv .gitconfig .gitignore_globa
   [ -e "$HOME/$file" ] && cp -R "$HOME/$file" "$WORK_DIR"
 done
 
-# Sensible folders
-for dir in .ssh .gnupg .config .docker .aws .kube .claude; do
-  [ -d "$HOME/$dir" ] && cp -R "$HOME/$dir" "$WORK_DIR"
+# Sensible folders (full copy — small credential/config dirs).
+# rsync (not cp) so live agent/runtime sockets are skipped cleanly.
+for dir in .ssh .gnupg .docker .aws .kube .snowflake .ecr .ssh-tunnel-ssm .k8slens .colima .agents; do
+  [ -d "$HOME/$dir" ] && rsync -a \
+    --exclude='agent/' \
+    --exclude='S.*' \
+    --exclude='*.sock' \
+    "$HOME/$dir" "$WORK_DIR/"
 done
+
+# Credential files buried in otherwise cache-heavy dirs (skip the multi-GB caches)
+[ -f "$HOME/.m2/settings.xml" ] && mkdir -p "$WORK_DIR/.m2" && cp "$HOME/.m2/settings.xml" "$WORK_DIR/.m2/"
+[ -f "$HOME/.gradle/gradle.properties" ] && mkdir -p "$WORK_DIR/.gradle" && cp "$HOME/.gradle/gradle.properties" "$WORK_DIR/.gradle/"
+
+# Larger dirs — copy but prune regenerable caches (Raycast blobs ~1.7G, CC transcripts ~600M)
+rsync -a --info=progress2 \
+  --exclude='raycast/' \
+  --exclude='raycast-x/' \
+  --exclude='intelephense/' \
+  "$HOME/.config" "$WORK_DIR/"
+
+rsync -a --info=progress2 \
+  --exclude='projects/**/*.jsonl' \
+  --exclude='file-history/' \
+  --exclude='shell-snapshots/' \
+  --exclude='paste-cache/' \
+  --exclude='cache/' \
+  --exclude='tmp/' \
+  "$HOME/.claude" "$WORK_DIR/"
 
 # Critical library
 mkdir -p "$WORK_DIR/Library"
