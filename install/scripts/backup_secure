@@ -38,7 +38,7 @@ done
 
 # Sensible folders (full copy — small credential/config dirs).
 # rsync (not cp) so live agent/runtime sockets are skipped cleanly.
-for dir in .ssh .gnupg .docker .aws .kube .snowflake .ecr .ssh-tunnel-ssm .k8slens .colima .agents; do
+for dir in .ssh .gnupg .docker .aws .kube .snowflake .ecr .ssh-tunnel-ssm .k8slens .agents; do
   [ -d "$HOME/$dir" ] && rsync -a \
     --exclude='agent/' \
     --exclude='S.*' \
@@ -52,6 +52,8 @@ done
 
 # Larger dirs — copy but prune regenerable caches (Raycast blobs ~1.7G, CC transcripts ~600M)
 rsync -a --info=progress2 \
+  --exclude='*.sock' \
+  --exclude='S.*' \
   --exclude='raycast/' \
   --exclude='raycast-x/' \
   --exclude='intelephense/' \
