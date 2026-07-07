@@ -1,6 +1,6 @@
 # NOTE(selman): without decorations, tabs can not be used :(
 # theme = dark:catppuccin-mocha,light:catppuccin-latte
-theme = catppuccin-mocha
+theme = GitHub
 window-decoration = true
 
 window-width = 90
@@ -15,10 +15,10 @@ font-size = 14
 font-family = "GeistMono Nerd Font"
 font-thicken = true
 font-variation-bold = wght=400
-background-opacity = 0.98
+#background-opacity = 0.98
 
-background-image = "~/dotfiles/install/images/mm.png"
-background-image-opacity = 0.3
+#background-image = "~/dotfiles/install/images/mm.png"
+#background-image-opacity = 0.3
 background-image-position = center
 background-image-fit = cover
 
