@@ -17,3 +17,7 @@ calculate_taxes() {
 
     rm -rf "$HOME/dotfiles/install/tools/DanTaxes/files/sala"*
 }
+
+export ASC_KEY_ID="8VLCWXKF8U"
+export ASC_ISSUER_ID="e3cc2834-4f26-41b2-8ca9-bc091377448a"
+export ASC_PRIVATE_KEY_PATH="/Users/alex.lombry/AuthKey_8VLCWXKF8U.p8"
