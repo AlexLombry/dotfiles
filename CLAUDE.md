@@ -58,13 +58,14 @@ The scanner resolves both file-level and directory-level stow symlinks (stow tre
 
 ### Dotfile Management Flow
 
-GNU Stow symlinks packages from `stow/*/` into `$HOME`. The `stow/` directory contains five packages:
+GNU Stow symlinks packages from `stow/*/` into `$HOME`. The `stow/` directory contains six packages:
 
 - **zsh** — `.zshrc`, `.zprofile`, `.ideavimrc`, Oh My Zsh theme/plugins
 - **git** — `.gitconfig`, `.gitignore_global`
 - **config** — `.config/nvim/`, `.config/ghostty/`, `.config/mise/`
 - **apps** — `.tmux.conf`, `.aerospace.toml`, `.dir_colors`, `.crontab`, `~/Library/` app configs
 - **work** — `.work.zsh` (work-specific aliases and env vars)
+- **bin** — `.local/bin/` executables. `~/.local/bin` also holds unmanaged binaries (`mise`, `uv`), so Stow links the individual files rather than folding the directory
 
 Each package maps directly to `$HOME` layout. Adding a file at `stow/zsh/.zshrc` means `~/.zshrc` will be symlinked to it after `just stow`.
 

@@ -1,0 +1,176 @@
+#!/usr/bin/env bash
+#
+# install-xcode-prepush — install a pre-push hook that runs `xcodebuild test`
+# before any push, so a broken build never reaches the remote.
+#
+# Usage:
+#   install-xcode-prepush [repo-path ...]   # defaults to the current repo
+#   install-xcode-prepush --force           # overwrite an existing pre-push hook
+#   install-xcode-prepush --uninstall       # remove a hook we installed
+#
+# Per-repo configuration (optional):
+#   git config xcode.scheme      MyScheme      # otherwise: first scheme found
+#   git config xcode.destination "platform=iOS Simulator,name=iPhone 17"
+#
+# Bypass a single push:  git push --no-verify   (or  SKIP_XCODE_TESTS=1 git push)
+
+set -euo pipefail
+
+MARKER='# managed-by: install-xcode-prepush'
+FORCE=0
+UNINSTALL=0
+REPOS=()
+
+for arg in "$@"; do
+    case "$arg" in
+        --force)     FORCE=1 ;;
+        --uninstall) UNINSTALL=1 ;;
+        -h|--help)   sed -n '2,16p' "$0" | cut -c3-; exit 0 ;;
+        -*)          echo "unknown flag: $arg" >&2; exit 2 ;;
+        *)           REPOS+=("$arg") ;;
+    esac
+done
+
+[ ${#REPOS[@]} -eq 0 ] && REPOS=(".")
+
+install_one() {
+    local repo="$1"
+
+    if ! git -C "$repo" rev-parse --git-dir >/dev/null 2>&1; then
+        echo "skip  $repo — not a git repository" >&2
+        return 1
+    fi
+
+    local git_dir hooks_dir hook
+    git_dir=$(git -C "$repo" rev-parse --absolute-git-dir)
+    hooks_dir=$(git -C "$repo" config core.hooksPath || echo "$git_dir/hooks")
+    hook="$hooks_dir/pre-push"
+
+    if [ "$UNINSTALL" -eq 1 ]; then
+        if [ -f "$hook" ] && grep -qF "$MARKER" "$hook"; then
+            rm "$hook"
+            echo "removed  $hook"
+        else
+            echo "skip     $repo — no hook of ours to remove" >&2
+        fi
+        return 0
+    fi
+
+    if [ -f "$hook" ] && ! grep -qF "$MARKER" "$hook" && [ "$FORCE" -eq 0 ]; then
+        echo "skip  $repo — a pre-push hook already exists (use --force to replace)" >&2
+        return 1
+    fi
+
+    mkdir -p "$hooks_dir"
+    write_hook "$hook"
+    chmod +x "$hook"
+    echo "installed  $hook"
+}
+
+write_hook() {
+    cat >"$1" <<'HOOK'
+#!/usr/bin/env bash
+# managed-by: install-xcode-prepush
+#
+# Runs the Xcode test suite before a push. A failing suite blocks the push.
+# Bypass with `git push --no-verify` or `SKIP_XCODE_TESTS=1 git push`.
+#
+# No-ops when the repository holds no Xcode project, so it is safe to install
+# everywhere.
+
+set -euo pipefail
+
+if [ "${SKIP_XCODE_TESTS:-0}" = "1" ]; then
+    echo "pre-push: SKIP_XCODE_TESTS=1, skipping tests"
+    exit 0
+fi
+
+repo_root=$(git rev-parse --show-toplevel)
+cd "$repo_root"
+
+# A push that only deletes remote refs has nothing to test.
+has_update=0
+while read -r _local_ref local_sha _remote_ref _remote_sha; do
+    [ "$local_sha" = "0000000000000000000000000000000000000000" ] || has_update=1
+done
+[ "$has_update" -eq 1 ] || exit 0
+
+# --- locate the project ------------------------------------------------------
+
+workspace=$(find . -maxdepth 2 -name '*.xcworkspace' -not -path '*/.*' \
+    -not -path '*.xcodeproj/*' | head -1 || true)
+project=$(find . -maxdepth 2 -name '*.xcodeproj' -not -path '*/.*' | head -1 || true)
+
+if [ -n "$workspace" ]; then
+    container=(-workspace "$workspace")
+elif [ -n "$project" ]; then
+    container=(-project "$project")
+else
+    exit 0  # not an Xcode repo
+fi
+
+# --- scheme ------------------------------------------------------------------
+
+scheme=$(git config xcode.scheme || true)
+if [ -z "$scheme" ]; then
+    scheme=$(xcodebuild -list "${container[@]}" 2>/dev/null \
+        | awk '/Schemes:/{found=1; next} found && NF {print $1; exit}')
+fi
+if [ -z "$scheme" ]; then
+    echo "pre-push: no scheme found — set one with: git config xcode.scheme <name>" >&2
+    exit 1
+fi
+
+# --- destination -------------------------------------------------------------
+
+destination=$(git config xcode.destination || true)
+if [ -z "$destination" ]; then
+    # Highest-numbered plain "iPhone <N>" simulator, so the hook survives an
+    # Xcode upgrade that retires whatever device was hardcoded.
+    name=$(xcrun simctl list devices available \
+        | grep -E '^[[:space:]]+iPhone [0-9]+ \(' \
+        | sed -E 's/^[[:space:]]*//; s/ \(.*//' \
+        | sort -t' ' -k2 -n \
+        | tail -1)
+    if [ -z "$name" ]; then
+        echo "pre-push: no 'iPhone <N>' simulator available" >&2
+        exit 1
+    fi
+    destination="platform=iOS Simulator,name=$name"
+fi
+
+# --- run ---------------------------------------------------------------------
+
+echo "pre-push: testing $scheme on ${destination#*name=}"
+
+log=$(mktemp -t xcode-prepush)
+trap 'rm -f "$log"' EXIT
+
+if xcodebuild test "${container[@]}" \
+    -scheme "$scheme" \
+    -destination "$destination" \
+    -testLanguage en \
+    -testRegion US \
+    >"$log" 2>&1
+then
+    echo "pre-push: tests passed"
+    exit 0
+fi
+
+echo "pre-push: tests FAILED — push aborted" >&2
+echo >&2
+grep -E "(error:|failed|Failing tests:|\*\* TEST)" "$log" | head -30 >&2 || tail -30 "$log" >&2
+echo >&2
+echo "Full log: $log (copied, since the temp file is about to go)" >&2
+cp "$log" "${TMPDIR:-/tmp}/xcode-prepush-last.log"
+echo "  ${TMPDIR:-/tmp}/xcode-prepush-last.log" >&2
+echo "Bypass with: git push --no-verify" >&2
+exit 1
+HOOK
+}
+
+status=0
+for repo in "${REPOS[@]}"; do
+    install_one "$repo" || status=1
+done
+exit $status

@@ -25,21 +25,21 @@ check:
 
 # Apply symlinks with GNU Stow (safe for re-runs — refuses to clobber)
 stow:
-    @cd "{{_stow}}" && stow -t "$HOME" zsh git config apps work
+    @cd "{{_stow}}" && stow -t "$HOME" zsh git config apps work bin
     @echo "Symlinks applied!"
 
 # First-time stow with --adopt (clean machine only — overwrites tracked files with $HOME copies)
 stow-fresh:
-    @cd "{{_stow}}" && stow --adopt -t "$HOME" zsh git config apps work
+    @cd "{{_stow}}" && stow --adopt -t "$HOME" zsh git config apps work bin
     @echo "Symlinks applied (with --adopt). Run 'git diff' to inspect what was adopted."
 
 # Dry-run: preview what would be linked without making changes
 stow-check:
-    @cd "{{_stow}}" && stow -n -v -t "$HOME" zsh git config apps work
+    @cd "{{_stow}}" && stow -n -v -t "$HOME" zsh git config apps work bin
 
 # Remove all managed symlinks
 unstow:
-    @cd "{{_stow}}" && stow -D -t "$HOME" zsh git config apps work
+    @cd "{{_stow}}" && stow -D -t "$HOME" zsh git config apps work bin
     @echo "Symlinks removed!"
 
 # ── Install ───────────────────────────────────────────────────────────────────
@@ -93,7 +93,7 @@ doctor:
     @echo "───────────────────"
     @echo
     @echo "▶ Stow (dry-run)"
-    @cd "{{_stow}}" && stow -n -v -t "$HOME" zsh git config apps work 2>&1 | sed 's/^/  /' || true
+    @cd "{{_stow}}" && stow -n -v -t "$HOME" zsh git config apps work bin 2>&1 | sed 's/^/  /' || true
     @echo
     @echo "▶ Homebrew bundle drift"
     @HOMEBREW_NO_AUTO_UPDATE=1 brew bundle check --file="{{_install}}/BrewFile" --verbose 2>&1 | sed 's/^/  /' || true
