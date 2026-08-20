@@ -1,3 +1,5 @@
+tap "alielsokary/tap", trusted: { casks: ["caskhub"] }
+tap "basicmachines-co/basic-memory", trusted: true
 tap "go-task/tap"
 tap "hashicorp/tap"
 tap "nikitabobko/tap"
@@ -8,16 +10,24 @@ brew "ack"
 brew "bat"
 # Like cat but displays content with syntax highlighting
 brew "ccat"
+# Tool for emulating mouse and keyboard events
+brew "cliclick"
 # Statistics utility to count lines of code
 brew "cloc"
 # Container runtimes on MacOS (and Linux) with minimal setup
 brew "colima", restart_service: :changed
+# Get a file from an HTTP, HTTPS or FTP server
+brew "curl"
+# Graphics library to dynamically manipulate images
+brew "gd"
+# General-purpose scripting language
+brew "php"
+# Dependency Manager for PHP
+brew "composer"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Reimplementation of ctags(1)
 brew "ctags"
-# Get a file from an HTTP, HTTPS or FTP server
-brew "curl"
 # Lightweight DNS forwarder and DHCP server
 brew "dnsmasq"
 # Pack, ship and run any application as a lightweight container
@@ -38,10 +48,10 @@ brew "fswatch"
 brew "fzf"
 # GNU awk utility
 brew "gawk"
-# Graphics library to dynamically manipulate images
-brew "gd"
 # GitHub command-line tool
 brew "gh"
+# Interpreter for PostScript and PDF
+brew "ghostscript"
 # Distributed revision control system
 brew "git"
 # Open-source GitLab command-line tool
@@ -52,10 +62,14 @@ brew "glow"
 brew "go"
 # Task is a task runner/build tool that aims to be simpler and easier to use
 brew "go-task"
+# Open-source build automation tool based on the Groovy and Kotlin DSL
+brew "gradle"
 # Improved top (interactive process viewer)
 brew "htop"
 # User-friendly cURL replacement (command-line HTTP client)
 brew "httpie"
+# Tools and libraries to manipulate images in select formats
+brew "imagemagick"
 # GNU utilities for networking
 brew "inetutils"
 # JSON diff and patch
@@ -76,6 +90,8 @@ brew "luarocks"
 brew "luv"
 # Mac App Store command-line interface
 brew "mas"
+# Deep clean and optimize your Mac
+brew "mole"
 # Incremental parsing library
 brew "tree-sitter"
 # Ambitious Vim-fork focused on extensibility and agility
@@ -84,10 +100,10 @@ brew "neovim", args: ["HEAD"]
 brew "node"
 # Manage multiple Node.js versions
 brew "nvm"
+# Development kit for the Java programming language
+brew "openjdk@21"
 # Shell command parallelization utility
 brew "parallel"
-# General-purpose scripting language
-brew "php"
 # Pinentry for GPG on Mac
 brew "pinentry-mac"
 # Monitor data's progress through a pipe
@@ -140,18 +156,26 @@ brew "ykman"
 brew "yt-dlp"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
+# AI-powered knowledge management system with MCP server integration
+brew "basicmachines-co/basic-memory/basic-memory"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password
 cask "1password-cli"
+# Command-line tools for building and debugging Android apps
+cask "android-commandlinetools"
 # Chromium based browser
 cask "arc"
 # Graphical configurator for Dygma Raise keyboards
 cask "bazecor"
 # Desktop password and login vault
 cask "bitwarden"
+# Native GUI for Homebrew casks
+cask "caskhub"
 # Anthropic's official Claude AI desktop app
 cask "claude"
+# Browser for SQLite databases
+cask "db-browser-for-sqlite"
 # Voice and text chat software
 cask "discord"
 # Collaborative team software
@@ -164,8 +188,12 @@ cask "font-roboto-mono", args: { appdir: "/Applications" }
 cask "font-source-code-pro-for-powerline", args: { appdir: "/Applications" }
 # Terminal emulator that uses platform-native UI and GPU acceleration
 cask "ghostty"
+# Web browser
+cask "google-chrome"
 # Tools to protect your emails and files
 cask "gpg-suite"
+# Vector graphics editor
+cask "inkscape"
 # Software for Logitech devices
 cask "logi-options+"
 # VPN client focusing on security
@@ -187,10 +215,15 @@ cask "vlc"
 # Multiplayer code editor
 cask "zed"
 mas "1Password for Safari", id: 1569813296
+mas "AuditStore", id: 0
+mas "CadenceOne", id: 0
+mas "ClickClack", id: 6740695697
 mas "Compressor", id: 6746516157
 mas "DaVinci Resolve", id: 571213070
 mas "Developer", id: 640199958
 mas "Final Cut Pro", id: 1631624924
+mas "Folder Preview", id: 6698876601
+mas "Framous", id: 6636520519
 mas "Hacktivate", id: 6748286602
 mas "iMazing Converter", id: 1292198261
 mas "iMovie", id: 408981434
@@ -198,8 +231,9 @@ mas "iNet Network Scanner", id: 403304796
 mas "Keynote", id: 361285480
 mas "Kickstart", id: 6758355178
 mas "LanguageTool", id: 1534275760
-mas "Logic Pro", id: 1615087040
+mas "Logic Pro", id: 1615087040
 mas "MainStage", id: 6746637089
+mas "Markdown Preview", id: 6739955340
 mas "Motion", id: 6746637149
 mas "Numbers", id: 361304891
 mas "Okta Verify", id: 490179405
@@ -210,8 +244,10 @@ mas "Pixelmator Pro", id: 6746662575
 mas "Pixelmator Pro", id: 1289583905
 mas "RocketSim", id: 1504940162
 mas "Swift Playground", id: 1496833156
+mas "TestFlight", id: 899247664
 mas "The Unarchiver", id: 425424353
 mas "Xcode", id: 497799835
 go "github.com/mitranim/gow"
 go "github.com/a-h/templ/cmd/templ"
+cargo "agora", source: "https://git.manomano.tech/ai-accelerate/agora"
 npm "intelephense"
