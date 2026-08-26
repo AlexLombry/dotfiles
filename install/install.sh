@@ -54,9 +54,6 @@ just setup
 
 # Removed: Homebrew Python installation (now managed by mise)
 
-echo "⚙️ Fixing fonts"
-sudo chmod 775 ~/Library/Fonts/**/
-
 echo "🚀 Claude Code skills (private repo)"
 SKILLS_REPO="$HOME/code/ClaudeSkillsPerso"
 if [ ! -d "$SKILLS_REPO" ]; then
@@ -65,3 +62,6 @@ if [ ! -d "$SKILLS_REPO" ]; then
 fi
 mkdir -p "$HOME/.claude"
 ln -sfn "$SKILLS_REPO/skills" "$HOME/.claude/skills"
+
+echo "⚙️ Fixing fonts"
+sudo chmod 775 ~/Library/Fonts/**/
