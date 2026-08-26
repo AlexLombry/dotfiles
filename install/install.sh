@@ -56,3 +56,12 @@ just setup
 
 echo "⚙️ Fixing fonts"
 sudo chmod 775 ~/Library/Fonts/**/
+
+echo "🚀 Claude Code skills (private repo)"
+SKILLS_REPO="$HOME/code/ClaudeSkillsPerso"
+if [ ! -d "$SKILLS_REPO" ]; then
+    mkdir -p "$HOME/code"
+    git clone git@github.com:AlexLombry/ClaudeSkillsPerso.git "$SKILLS_REPO"
+fi
+mkdir -p "$HOME/.claude"
+ln -sfn "$SKILLS_REPO/skills" "$HOME/.claude/skills"
