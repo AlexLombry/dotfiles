@@ -64,4 +64,4 @@ mkdir -p "$HOME/.claude"
 ln -sfn "$SKILLS_REPO/skills" "$HOME/.claude/skills"
 
 echo "⚙️ Fixing fonts"
-sudo chmod 775 ~/Library/Fonts/**/
+sudo chmod 775 ~/Library/Fonts/**/(N)
